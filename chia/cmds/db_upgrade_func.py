@@ -59,7 +59,7 @@ def db_upgrade_func(
 
 BLOCK_COMMIT_RATE = 5000
 SES_COMMIT_RATE = 1000
-COIN_COMMIT_RATE = 30000
+COIN_COMMIT_RATE = 15000
 
 
 async def convert_v1_to_v2(in_path: Path, out_path: Path):
@@ -85,8 +85,12 @@ async def convert_v1_to_v2(in_path: Path, out_path: Path):
 
         print(f"opening file for writing: {out_path}")
         async with aiosqlite.connect(out_path) as out_db:
-            await out_db.execute("pragma journal_mode=MEMORY")
+            await out_db.execute("pragma journal_mode=OFF")
             await out_db.execute("pragma synchronous=OFF")
+            await out_db.execute("pragma cache_size=1000000")
+            await out_db.execute("pragma locking_mode=exclusive")
+            await out_db.execute("pragma temp_store=memory")
+
             print("initializing v2 version")
             await out_db.execute("CREATE TABLE database_version(version int)")
             await out_db.execute("INSERT INTO database_version VALUES(?)", (2,))
@@ -164,6 +168,7 @@ async def convert_v1_to_v2(in_path: Path, out_path: Path):
                         commit_in -= 1
                         if commit_in == 0:
                             commit_in = BLOCK_COMMIT_RATE
+                            await out_db.execute("begin transaction")
                             await out_db.executemany(
                                 "INSERT OR REPLACE INTO full_blocks VALUES(?, ?, ?, ?, ?, ?, ?, ?)", block_values
                             )
@@ -174,6 +179,7 @@ async def convert_v1_to_v2(in_path: Path, out_path: Path):
                             rate = BLOCK_COMMIT_RATE / (end_time - start_time)
                             start_time = end_time
 
+            await out_db.execute("begin transaction")
             await out_db.executemany("INSERT OR REPLACE INTO full_blocks VALUES(?, ?, ?, ?, ?, ?, ?, ?)", block_values)
             await out_db.commit()
             end_time = time()
@@ -208,8 +214,8 @@ async def convert_v1_to_v2(in_path: Path, out_path: Path):
             end_time = time()
             print(f"\r      {end_time - ses_start_time:.2f} seconds                             ")
 
-            await CoinStore.create(DBWrapper(out_db, db_version=2))
             print("[3/3] converting coin_store")
+            await CoinStore.create(DBWrapper(out_db, db_version=2))
             await out_db.commit()
 
             commit_in = COIN_COMMIT_RATE
@@ -246,18 +252,20 @@ async def convert_v1_to_v2(in_path: Path, out_path: Path):
                     )
                     count += 1
                     if (count % 2000) == 0:
-                        print(f"\r{count:10d} coins {rate:0.1f} coins/s  ", end="")
+                        print(f"\r{count//1000:10d}k coins {rate:0.1f} coins/s  ", end="")
                         sys.stdout.flush()
                     commit_in -= 1
                     if commit_in == 0:
                         commit_in = COIN_COMMIT_RATE
-
+                        await out_db.execute("begin transaction")
                         await out_db.executemany("INSERT INTO coin_record VALUES(?, ?, ?, ?, ?, ?, ?, ?)", coin_values)
                         await out_db.commit()
                         coin_values = []
                         end_time = time()
                         rate = COIN_COMMIT_RATE / (end_time - start_time)
                         start_time = end_time
+
+            await out_db.execute("begin transaction")
             await out_db.executemany("INSERT INTO coin_record VALUES(?, ?, ?, ?, ?, ?, ?, ?)", coin_values)
             await out_db.commit()
             end_time = time()
