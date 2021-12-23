@@ -26,17 +26,24 @@ test_constants_modified = test_constants.replace(
 
 class TestSimulation:
     @pytest.fixture(scope="function")
-    async def extra_node(self, db_version):
+    #    async def extra_node(self, db_version):
+    async def extra_node(self):
         with TempKeyring() as keychain:
             b_tools = await create_block_tools_async(constants=test_constants_modified, keychain=keychain)
             async for _ in setup_full_node(
-                test_constants_modified, "blockchain_test_3.db", 21240, b_tools, db_version=db_version
+                #                test_constants_modified, "blockchain_test_3.db", 21240, b_tools, db_version=db_version
+                test_constants_modified,
+                "blockchain_test_3.db",
+                21240,
+                b_tools,
+                db_version=2,
             ):
                 yield _
 
     @pytest.fixture(scope="function")
-    async def simulation(self, db_version):
-        async for _ in setup_full_system(test_constants_modified, db_version=db_version):
+    #    async def simulation(self, db_version):
+    async def simulation(self):
+        async for _ in setup_full_system(test_constants_modified, db_version=2):
             yield _
 
     @pytest.mark.asyncio
