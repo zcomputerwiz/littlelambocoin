@@ -113,7 +113,6 @@ async def convert_v1_to_v2(in_path: Path, out_path: Path):
             start_time = time()
             block_start_time = start_time
             block_values = []
-            #            await out_db.execute("BEGIN TRANSACTION")
 
             async with in_db.execute(
                 "SELECT header_hash, prev_hash, block, sub_epoch_summary FROM block_records ORDER BY height DESC"
@@ -121,6 +120,8 @@ async def convert_v1_to_v2(in_path: Path, out_path: Path):
                 async with in_db.execute(
                     "SELECT header_hash, height, is_fully_compactified, block FROM full_blocks ORDER BY height DESC"
                 ) as cursor_2:
+
+                    await out_db.execute("begin transaction")
                     async for row in cursor:
 
                         header_hash = bytes.fromhex(row[0])
@@ -168,18 +169,16 @@ async def convert_v1_to_v2(in_path: Path, out_path: Path):
                         commit_in -= 1
                         if commit_in == 0:
                             commit_in = BLOCK_COMMIT_RATE
-                            await out_db.execute("begin transaction")
                             await out_db.executemany(
                                 "INSERT OR REPLACE INTO full_blocks VALUES(?, ?, ?, ?, ?, ?, ?, ?)", block_values
                             )
                             await out_db.commit()
+                            await out_db.execute("begin transaction")
                             block_values = []
-                            #                            await out_db.execute("BEGIN TRANSACTION")
                             end_time = time()
                             rate = BLOCK_COMMIT_RATE / (end_time - start_time)
                             start_time = end_time
 
-            await out_db.execute("begin transaction")
             await out_db.executemany("INSERT OR REPLACE INTO full_blocks VALUES(?, ?, ?, ?, ?, ?, ?, ?)", block_values)
             await out_db.commit()
             end_time = time()
@@ -192,6 +191,7 @@ async def convert_v1_to_v2(in_path: Path, out_path: Path):
             ses_start_time = time()
             async with in_db.execute("SELECT ses_block_hash, challenge_segments FROM sub_epoch_segments_v3") as cursor:
                 count = 0
+                await out_db.execute("begin transaction")
                 async for row in cursor:
                     block_hash = bytes32.fromhex(row[0])
                     ses = row[1]
@@ -206,6 +206,7 @@ async def convert_v1_to_v2(in_path: Path, out_path: Path):
                         commit_in = SES_COMMIT_RATE
                         await out_db.executemany("INSERT INTO sub_epoch_segments_v3 VALUES (?, ?)", ses_values)
                         await out_db.commit()
+                        await out_db.execute("begin transaction")
                         ses_values = []
 
             await out_db.executemany("INSERT INTO sub_epoch_segments_v3 VALUES (?, ?)", ses_values)
@@ -229,6 +230,7 @@ async def convert_v1_to_v2(in_path: Path, out_path: Path):
                 (peak_height,),
             ) as cursor:
                 count = 0
+                await out_db.execute("begin transaction")
                 async for row in cursor:
                     spent_index = row[2]
 
@@ -257,15 +259,14 @@ async def convert_v1_to_v2(in_path: Path, out_path: Path):
                     commit_in -= 1
                     if commit_in == 0:
                         commit_in = COIN_COMMIT_RATE
-                        await out_db.execute("begin transaction")
                         await out_db.executemany("INSERT INTO coin_record VALUES(?, ?, ?, ?, ?, ?, ?, ?)", coin_values)
                         await out_db.commit()
+                        await out_db.execute("begin transaction")
                         coin_values = []
                         end_time = time()
                         rate = COIN_COMMIT_RATE / (end_time - start_time)
                         start_time = end_time
 
-            await out_db.execute("begin transaction")
             await out_db.executemany("INSERT INTO coin_record VALUES(?, ?, ?, ?, ?, ?, ?, ?)", coin_values)
             await out_db.commit()
             end_time = time()
