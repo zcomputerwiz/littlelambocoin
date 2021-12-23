@@ -6,7 +6,6 @@ import time
 from dataclasses import replace
 from secrets import token_bytes
 from typing import Optional
-from conftest import db_version
 
 import pytest
 from blspy import AugSchemeMPL, G2Element
