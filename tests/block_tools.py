@@ -14,7 +14,7 @@ from pathlib import Path
 from typing import Callable, Dict, List, Optional, Tuple, Any
 
 from blspy import AugSchemeMPL, G1Element, G2Element, PrivateKey
-from littlelambocoinbip158 import PyBIP158
+from chiabip158 import PyBIP158
 
 from littlelambocoin.cmds.init_funcs import create_all_ssl, create_default_littlelambocoin_config
 from littlelambocoin.daemon.keychain_proxy import connect_to_keychain_and_validate, wrap_local_keychain

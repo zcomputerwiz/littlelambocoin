@@ -8,7 +8,7 @@ import traceback
 import os
 from typing import Callable, Dict, List, Optional, Tuple, Set
 from littlelambocoin.util.streamable import Streamable, streamable
-from littlelambocoinvdf import create_discriminant, prove
+from chiavdf import create_discriminant, prove
 
 from littlelambocoin.consensus.constants import ConsensusConstants
 from littlelambocoin.consensus.pot_iterations import calculate_sp_iters, is_overflow_block
@@ -130,7 +130,7 @@ class Timelord:
             self.main_loop = asyncio.create_task(self._manage_chains())
         else:
             if os.name == "nt" or slow_bluebox:
-                # `vdf_client` doesn't build on windows, use `prove()` from littlelambocoinvdf.
+                # `vdf_client` doesn't build on windows, use `prove()` from chiavdf.
                 workers = self.config.get("slow_bluebox_process_count", 1)
                 self.bluebox_pool = ProcessPoolExecutor(max_workers=workers)
                 self.main_loop = asyncio.create_task(

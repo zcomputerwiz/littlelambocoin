@@ -1,6 +1,6 @@
 from typing import Tuple
 
-from littlelambocoinvdf import prove
+from chiavdf import prove
 
 from littlelambocoin.consensus.constants import ConsensusConstants
 from littlelambocoin.types.blockchain_format.classgroup import ClassgroupElement

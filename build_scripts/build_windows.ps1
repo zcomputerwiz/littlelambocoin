@@ -121,7 +121,7 @@ If ($LastExitCode -gt 0){
 Set-Location -Path "packages\gui" -PassThru
 
 Write-Output "   ---"
-Write-Output "Increase the stack for littlelambocoin command for (littlelambocoin plots create) littlelambocoinpos limitations"
+Write-Output "Increase the stack for littlelambocoin command for (littlelambocoin plots create) chiapos limitations"
 # editbin.exe needs to be in the path
 editbin.exe /STACK:8000000 daemon\littlelambocoin.exe
 Write-Output "   ---"

@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import Dict, List, Optional, Tuple, Union
 
 from blspy import G1Element, PrivateKey
-from littlelambocoinpos import DiskProver
+from chiapos import DiskProver
 
 from littlelambocoin.types.blockchain_format.sized_bytes import bytes32
 from littlelambocoin.util.config import load_config, save_config

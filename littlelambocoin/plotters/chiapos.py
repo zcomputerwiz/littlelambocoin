@@ -12,9 +12,9 @@ from typing import Any, Dict, Optional
 log = logging.getLogger(__name__)
 
 
-def get_littlelambocoinpos_install_info() -> Optional[Dict[str, Any]]:
-    littlelambocoinpos_version: str = pkg_resources.get_distribution("littlelambocoinpos").version
-    return {"display_name": "LittleLamboCoin Proof of Space", "version": littlelambocoinpos_version, "installed": True}
+def get_chiapos_install_info() -> Optional[Dict[str, Any]]:
+    chiapos_version: str = pkg_resources.get_distribution("chiapos").version
+    return {"display_name": "LittleLamboCoin Proof of Space", "version": chiapos_version, "installed": True}
 
 
 class Params:

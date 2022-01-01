@@ -1,5 +1,5 @@
 from typing import Any, Iterator, List, Tuple
-from littlelambocoinbip158 import PyBIP158
+from chiabip158 import PyBIP158
 
 from littlelambocoin.types.blockchain_format.coin import Coin
 from littlelambocoin.types.blockchain_format.sized_bytes import bytes32

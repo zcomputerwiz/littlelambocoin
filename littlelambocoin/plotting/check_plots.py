@@ -5,7 +5,7 @@ from time import time, sleep
 from typing import List
 
 from blspy import G1Element
-from littlelambocoinpos import Verifier
+from chiapos import Verifier
 
 from littlelambocoin.plotting.manager import PlotManager
 from littlelambocoin.plotting.util import (

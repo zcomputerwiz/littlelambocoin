@@ -8,7 +8,7 @@ from typing import Any, Callable, Dict, List, Optional, Set, Tuple
 from concurrent.futures.thread import ThreadPoolExecutor
 
 from blspy import G1Element
-from littlelambocoinpos import DiskProver
+from chiapos import DiskProver
 
 from littlelambocoin.consensus.pos_quality import UI_ACTUAL_SPACE_CONSTANT_FACTOR, _expected_plot_size
 from littlelambocoin.plotting.util import (

@@ -4,7 +4,7 @@ import time
 
 import pytest
 from blspy import AugSchemeMPL
-from littlelambocoinpos import DiskPlotter
+from chiapos import DiskPlotter
 
 from littlelambocoin.consensus.coinbase import create_puzzlehash_for_pk
 from littlelambocoin.plotting.util import stream_plot_info_ph, stream_plot_info_pk
