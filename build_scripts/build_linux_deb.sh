@@ -42,7 +42,7 @@ if [ "$LAST_EXIT_CODE" -ne 0 ]; then
 	exit $LAST_EXIT_CODE
 fi
 
-cp -r dist/daemon ../littlelambocoin-blockchain-gui/packages/gui
+cp -r dist/daemon ../littlelambocoin-blockchain-gui/
 cd .. || exit
 cd littlelambocoin-blockchain-gui || exit
 
