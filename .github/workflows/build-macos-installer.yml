@@ -36,7 +36,7 @@ jobs:
         fetch-depth: 0
         submodules: recursive
 
-    - uses: LittleLamboCoin-Network/actions/git-ssh-to-https@main
+    - uses: Chia-Network/actions/git-ssh-to-https@main
 
     - name: Cleanup any leftovers that exist from previous runs
       run: bash build_scripts/clean-runner.sh || true
@@ -98,7 +98,7 @@ jobs:
         result-encoding: string
         script: |
           const releases = await github.repos.listReleases({
-            owner: 'LittleLamboCoin-Network',
+            owner: 'Chia-Network',
             repo: 'littlelambocoin-plotter-madmax',
           });
           return releases.data[0].tag_name;

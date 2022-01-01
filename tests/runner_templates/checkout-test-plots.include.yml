@@ -1,7 +1,7 @@
     - name: Checkout test blocks and plots
       uses: actions/checkout@v2
       with:
-        repository: 'LittleLamboCoin-Network/test-cache'
+        repository: 'Chia-Network/test-cache'
         path: '.littlelambocoin'
         ref: '0.28.0'
         fetch-depth: 1
