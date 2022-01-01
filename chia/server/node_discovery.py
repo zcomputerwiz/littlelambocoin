@@ -16,7 +16,7 @@ from littlelambocoin.server.address_manager_store import AddressManagerStore
 from littlelambocoin.server.address_manager_sqlite_store import create_address_manager_from_db
 from littlelambocoin.server.outbound_message import NodeType, make_msg
 from littlelambocoin.server.peer_store_resolver import PeerStoreResolver
-from littlelambocoin.server.server import LittlelambocoinServer
+from littlelambocoin.server.server import LittleLamboCoinServer
 from littlelambocoin.types.peer_info import PeerInfo, TimestampedPeerInfo
 from littlelambocoin.util.hash import std_hash
 from littlelambocoin.util.ints import uint64
@@ -36,7 +36,7 @@ class FullNodeDiscovery:
 
     def __init__(
         self,
-        server: LittlelambocoinServer,
+        server: LittleLamboCoinServer,
         target_outbound_count: int,
         peer_store_resolver: PeerStoreResolver,
         introducer_info: Optional[Dict],
@@ -46,7 +46,7 @@ class FullNodeDiscovery:
         default_port: Optional[int],
         log,
     ):
-        self.server: LittlelambocoinServer = server
+        self.server: LittleLamboCoinServer = server
         self.message_queue: asyncio.Queue = asyncio.Queue()
         self.is_closed = False
         self.target_outbound_count = target_outbound_count
@@ -137,7 +137,7 @@ class FullNodeDiscovery:
     def add_message(self, message, data):
         self.message_queue.put_nowait((message, data))
 
-    async def on_connect(self, peer: ws.WSLittlelambocoinConnection):
+    async def on_connect(self, peer: ws.WSLittleLamboCoinConnection):
         if (
             peer.is_outbound is False
             and peer.peer_server_port is not None
@@ -164,7 +164,7 @@ class FullNodeDiscovery:
             await peer.send_message(msg)
 
     # Updates timestamps each time we receive a message for outbound connections.
-    async def update_peer_timestamp_on_message(self, peer: ws.WSLittlelambocoinConnection):
+    async def update_peer_timestamp_on_message(self, peer: ws.WSLittleLamboCoinConnection):
         if (
             peer.is_outbound
             and peer.peer_server_port is not None
@@ -202,7 +202,7 @@ class FullNodeDiscovery:
         if self.introducer_info is None:
             return None
 
-        async def on_connect(peer: ws.WSLittlelambocoinConnection):
+        async def on_connect(peer: ws.WSLittleLamboCoinConnection):
             msg = make_msg(ProtocolMessageTypes.request_peers_introducer, introducer_protocol.RequestPeersIntroducer())
             await peer.send_message(msg)
 
@@ -235,7 +235,7 @@ class FullNodeDiscovery:
         except Exception as e:
             self.log.warn(f"querying DNS introducer failed: {e}")
 
-    async def on_connect_callback(self, peer: ws.WSLittlelambocoinConnection):
+    async def on_connect_callback(self, peer: ws.WSLittleLamboCoinConnection):
         if self.server.on_connect is not None:
             await self.server.on_connect(peer)
         else:

@@ -60,7 +60,7 @@ from littlelambocoin.wallet.wallet_puzzle_store import WalletPuzzleStore
 from littlelambocoin.wallet.wallet_sync_store import WalletSyncStore
 from littlelambocoin.wallet.wallet_transaction_store import WalletTransactionStore
 from littlelambocoin.wallet.wallet_user_store import WalletUserStore
-from littlelambocoin.server.server import LittlelambocoinServer
+from littlelambocoin.server.server import LittleLamboCoinServer
 from littlelambocoin.wallet.did_wallet.did_wallet import DIDWallet
 
 
@@ -115,7 +115,7 @@ class WalletStateManager:
     interested_store: WalletInterestedStore
     pool_store: WalletPoolStore
     weight_proof_handler: Any
-    server: LittlelambocoinServer
+    server: LittleLamboCoinServer
     root_path: Path
 
     @staticmethod
@@ -124,7 +124,7 @@ class WalletStateManager:
         config: Dict,
         db_path: Path,
         constants: ConsensusConstants,
-        server: LittlelambocoinServer,
+        server: LittleLamboCoinServer,
         root_path: Path,
         name: str = None,
     ):

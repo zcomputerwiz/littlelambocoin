@@ -6,9 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project does not yet adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 for setuptools_scm/PEP 440 reasons.
 
-## 1.2.11 Littlelambocoin blockchain 2021-11-4
+## 1.2.11 LittleLamboCoin blockchain 2021-11-4
 
-Farmers rejoice: today's release integrates two plotters in broad use in the Littlelambocoin community: Bladebit, created by @harold-b, and Madmax, created by @madMAx43v3r. Both of these plotters bring significant improvements in plotting time. More plotting info [here](https://github.com/Chia-Network/chia-blockchain/wiki/Alternative--Plotters).
+Farmers rejoice: today's release integrates two plotters in broad use in the LittleLamboCoin community: Bladebit, created by @harold-b, and Madmax, created by @madMAx43v3r. Both of these plotters bring significant improvements in plotting time. More plotting info [here](https://github.com/Chia-Network/chia-blockchain/wiki/Alternative--Plotters).
 This release also includes several important performance improvements as a result of last weekends "Dust Storm", with two goals in mind: make sure everyone can farm at all times, and improve how many transactions per second each node can accept, especially for low-end hardware. Please know that these optimizations are only the first wave in a series of many over the next few releases to help address this going forward. While the changes we have implemented in this update may not necessarily solve for _every_ possible congestion scenario, they should go a long way towards helping low-end systems perform closer to expectations if this happens again.
 
 ### Added
@@ -18,7 +18,7 @@ This release also includes several important performance improvements as a resul
   - Prioritized block validation.
   - Added transaction queues for more efficient handling of incoming transactions.
   - Increased BLS pairing cache.
-- Integrated the Bladebit plotter to CLI and GUI. Thanks @harold-b for all your hard work on this, and welcome again to the Littlelambocoin Network team!
+- Integrated the Bladebit plotter to CLI and GUI. Thanks @harold-b for all your hard work on this, and welcome again to the LittleLamboCoin Network team!
 - Added the Madmax plotter to CLI and GUI. Thanks @madMAx43v3r for your support!
 - Added option to configure your node to testnet using to `littlelambocoin init --testnet`.
 
@@ -40,14 +40,14 @@ This release also includes several important performance improvements as a resul
 
 - PlotNFT transactions via CLI (e.g. `littlelambocoin plotnft join`) now accept a fee parameter, but it is not yet operable.
 
-## 1.2.10 Littlelambocoin blockchain 2021-10-25
+## 1.2.10 LittleLamboCoin blockchain 2021-10-25
 
-We have some great improvements in this release: We launched our migration of keys to a common encrypted keyring.yaml file, and we secure this with an optional passphrase in both GUI and CLI. We've added a passphrase hint in case you forget your passphrase. More info on our [wiki](https://github.com/Chia-Network/chia-blockchain/wiki/Passphrase-Protected-Littlelambocoin-Keys-and-Key-Storage-Migration). We also launched a new Littlelambocoinlisp compiler in clvm_tools_rs which substantially improves compile time for Littlelambocoinlisp developers. We also addressed a widely reported issue in which a system failure, such as a power outage, would require some farmers to sync their full node from zero. This release also includes several other improvements and fixes.
+We have some great improvements in this release: We launched our migration of keys to a common encrypted keyring.yaml file, and we secure this with an optional passphrase in both GUI and CLI. We've added a passphrase hint in case you forget your passphrase. More info on our [wiki](https://github.com/Chia-Network/chia-blockchain/wiki/Passphrase-Protected-LittleLamboCoin-Keys-and-Key-Storage-Migration). We also launched a new LittleLamboCoinlisp compiler in clvm_tools_rs which substantially improves compile time for LittleLamboCoinlisp developers. We also addressed a widely reported issue in which a system failure, such as a power outage, would require some farmers to sync their full node from zero. This release also includes several other improvements and fixes.
 
 ### Added
 
-- Added support for keyring migration from keychain, and the addition of passphrase support. Learn more at our [wiki](https://github.com/Chia-Network/chia-blockchain/wiki/Passphrase-Protected-Littlelambocoin-Keys-and-Key-Storage-Migration).
-- Enabled experimental use of a new Littlelambocoinlisp compiler in clvm_tools_rs in littlelambocoin-blockchain, which is off by default, and substantially improves compile time.
+- Added support for keyring migration from keychain, and the addition of passphrase support. Learn more at our [wiki](https://github.com/Chia-Network/chia-blockchain/wiki/Passphrase-Protected-LittleLamboCoin-Keys-and-Key-Storage-Migration).
+- Enabled experimental use of a new LittleLamboCoinlisp compiler in clvm_tools_rs in littlelambocoin-blockchain, which is off by default, and substantially improves compile time.
 - Added Windows PowerShell scripts to support installation from source.
 - Added a test to check that we don't reorg subslots unless there is a new peak.
 - Added harvester info to farmer logging.
@@ -76,32 +76,32 @@ We have some great improvements in this release: We launched our migration of ke
 - In macOS builds, changed the export value of NOTARIZE to fix some build failures.
 - Fix log output for duplicated plots.
 - Removed a flaky mtime check for plots that resolved an issue where file_path.stat() shows multiple copies of plots and slows performance of the farmer. Thanks @timporter for the assist on this one.
-- Thanks @jcteng for fixing a bug on the Littlelambocoin DID wallet that showed 'mojo:'' instead of 'mojo'.
+- Thanks @jcteng for fixing a bug on the LittleLamboCoin DID wallet that showed 'mojo:'' instead of 'mojo'.
 
-## 1.2.9 Littlelambocoin blockchain 2021-10-01
+## 1.2.9 LittleLamboCoin blockchain 2021-10-01
 
 ### Changed
 
 - Changed "About" section in client to indicate correct release version.
 
-## 1.2.8 Littlelambocoin blockchain 2021-09-30
+## 1.2.8 LittleLamboCoin blockchain 2021-09-30
 
 ### Added
 
 - Added RPC updates to support keyring migration and to support adding a passphrase for wallets in an upcoming release.
 - Added plot memo caching in PlotManager, speeding initial loading and cached loading, by enabling harvester to save the parsed plot memo on disk on shutdown, then load it back into memory on startup so that it can skip key parsing calculations for all already known plots.
 - Added a debug option to log all SQL commands.
-- Added support for DID, our decentralized identity solution, as a building block toward Littlelambocoin's broader set of DID capabilities.
+- Added support for DID, our decentralized identity solution, as a building block toward LittleLamboCoin's broader set of DID capabilities.
 - Thanks @olivernyc for the addition of a query in CoinStore to special case height 0 to avoid querying all unspent coins.
 - Starting logging the timing of applying additions and removals to the coin store.
 - Made max message size configurable in config.yaml, as a possible workaround for very large farms where reporting plot information exceeds the maximum message size.
 - Added a config option for peer_connect_timeout.
 - Added support for unhardened key derivations.
 - Various CoinStore benchmark and performance improvements.
-- Beta builds are built on every merge to main, and are now available from <https://littlelambocoin.net/download/>.
+- Beta builds are built on every merge to main, and are now available from <https://littlelambocoin.org/download/>.
 - Thanks @Radexito for adding support for Raspberry Pi 4 64Bit to the GUI installation script.
 - Added macOS keyring.yaml support, migrating keys from macOS Keychain to keyring.yaml to support an upcoming release in which we'll add an optional passphrase to wallets.
-- We have made many full node changes to support our upcoming Littlelambocoin Asset Token (CAT) standard and our upcoming standalone light wallet, which will use Littlelambocoin's new electrum-style protocol to enable faster wallet syncing.
+- We have made many full node changes to support our upcoming LittleLamboCoin Asset Token (CAT) standard and our upcoming standalone light wallet, which will use LittleLamboCoin's new electrum-style protocol to enable faster wallet syncing.
 - We have many new translations added in this release. Thanks to the following community members for their contributions: Albanian @ATSHOOTER; Arabic @younes.huawei.test; Belarusian @LUXDAD; Catalan @Poliwhirl; Chinese Traditional @MongWu-NeiTherHwoGer-Long, @danielrangel6; Chinese, Simplified @SupperDog; Croatian @vjukopila5 @marko.anti12; Czech @HansCZ; Danish @loppefaaret; Dutch @netlob;English @sharjeelaziz @darkflare; English, Australia @nzjake; English, New Zealand @nzjake @sharjeelaziz; Finnish @f00b4r; French @burnt; Hungarian @SirGeoff; Hebrew @Arielzikri; Indonesian @lespau;Lithuanian @Mariusxz; Polish @bartlomiej.tokarzewski; Portuguese @darkflare; Portuguese, Brazilian @fsavaget; Sinhala @HelaBasa;Slovak @atomsymbol; Spanish @needNRG; Spanish, Argentina @juands1644 @gdestribats; Spanish, Mexico @danielrangel6; Swedish @MrDyngrak; Thai @3bb.pintakam.7m1 @taweesak0803650558 @taweesak.25may1993 @3bb.pintakam.7m1; Turkish @baturman @ExtremeSTRAUSSER.
 
 ### Changed
@@ -122,7 +122,7 @@ We have some great improvements in this release: We launched our migration of ke
 - A change to logging to only log warnings when more than 10 seconds has passed, to reduce the number of warning logs.
 - Improved and fixed some outdated messages in CLI. Thanks @jack60612 for the assist!
 - We previously added a Rust condition checker, to replace our existing Python-based condition checker. In this release, we're removing the old Python code.
-- Several clvm_rs updates to support our upcoming Littlelambocoin Asset Token (CAT) standard.
+- Several clvm_rs updates to support our upcoming LittleLamboCoin Asset Token (CAT) standard.
 
 ### Fixed
 
@@ -135,13 +135,13 @@ We have some great improvements in this release: We launched our migration of ke
 - Thanks @olivernyc for fixing an edge case with negative inputs to 'truncate_to_significant_bits'.
 - Added a fix for Windows installs that were seeing exceptions when writing to the keyring.
 
-## 1.2.7 Littlelambocoin blockchain 2021-09-16
+## 1.2.7 LittleLamboCoin blockchain 2021-09-16
 
 ### Fixed
 
 - Thanks to @jack60612 for fixing a bug that displayed 25 words instead of 24 words in some instances in the GUI.
 
-## 1.2.6 Littlelambocoin blockchain 2021-09-09
+## 1.2.6 LittleLamboCoin blockchain 2021-09-09
 
 Today we’re releasing version 1.2.6 to address a resource bug with nodes, and we want to stress the importance of updating to it at the earliest convenience. The fix prevents a node from consuming excessive memory when many Bluebox Timelords are active on the chain.
 
@@ -156,13 +156,13 @@ Today we’re releasing version 1.2.6 to address a resource bug with nodes, and 
 - Fixed memory utilization issue related to how the node handles compact VDFs generated from blueboxes. We recommend everyone update to this version to avoid memory issues that can impact farming and harvesting.
 - Fixed issues with reloading plot files detected as bad (this can happen during plot copying).
 
-## 1.2.5 Littlelambocoin blockchain 2021-08-27
+## 1.2.5 LittleLamboCoin blockchain 2021-08-27
 
 ### Fixed
 
 - Fixed errors in the Linux GUI install script, which impacted only Linux users.
 
-## 1.2.4 Littlelambocoin blockchain 2021-08-26
+## 1.2.4 LittleLamboCoin blockchain 2021-08-26
 
 ### Added
 
@@ -177,7 +177,7 @@ Today we’re releasing version 1.2.6 to address a resource bug with nodes, and 
 - Enabled querying AAAA records for DNS Introducer.
 - We now set the version for the GUI when doing a manual install using the install-gui.sh script. Uses a python helper to get the version of the littlelambocoin install and then converts it into proper npm format and puts that into package.json.
 - Added some new class methods to the Program objects to improve ease of use.
-- Added an option to sign bytes as well as UTF-8 strings, which is particularly helpful if you're writing Littlelambocoinlisp puzzles that require signatures and you want to test them without necessarily writing a whole python script for signing the relevant data.
+- Added an option to sign bytes as well as UTF-8 strings, which is particularly helpful if you're writing LittleLamboCoinlisp puzzles that require signatures and you want to test them without necessarily writing a whole python script for signing the relevant data.
 - Added a first version of .pre-commit-config.yaml and applied the changes required by the following initial hooks in separate commits. To use this you need to install pre-commit, see <https://pre-commit.com/#installation/>.
 - We have added many new translations in this release based on community
 submissions. Thanks to @RuiZhe for Chinese, Traditional; @HansCZ for Czech;
@@ -189,7 +189,7 @@ submissions. Thanks to @RuiZhe for Chinese, Traditional; @HansCZ for Czech;
 - Thanks @altendky for changing the default to paginate to littlelambocoin wallet get_transactions to address cases such as piping and output redirection to a file where the command previously just hung while waiting for the user to press c for the next page.
 - Removed commented-out debug breakpoints.
 - Enabled Rust condition checker to add the ability to parse the output conditions from a  generator program in Rust. It also validates some of the conditions in Rust.
-- Switched IP address lookup to first use Littlelambocoin's service ip.littlelambocoin.net.
+- Switched IP address lookup to first use LittleLamboCoin's service ip.littlelambocoin.org.
 - Made changes so that when creating SSL certificate and private key files, we ensure that files are written with the proper file permissions.
 - Define a new encrypted keyring format to be used to store keys, and which is optionally encrypted to a user-supplied passphrase. GUI for the passphrase will come in an upcoming release.
 - Removed initial transaction freeze put in place at mainnet launch as it is no longer necessary.
@@ -214,7 +214,7 @@ submissions. Thanks to @RuiZhe for Chinese, Traditional; @HansCZ for Czech;
 - Fixed NPM publish in clvm_rs.
 - Thanks to @skweee for his investigation work on fixing mempool TX cache cost, where the cost of the mempool TX cache (for spend bundles that can't be included in a block yet) would not be reset when the cache was emptied.
 
-## 1.2.3 Littlelambocoin blockchain 2021-07-26
+## 1.2.3 LittleLamboCoin blockchain 2021-07-26
 
 ### Added
 
@@ -233,7 +233,7 @@ submissions. Thanks to @RuiZhe for Chinese, Traditional; @HansCZ for Czech;
 
 - Updated blspy to 1.0.5.
 - Updated littlelambocoinpos to 1.0.4.
-- Included all Littlelambocoinlisp files in source distribution.
+- Included all LittleLamboCoinlisp files in source distribution.
 - Removed left-over debug logging from test_wallet_pool_store.
 - Made changes to allow us to use the name coin_spend everywhere in our code, without changing it in the API requests, both outgoing and incoming. Enables us to decide at a later date when to cut over completely to the coin_spend name.
 - Thanks @mishan for your change to 'littlelambocoin plotnft show' to display Percent Successful Points.
@@ -253,14 +253,14 @@ submissions. Thanks to @RuiZhe for Chinese, Traditional; @HansCZ for Czech;
 - The wallet ignores coins sent by accident to the pool contract address and allows self pooling rewards to be claimed in this case.
 - Thanks @mgraczyk for fixing the use of print_exc in farmer.
 
-## 1.2.2 Littlelambocoin blockchain 2021-07-13
+## 1.2.2 LittleLamboCoin blockchain 2021-07-13
 
 ### Fixed
 
 - Converted test_rom.py to use pytest and fixed test_singleton.
 - Thanks to @yshklarov for help fixing [#7273](https://github.com/Chia-Network/chia-blockchain/issues/7273), which bundled CA store to support pools for some farming systems, including M1 Apple computers. This enables those machines to properly connect to pools, and fixes the issue.
 
-## 1.2.1 Littlelambocoin blockchain 2021-07-12
+## 1.2.1 LittleLamboCoin blockchain 2021-07-12
 
 ### Added
 
@@ -273,12 +273,12 @@ submissions. Thanks to @RuiZhe for Chinese, Traditional; @HansCZ for Czech;
 - Thanks to @x-Rune for helping find and test a lot of 1.2.0 bugs with the harvester.
 - Fixed issue for Debian users where the wallet crashes on start for them since last release
 
-## 1.2.0 Littlelambocoin blockchain 2021-07-07
+## 1.2.0 LittleLamboCoin blockchain 2021-07-07
 
 ### Added
 
 - Portable pooled plots are now available using our new plot NFT. These allow you to plot new plots to an NFT that can either self farm or join and leave pools. During development there were changes to the plot NFT so portable pool plots (those made with `-c` option to `littlelambocoin plots create`) using code from before June 25th are invalid on mainnet.
-OG plots made before this release can continue to be farmed side by side with the new portable pool plots but can not join pools using the official pooling protocol. You can learn more as a farmer by checking out the [pool user guide](https://github.com/Chia-Network/chia-blockchain/wiki/Pooling-User-Guide). Pool operators and those wanting to understand how the official pooling protocol operates should check out our [pooling implementation reference repository](https://github.com/Littlelambocoin-Network/pool-reference). If you plan to use plot NFT, all your farmers and harvesters must be on 1.2.0 to function properly for portable pool plots.
+OG plots made before this release can continue to be farmed side by side with the new portable pool plots but can not join pools using the official pooling protocol. You can learn more as a farmer by checking out the [pool user guide](https://github.com/Chia-Network/chia-blockchain/wiki/Pooling-User-Guide). Pool operators and those wanting to understand how the official pooling protocol operates should check out our [pooling implementation reference repository](https://github.com/LittleLamboCoin-Network/pool-reference). If you plan to use plot NFT, all your farmers and harvesters must be on 1.2.0 to function properly for portable pool plots.
 - The exact commit after which Plot NFTs should be valid is the 89f7a4b3d6329493cd2b4bc5f346a819c99d3e7b commit (in which `pools.testnet9` branch was merged to main) or 5d62b3d1481c1e225d8354a012727ab263342c0a within the `pools.testnet9` branch.
 - `littlelambocoin farm summary` and the GUI now use a new RPC endpoint to properly show plots for local and remote harvesters. This should address issues #6563, #5881, #3875, #1461.
 - `littlelambocoin configure` now supports command line updates to peer count and target peer count.
@@ -286,7 +286,7 @@ OG plots made before this release can continue to be farmed side by side with th
 - Thanks to @maran and @Animazing for adding farmer and pool public key display to the RPC.
 - We have added translations for Hungarian, Belarusian, Catalan, and Albanian.  For Hungarian thanks to @SirGeoff, @azazio @onokaxxx, @rolandfarkasCOM, @HUNDavid , @horvathpalzsolt, @stishun74, @tusdavgaming, @idotitusz, @rasocsabi, @mail.kope, @gsprblnt, @mbudahazi, @csiberius, @tomatos83, @zok42, @ocel0t, @rwtoptomi, @djxpitke, @ftamas85, @zotya0330, @fnni, @kapabeates, @zamery, @viktor.gonczi, @pal.suta, @miv, and @Joeman_. For Belarusian thanks to @shurix83, @haxycgm, and @metalomaniax. For Catalan thank you to @Poliwhirl, @Pep-33, @marqmarti, @meuca, @Guiwdin, @carlescampi, @jairobtx, @Neoares, @darknsis, @augustfarrerasgimeno, and @fornons. Finally for Albanian thanks to @ATSHOOTER and @lakedeejay. We apologize if we missed anyone and welcome corrections.
 - Our release process is now fully automated from tagging a release to publishing installers to all of the appropriate locations and now makes the release artifacts available via torrents as well.
-- All Littlelambocoin repositories now automatically build M1 wheels and create a new MacOS M1 native installer.
+- All LittleLamboCoin repositories now automatically build M1 wheels and create a new MacOS M1 native installer.
 - New CLI command `littlelambocoin plotnft` to manage pools.
 - We have added a new RPC `get_harvesters` to the farmer. This returns information about remote harvesters and plots.
 - We have added a new RPC `check_delete_key` to the wallet, to check keys prior to deleting them.
@@ -306,7 +306,7 @@ OG plots made before this release can continue to be farmed side by side with th
 - We updated to clvm 0.9.6 and clvm_rs 0.1.8. CLVMObject now lazily converts python types to CLVM types as elements are inspected in clvm. cvlm_rs now returns python objects rather than a serialized object.
 - We now have rudimentary checks to makes sure that fees are less than the amount being spent.
 - The harvester API no longer relies upon time:time with thanks to @x1957.
-- We have increased the strictness of validating Littlelambocoinlisp in the mempool and clvm.
+- We have increased the strictness of validating LittleLamboCoinlisp in the mempool and clvm.
 - Thanks to @ruslanskorb for improvements to the human-readable forms in the CLI.
 - Thanks to @etr2460 for improvements to the plotting progress bar in the GUI and enhancements to human-readable sizes.
 - @dkackman changed the way that configuration was found on startup.
@@ -327,7 +327,7 @@ OG plots made before this release can continue to be farmed side by side with th
 - Fixed a potential timelord bug that could lead to a chain stall.
 - Add an explicit error message when mnemonic words are not in the dictionary; should help users self-service issues like #3425 faster. Thank you to @elliotback for this PR.
 - Thank you to @Nikolaj-K for various typo corrections around the Mozilla CA, code simplifications and improvements in converting to human-readable size estimations, and clean up in the RPCs and logging.
-- Thank you to @LittlelambocoinMineJP for various improvements.
+- Thank you to @LittleLamboCoinMineJP for various improvements.
 - @asdf2014 removed some useless code in the wallet node API.
 - Thanks to @willi123yao for a fix to under development pool wallets.
 - `littlelambocoin farm summary` better handles wallet errors.
@@ -341,13 +341,13 @@ OG plots made before this release can continue to be farmed side by side with th
 
 - If you resync your wallet, transactions made with your plot NFTs will show incorrectly in the GUI. The internal accounting, and total balance displayed is correct.
 
-### 1.1.7 Littlelambocoin Blockchain 2021-06-05
+### 1.1.7 LittleLamboCoin Blockchain 2021-06-05
 
 ### Fixed
 
 Batch process weight proof epochs in groups of 900 to fit below May 2020 sqlite limit (999 for Python 3.7 on Windows). Fixes sqlite3.OperationalError: too many SQL variables error and resulting issues with syncing wallets on Windows.
 
-## 1.1.6 Littlelambocoin Blockchain 2021-05-20
+## 1.1.6 LittleLamboCoin Blockchain 2021-05-20
 
 ### Added
 
@@ -391,13 +391,13 @@ Batch process weight proof epochs in groups of 900 to fit below May 2020 sqlite 
 - Thanks to @msg7086 for fixing install.sh for Debian.
 - And thank you to @alfonsoperez, @asdf2014, @fredericosilva, @lamba09, @Nikolaj-K, @sargonas, @aisk, @Ich5003, and @trumankain for various other fixes and improvements.
 
-## 1.1.5 Littlelambocoin Blockchain 2021-05-09
+## 1.1.5 LittleLamboCoin Blockchain 2021-05-09
 
 ### Fixed
 
 - We were not checking for negative values in the uint64 constructor. Therefore coins with negative values were added to the mempool. These blocks passed validation, but they did not get added into the blockchain due to negative values not serializing in uint64. Farmers making these blocks would make blocks that did not make it into or advance the chain, so the blockchain slowed down starting at block 255518 around 6:35AM PDT 5/9/2021. The fix adds a check in the mempool and block validation, and does not disconnect peers who send these invalid blocks (any peer 1.1.4 or older), making this update not mandatory but is recommended. Users not updating might see their blocks get rejected from other peers. Upgraded nodes will show an error when they encounter an old node trying to send an invalid block. This "Consensus error 124..." can be safely ignored.
 
-## 1.1.4 Littlelambocoin Blockchain 2021-05-04
+## 1.1.4 LittleLamboCoin Blockchain 2021-05-04
 
 ### Changed
 
@@ -412,7 +412,7 @@ Batch process weight proof epochs in groups of 900 to fit below May 2020 sqlite 
 - Two issues with processing Weight Proofs during syncing while farming.
 - Fixed a bug in the outgoing rate control logic that could prevent messages being sent.
 
-## 1.1.3 Littlelambocoin Blockchain 2021-05-01
+## 1.1.3 LittleLamboCoin Blockchain 2021-05-01
 
 ### Added
 
@@ -437,7 +437,7 @@ Batch process weight proof epochs in groups of 900 to fit below May 2020 sqlite 
 - @martomi added logging of added coins back.
 - Thank you to @aisk for additional type checking.
 - @aisk added error checking in bech32m
-- Littlelambocoinlisp programs now remained serialized in Node for better performance.
+- LittleLamboCoinlisp programs now remained serialized in Node for better performance.
 - Mempool is now set to be 50 times the single block size.
 - Mitigate 1-3 mojo dust attacks.
 - CLI now switches to EiB for netspace display as appropriate.
@@ -457,7 +457,7 @@ Batch process weight proof epochs in groups of 900 to fit below May 2020 sqlite 
 - Thanks @antoniobg for a typo fix in keychain.py.
 - Thanks to @altendky for catching a Copyright date error.
 
-## 1.1.2 Littlelambocoin Blockchain 2021-04-24
+## 1.1.2 LittleLamboCoin Blockchain 2021-04-24
 
 ### Changed
 
@@ -468,7 +468,7 @@ Batch process weight proof epochs in groups of 900 to fit below May 2020 sqlite 
 - When attempting to sync, connections could accidentally disconnect for rate limiting reasons. This was causing many to not be able to sync.
 - Some temp files were not being closed during GUI plotting.
 
-## 1.1.1 Littlelambocoin Blockchain 2021-04-21
+## 1.1.1 LittleLamboCoin Blockchain 2021-04-21
 
 ### Added
 
@@ -482,12 +482,12 @@ Batch process weight proof epochs in groups of 900 to fit below May 2020 sqlite 
 
 - Changes were made in 1.1.0 to make sure that even out of order signage points were found and responded to by as many farmers as possible. That change lead to a situation where the harvester could thrash on the same cached signage point.
 
-## 1.1.0 Littlelambocoin Blockchain 2021-04-21
+## 1.1.0 LittleLamboCoin Blockchain 2021-04-21
 
 ### Added
 
-- This fork release includes full transaction support for the Littlelambocoin Blockchain. Transactions are still disabled until 5/3/2021 at 10:00AM PDT. It is hard to overstate how much work and clean up went into this release.
-- This is the 1.0 release of Littlelambocoinlisp. Much has been massaged and finalized. We will be putting a focus on updating and expanding the documentation on [littlelambocoinlisp.com](https://littlelambocoinlisp.com) shortly.
+- This fork release includes full transaction support for the LittleLamboCoin Blockchain. Transactions are still disabled until 5/3/2021 at 10:00AM PDT. It is hard to overstate how much work and clean up went into this release.
+- This is the 1.0 release of LittleLamboCoinlisp. Much has been massaged and finalized. We will be putting a focus on updating and expanding the documentation on [littlelambocoinlisp.com](https://littlelambocoinlisp.com) shortly.
 - Farmers now compress blocks using code snippets from previous blocks. This saves storage space and allows larger smart coins to have a library of sorts on chain.
 - We now support offline signing of coins.
 - You can now ask for an offset wallet receive address in the cli. Thanks @jespino.
@@ -508,7 +508,7 @@ Batch process weight proof epochs in groups of 900 to fit below May 2020 sqlite 
 - Timelords are now successfully infusing almost 100% of blocks.
 - Harvester should be a bit more tolerant of some bad plots.
 
-## 1.0.5 Littlelambocoin Blockchain 2021-04-14
+## 1.0.5 LittleLamboCoin Blockchain 2021-04-14
 
 ### Added
 
@@ -527,7 +527,7 @@ Batch process weight proof epochs in groups of 900 to fit below May 2020 sqlite 
 - Our estimate for k=32 was about 0.4GiB too low in some cases.
 - Building the GUI in especially ARM64 Linux was painful enough to be considered broken.
 
-## 1.0.4 Littlelambocoin Blockchain 2021-04-12
+## 1.0.4 LittleLamboCoin Blockchain 2021-04-12
 
 ### Added
 
@@ -551,7 +551,7 @@ Batch process weight proof epochs in groups of 900 to fit below May 2020 sqlite 
 - Wallet start up would have a race condition that output a harmless error on startup.
 - Thanks for a typo fix from @alfonsoperez.
 
-## 1.0.3 Littlelambocoin Blockchain 2021-03-30
+## 1.0.3 LittleLamboCoin Blockchain 2021-03-30
 
 ### Added
 
@@ -563,7 +563,7 @@ Batch process weight proof epochs in groups of 900 to fit below May 2020 sqlite 
 - An incorrect merge brought in unreleased features and broke `littlelambocoin keys`.
 - Omitted from the 1.0.2 changelog, we fixed one crash in harvester with the release of littlelambocoinpos 1.0.0 as well.
 
-## 1.0.2 Littlelambocoin Blockchain 2021-03-30
+## 1.0.2 LittleLamboCoin Blockchain 2021-03-30
 
 ### Added
 
@@ -594,7 +594,7 @@ Batch process weight proof epochs in groups of 900 to fit below May 2020 sqlite 
 - There was a potential node locking issue that could have prevented a Timelord from getting a new peak and cause a chain stall.
 - We did not correctly support some Crowdin locales. Pirate English was starting to overwrite US English for example.
 
-## 1.0.1 Littlelambocoin Blockchain 2021-03-23
+## 1.0.1 LittleLamboCoin Blockchain 2021-03-23
 
 ### Added
 
@@ -615,11 +615,11 @@ Batch process weight proof epochs in groups of 900 to fit below May 2020 sqlite 
 - Users can now pip install e.g. littlelambocoin-blockchain==1.0.1 on most platforms.
 - Sometimes the GUI had an error regarding MainWindow.
 
-## 1.0.0 First Release of Littlelambocoin Blockchain 2021-03-17
+## 1.0.0 First Release of LittleLamboCoin Blockchain 2021-03-17
 
 ### Added
 
-- This is the first production release of the Littlelambocoin Blockchain. This can be installed and will wait for the green flag that will be dropped at approximately 7AM PDST (14:00 UTC) on Friday March 19, 2021. All farming rewards from that point forward will be considered valid and valuable LLC. There is a six week lock on all transactions. During those six weeks farmers will be earning their farming rewards but those rewards can not be spent.
+- This is the first production release of the LittleLamboCoin Blockchain. This can be installed and will wait for the green flag that will be dropped at approximately 7AM PDST (14:00 UTC) on Friday March 19, 2021. All farming rewards from that point forward will be considered valid and valuable LLC. There is a six week lock on all transactions. During those six weeks farmers will be earning their farming rewards but those rewards can not be spent.
 - Initial difficulty will be set for 100PB. This may mean the initial epoch may be slow. Mainnet difficulty resets are targeted for 24 hours so this difficulty will adjust to the actual space brought online in 24 to 48 hours after launch.
 - Transactions are not enabled in the 1.0.0 version and will be soft forked in during the six week period via a 1.1.0 release.
 - There will also be a 1.0.1 release after the green flag process is complete to simplify install for new users by removing the green flag alert. In the interim there will be new testnet releases using the 1.1bx version scheme.
@@ -659,7 +659,7 @@ Batch process weight proof epochs in groups of 900 to fit below May 2020 sqlite 
 
 ### Added
 
-- This is a hard fork/breaking change from RC6/7. TLLC Coins will **not** be moved forward but your plots and keys and parts of your configuration do. When you install this version before 10AM PDST on 3/16/2021 it will load up, start finding peers, and otherwise wait for the flag drop at that time to start farming. This is likely to be the last dress rehearsal for mainnet launch. Our [3/15/2021 blog post](https://www.littlelambocoin.net/2021/03/15/mainnet-update.html) has more details on the current mainnet launch plan.
+- This is a hard fork/breaking change from RC6/7. TLLC Coins will **not** be moved forward but your plots and keys and parts of your configuration do. When you install this version before 10AM PDST on 3/16/2021 it will load up, start finding peers, and otherwise wait for the flag drop at that time to start farming. This is likely to be the last dress rehearsal for mainnet launch. Our [3/15/2021 blog post](https://www.littlelambocoin.org/2021/03/15/mainnet-update.html) has more details on the current mainnet launch plan.
 - The GUI now has a tooltip that directs users to the explanation of the plot filter.
 - The GUI now has a tooltip to explain the "Disable bitfield plotting" option. Thanks @shaneo257 for the idea.
 - The GUI now has a tooltip to explain Hierarchical Deterministic keys next to Receive Address on the Wallet page.
@@ -734,13 +734,13 @@ Batch process weight proof epochs in groups of 900 to fit below May 2020 sqlite 
 - There are new timestamp consensus rules. A block N must have a greater timestamp than block N-1. Also, a block's timestamp cannot be more than 5 minutes in the future. Note that we have decided that work factor difficulty resets are now going to be 24 hours on mainnet but are still shorter on testnet.
 - A List[Tuple[uint16, str]] is added to the peer network handshake. These are the capabilities that the node supports, to add new features to the protocol in an easy - soft fork - manner. The message_id is now before the data in each message.
 - Peer gossip limits were set.
-- Generators have been re-worked in CLVM. We added a littlelambocoinlisp deserialization puzzle and improved the low-level generator. We reduce the accepted atom size to 1MB during LittlelambocoinLisp native deserialization.
+- Generators have been re-worked in CLVM. We added a littlelambocoinlisp deserialization puzzle and improved the low-level generator. We reduce the accepted atom size to 1MB during LittleLamboCoinLisp native deserialization.
 - When processing mempool transactions, Coin IDs are now calculated from parent coin ID and amount
 - We implemented rate limiting for full node. This can and will lead to short term bans of certain peers that didn't behave in expected ways. This is ok and normal, but strong defense against many DDOS attacks.
 - `requirements-dev.txt` has been removed in favor of the CI actions and test scripts.
-- We have moved to a new and much higher scalability download.littlelambocoin.net to support the mainnet launch flag and additional download demand.
-- To always get the latest testnet and then mainnet installers you can now use a latest URL: [Windows](https://download.littlelambocoin.net/latest/Setup-Win64.exe) and [MacOS x86_64](https://download.littlelambocoin.net/latest/Setup-MacOS.dmg).
-- Littlelambocoin wheels not on Pypi and some dependecies not found there also are now on pypi.chia.net.
+- We have moved to a new and much higher scalability download.littlelambocoin.org to support the mainnet launch flag and additional download demand.
+- To always get the latest testnet and then mainnet installers you can now use a latest URL: [Windows](https://download.littlelambocoin.org/latest/Setup-Win64.exe) and [MacOS x86_64](https://download.littlelambocoin.org/latest/Setup-MacOS.dmg).
+- LittleLamboCoin wheels not on Pypi and some dependecies not found there also are now on pypi.chia.net.
 - Additional typing has been added to the Python code with thanks to @jespino.
 - Cryptography and Keyring have been bumped to their current releases.
 - PRs and commits to the littlelambocoin-blockchain-gui repository will automatically have their locales updated.
@@ -762,13 +762,13 @@ Batch process weight proof epochs in groups of 900 to fit below May 2020 sqlite 
 ### Added
 
 - The RC5 release is a new breaking change/hard fork blockchain. Plots and keys from previous chains will work fine on RC5 but balances of TLLC will not come forward.
-- We now support a "green flag" chain launch process. A new version of the software will poll download.littlelambocoin.net/notify/ for a signed json file that will be the genesis block of the chain for that version. This will allow unattended start at mainnet.
+- We now support a "green flag" chain launch process. A new version of the software will poll download.littlelambocoin.org/notify/ for a signed json file that will be the genesis block of the chain for that version. This will allow unattended start at mainnet.
 - Bluebox Timelords are back. These are Timelords most anyone can run. They search through the historical chain and find large proofs of times and compact them down to their smallest representation. This significantly speeds up syncing for newly started nodes. Currently this is only supported on Linux and MacOS x86_64 but we will expand that. Any desktop or server of any age will be fast enough to be a useful Bluebox Timelord.
 - Thanks to @jespino there is now `littlelambocoin farm summary`. You can now get almost exactly the same farming information on the CLI as the GUI.
 - We have added Romanian to the GUI translations. Thank you to @bicilis on [Crowdin](https://crowdin.com/project/littlelambocoin-blockchain). We also added a couple of additional target languages. Klingon anyone?
 - `littlelambocoin wallet` now takes get_address to get a new wallet receive address from the CLI.
 - `littlelambocoin plots check` will list out all the failed plot filenames at the end of the report. Thanks for the PR go to @eFishCent.
-- Littlelambocoinlisp and the clvm have had the standard puzzle updated and we replaced `((c P A))` with `(a P A)`.
+- LittleLamboCoinlisp and the clvm have had the standard puzzle updated and we replaced `((c P A))` with `(a P A)`.
 
 ## Changed
 
@@ -782,10 +782,10 @@ Batch process weight proof epochs in groups of 900 to fit below May 2020 sqlite 
 - The new littlelambocoinvdf proof format is not compatible with the old one, however zero-Wesolowski proofs are not affected as they have zero proof segments and consist only of (y, proof).
 - We made two HashPrime optimizations in littlelambocoinvdf. This forces numbers being tested for primality to be odd and avoids an unnecessary update of the sprout vector by stopping after the first non-zero value. This is a breaking change as it changes the prime numbers generated from a given seed. We believe this is the final breaking change for littlelambocoinvdf.
 - littlelambocoinbip158 was set to a gold 1.0 version.
-- Comments to Littlelambocoinlisp and clvm source have been updated for all of the Littlelambocoinlisp changes over the proceeding three weeks.
+- Comments to LittleLamboCoinlisp and clvm source have been updated for all of the LittleLamboCoinlisp changes over the proceeding three weeks.
 - And thanks yet again to @jespino for a host of PRs to add more detailed typing to various components in littlelambocoin-blockchain.
 - aiohttp was updated to 3.7.4 to address a low severity [security issue](https://github.com/advisories/GHSA-v6wp-4m6f-gcjg).
-- calccrypto/uint128_t was updated in the Windows littlelambocoinpos implementation. Littlelambocoinpos required some changes its build process to support MacOS ARM64.
+- calccrypto/uint128_t was updated in the Windows littlelambocoinpos implementation. LittleLamboCoinpos required some changes its build process to support MacOS ARM64.
 
 ### Fixed
 
@@ -793,10 +793,10 @@ Batch process weight proof epochs in groups of 900 to fit below May 2020 sqlite 
 - Nodes that were interrupted by a network crash or standby on a laptop were not syncing upon reconnection in RC4.
 - Sync issues could stop syncing from restarting and could lead to a peer host that you could not remove.
 - Adding Click changed the behavior of `littlelambocoin keys add -m`. The help now makes it clear that the 24 word mnemonic needs to be surrounded by a pair of quotes.
-- Python root CA certificates have issues so we have added the Mozilla certificate store via curl.se and use that to connect to backup.littlelambocoin.net via https, for example.
+- Python root CA certificates have issues so we have added the Mozilla certificate store via curl.se and use that to connect to backup.littlelambocoin.org via https, for example.
 - The difficulty adjustment calculation was simplified.
 - All of the littlelambocoin sub repositories that were attempting to build MacOS Universal wheels were only generating x86_64 wheels internally. We have moved back to only generating x86_64 MacOS wheels on CI.
-- However, we have updated and test compiled all Littlelambocoin dependencies on Apple Silicon and will be making available a test .dmg for MacOS ARM64 shortly.
+- However, we have updated and test compiled all LittleLamboCoin dependencies on Apple Silicon and will be making available a test .dmg for MacOS ARM64 shortly.
 - Various weight proof edge cases have been fixed.
 - Various typos and style clean ups were made to the Click CLI implementation. `littlelambocoin -upnp f` was added to disable uPnP.
 - `littlelambocoin plots check` shouldn't crash when encountering plots that cause RuntimeError. PR again thanks to @eFishCent.
@@ -866,12 +866,12 @@ Batch process weight proof epochs in groups of 900 to fit below May 2020 sqlite 
 ### Added
 
 - This is the first release in our release candidate series. There are still a few things that will change at the edges but the blockchain, clvm, and littlelambocoinlisp are in release form. We have one major change to littlelambocoinlisp/clvm that we have chosen to schedule for the next release as in this release we're breaking the way q/quote works. We also have one more revision to the VDF that will decrease the sizes of the proofs of time. We expect a few more releases in the release candidate series.
-- Installers will now be of the pattern LittlelambocoinSetup-0.2.1.exe. `0.2` is release candidate and the final `.1` is the first release candidate.
+- Installers will now be of the pattern LittleLamboCoinSetup-0.2.1.exe. `0.2` is release candidate and the final `.1` is the first release candidate.
 - Use 'littlelambocoin wallet get_transactions' in the command line to see your transactions.
 - 'littlelambocoin wallet show' now shows your wallet's height.
 - Last Attempted Proof is now above Latest Block Challenge on the Farm page of the GUI.
 - The GUI now detects duplicate plots and also only counts unique plots and unique plot size.
-- We have integrated with crowdin to make it easier to translate the GUI. Check out [Littlelambocoin Blockchain GUI](https://crowdin.com/project/littlelambocoin-blockchain) there.
+- We have integrated with crowdin to make it easier to translate the GUI. Check out [LittleLamboCoin Blockchain GUI](https://crowdin.com/project/littlelambocoin-blockchain) there.
 - We have added Italian, Russian, and Finnish. More to come soon.
 - There is now remote UI support. [Documents](https://github.com/Chia-Network/chia-blockchain-gui/blob/main/remote.md) will temporarily live in the repository but have moved to the [wiki](https://github.com/Chia-Network/chia-blockchain/wiki/Connecting-the-UI-to-a-remote-daemon). Thanks to @dkackman for this excellent addition!
 - Added the ability to specify an address for the pool when making plots (-c flag), as opposed to a public key. The block
@@ -945,14 +945,14 @@ all fields that referred to sub blocks are changed to blocks.
 
 ### Changed
 
-- Significant improvements have been made to how the full node handles the mempool. This generally cuts CPU usage of node by 2x or more. Part of this increase is that we have temporarily limited the size of transactions. If you want to test sending a transaction you should keep the value of your transaction below 20 TLLC as new consensus will cause you to use a lot of inputs. This will be returned to the expected level as soon as the integration of [clvm rust](https://github.com/Littlelambocoin-Network/clvm_rs) is complete.
+- Significant improvements have been made to how the full node handles the mempool. This generally cuts CPU usage of node by 2x or more. Part of this increase is that we have temporarily limited the size of transactions. If you want to test sending a transaction you should keep the value of your transaction below 20 TLLC as new consensus will cause you to use a lot of inputs. This will be returned to the expected level as soon as the integration of [clvm rust](https://github.com/LittleLamboCoin-Network/clvm_rs) is complete.
 - We have changed the way TLS between nodes and between littlelambocoin services work. Each node now has two certificate authorities. One is a public, shared CA that signs the TLS certificates that every node uses to connect to other nodes on 8444 or 58444. You now also have a self generated private CA that must sign e.g. farmer and harvester's certificates. To run a remote harvester you need a new harvester key that is then signed by your private CA. We know this is not easy for remote harvester in this release but will address it quickly.
 - We have changed the way we compile the proof of space plotter and added one additional optimization. On many modern processors this will mean that using the plotter with the `-e` flag will be 2-3% faster than the Beta 17 plotter on the same CPU. We have found this to be very sensitive to different CPUs but are now confident that, at worst, the Beta 24 plotter with `-e` will be the same speed as Beta 17 if not slightly faster on the same hardware. Huge thanks to @xorinox for meticulously tracking down and testing this.
 - If a peer is not responsive during sync, node will disconnect it.
 - Peers that have not sent data in the last hour are now disconnected.
 - We have made the "Help Translate" button in the GUI open in your default web browser and added instructions for adding new translations and more phrases in existing translations at that [URL](https://github.com/Chia-Network/chia-blockchain/tree/main/electron-react/src/locales). Try the "Help Translate" option on the language selection pull down to the left of the dark/light mode selection at the top right of the GUI.
 - Sync store now tracks all connected peers and removes them as they get removed.
-- The Rate Limited Wallet has been ported to new consensus and updated Littlelambocoinlisp methods.
+- The Rate Limited Wallet has been ported to new consensus and updated LittleLamboCoinlisp methods.
 - We are down to only one sub dependency that does not ship binary wheels for all four platforms. The only platform still impacted is ARM64 (generally Raspberry Pi) but that only means that you still need the minor build tools as outlined on the [wiki](https://github.com/Chia-Network/chia-blockchain/wiki/Raspberry-Pi).
 - We upgraded to Electron 9.4.2 for the GUI.
 - We have upgraded to py-setproctitle 1.2.2. We now have binary wheels for setproctitle on all four platforms and make it a requirement in setup.py. It is run-time optional if you wish to disable it.
@@ -995,7 +995,7 @@ all fields that referred to sub blocks are changed to blocks.
 
 - On starting full node, the weight proof cache does not attempt to load all sub blocks. Startup times are noticeably improved though there remains a hesitation when validating the mempool. Our clvm Rust implementation, which will likely ship in the next release, will drop example processing times from 180 to 3 seconds.
 - Changes to weight proofs and sub block storage and cacheing required a new database schema. This will require a re-sync or obtaining a synced blockchain_v23.db.
-- clvm bytecode is now generated and confirmed that the checked-in clvm and LittlelambocoinLisp code matches the CI compiled code.
+- clvm bytecode is now generated and confirmed that the checked-in clvm and LittleLamboCoinLisp code matches the CI compiled code.
 - We have removed the '-r' flag from `littlelambocoin` as it was being overridden in most cases by the `-r` for restart flag to `littlelambocoin start`. Use `littlelambocoin --root-path` instead.
 - `littlelambocoin -h` now recommends `littlelambocoin netspace -d 192` which is approximately one hours worth of sub blocks. Use `-d 1000` to get the same estimate of netspace as the RPC and GUI.
 - `littlelambocoin show -c` now displays in MiB and the GUI has been changed to MiB to match.
@@ -1085,7 +1085,7 @@ all fields that referred to sub blocks are changed to blocks.
 
 - Welcome to the new consensus. This release is an all but a full re-write of the blockchain in under 30 days. There is now only one tip of the blockchain but we went from two chains to three. Block times are now a little under a minute but there are a couple of sub blocks between each transaction block. A block is also itself a special kind of sub block and each sub block rewards the farmer who won it 1 TLLC. Sub blocks come, on average, about every 17 to 18 seconds.
 - Starting with this Beta, there are 4608 opportunities per day for a farmer to win 1 TLLC compared to Beta 18 where there were 288 opportunities per day for a farmer to win 16 TLLC.
-- There is a lot more information and explanation of the new consensus algorithm in the New Consensus Working Document linked from [littlelambocoin.net](https://littlelambocoin.net/). Among the improvements this gives the Littlelambocoin blockchain are a much higher security level against all attacks, more frequent transaction blocks that have less time variation between them and are then buried under confirmations (sub blocks also count towards re-org security) much more quickly.
+- There is a lot more information and explanation of the new consensus algorithm in the New Consensus Working Document linked from [littlelambocoin.org](https://littlelambocoin.org/). Among the improvements this gives the LittleLamboCoin blockchain are a much higher security level against all attacks, more frequent transaction blocks that have less time variation between them and are then buried under confirmations (sub blocks also count towards re-org security) much more quickly.
 - New consensus means this is a very hard fork. All of your TLLC from Beta 17/18 will be gone. Your plots and keys will work just fine however. You will have to sync to the new chain.
 - You now have to sync 16 times more "blocks" for every 5 minutes of historical time so syncing is slower than it was on the old chain. We're aware of this and will be speeding it up and addressing blockchain database growth in the nest couple of releases.
 - Prior to this Beta 19, we had block times that targeted 5 minutes and rewarded 16 TLLC to one farmer. Moving forward we have epoch times that target 10 minutes and reward 32 TLLC to 32 farmers about every 17-18 seconds over that period. This has subtle naming and UI impacts in various places.
@@ -1105,18 +1105,18 @@ all fields that referred to sub blocks are changed to blocks.
 - The new plots page offers advanced plotting options in the various "Show Advanced Options" fold outs.
 - The plotter supports the new bitfield back propagation method and the old method from Beta 17. To choose the old method add a `-e` to the command line or choose "Disable bitfield plotting" in "Show Advanced Options" of the Plots tab. Bitfield back propagation writes about 13% less total writes and can be faster on some slower hard drive temp spaces. For now, SSD temp space will likely plot faster with bitfield back propagation disabled. We will be returning to speed enhancements to the plotter as we approach and pass our mainnet launch.
 - The Farm tab in the GUI is significantly enhanced. Here you have a dashboard overview of your farm and your activity in response to challenges blockchain challnegs, how long it will take you - on average - to win a block, and how much TLLC you've won so far. Harvester and Full Node connections have moved to Advanced Options.
-- Harvester and farmer will start when the GUI starts instead of waiting for key selection if there are already keys available. This means you will start farming on reboot if you have the Littlelambocoin application set to launch on start.
+- Harvester and farmer will start when the GUI starts instead of waiting for key selection if there are already keys available. This means you will start farming on reboot if you have the LittleLamboCoin application set to launch on start.
 - Testnet is now running at the primary port of 58444. Update your routers appropriately. This opens 8444 for mainnet.
 - All networking code has been refactored and mostly moved to websockets.
 - RPCs and daemon now communicate over TLS with certificates that are generated into `~/.littlelambocoin/VERSION/config/`
 - We have moved to taproot across all of our transactions and smart transactions.
 - We have adopted chech32m encoding of keys and addresses in parallel to bitcoin's coming adoption of bech32m.
 - The rate limited wallet was updated and re-factored.
-- All appropriate Littlelambocoinlisp smart transactions have been updated to use aggsig_me.
+- All appropriate LittleLamboCoinlisp smart transactions have been updated to use aggsig_me.
 - Full node should be more aggressive about finding other peers.
 - Peer disconnect messages are now set to log level INFO down from WARNING.
 - littlelambocoinvdf now allows passing in input to a VDF for new consensus.
-- sha256tree has been removed from Littlelambocoinlisp.
+- sha256tree has been removed from LittleLamboCoinlisp.
 - `littlelambocoin show -s` has been refactored to support the new consensus.
 - `littlelambocoin netspace` has been refactored for new consensus.
 - aiohttp, clvm-tools, colorlog, concurrent-log-handler, keyring, cryptography, and sortedcontainers have been upgraded to their current versions.
@@ -1140,7 +1140,7 @@ all fields that referred to sub blocks are changed to blocks.
 
 - F1 generation in the plotter is now fully parallel for a small speedup.
 - We have bitfield optimized phase 2 of plotting. There is only about a 1% increase in speed from this change but there is a 12% decrease in writes with a penalty of 3% more reads. More details in [PR 120](https://github.com/Chia-Network/chiapos/pull/120). Note that some sorts in phase 2 and phase 3 will now appear "out of order" and that is now expected behavior.
-- Partial support for Python 3.9. That includes new versions of Littlelambocoin dependencies like littlelambocoinbip158.
+- Partial support for Python 3.9. That includes new versions of LittleLamboCoin dependencies like littlelambocoinbip158.
 
 ### Changed
 
@@ -1173,7 +1173,7 @@ all fields that referred to sub blocks are changed to blocks.
 
 ### Added
 
-- The Littlelambocoin GUI now supports dark and light mode.
+- The LittleLamboCoin GUI now supports dark and light mode.
 - The GUI now supports translations and localizations. If you'd like to add your language you can see the examples in [the locales directory](https://github.com/Chia-Network/chia-blockchain/tree/dev/electron-react/src/locales) of the littlelambocoin-blockchain repository.
 - `littlelambocoin check plots` now takes a `-g` option that allows you to specify a matching path string to only check a single plot file, a wild card list of plot files, or all plots in a single directory instead of the default behavior of checking every directory listed in your config.yaml. A big thank you to @eFishCent for this pull request!
 - Better documentation of the various timelord options in the default config.yaml.
@@ -1244,7 +1244,7 @@ all fields that referred to sub blocks are changed to blocks.
 
 - Temporary space required for each k size was updated with more accurate estimates.
 - Tables in the README.MD were not rendering correctly on Pypi. Thanks again @altendky.
-- Littlelambocoinpos issue where memory was spiking and increasing
+- LittleLamboCoinpos issue where memory was spiking and increasing
 - Fixed working space estimates so they are exact
 - Log all errors in littlelambocoinpos
 - Fixed a bug that was causing Bluebox vdfs to fail.
@@ -1268,7 +1268,7 @@ all fields that referred to sub blocks are changed to blocks.
 ### Added
 
 - Rate limited wallets can now have unspent and un-spendable funds clawed back by the Admin wallet.
-- You can now backup your wallet related metadata in an encrypted and signed file to a free service from Littlelambocoin Network at backup.littlelambocoin.net. Simply having a backup of your private key will allow you to fully restore the state of your wallet including coloured coins, rate limited wallets, distributed identity wallets and many more. Your private key is used to automatically restore the last backup you saved to the Littlelambocoin backup cloud service. This service is open source and ultimately you will be able to configure your backups to go to backup.littlelambocoin.net, your own installation, or a third party's version of it.
+- You can now backup your wallet related metadata in an encrypted and signed file to a free service from LittleLamboCoin Network at backup.littlelambocoin.org. Simply having a backup of your private key will allow you to fully restore the state of your wallet including coloured coins, rate limited wallets, distributed identity wallets and many more. Your private key is used to automatically restore the last backup you saved to the LittleLamboCoin backup cloud service. This service is open source and ultimately you will be able to configure your backups to go to backup.littlelambocoin.org, your own installation, or a third party's version of it.
 - Added a Code of Conduct in CODE_OF_CONDUCT.md.
 - Added a bug report template in `.github/ISSUE_TEMPLATE/bug_report.md`.
 
@@ -1291,13 +1291,13 @@ all fields that referred to sub blocks are changed to blocks.
 - View -> Developer -> Developer Tools now correctly opens the developer tools. Thank you to @roxaaams for this pull request!
 - Fixed 'Receive Address' typo in Wallet. Thanks @meurtn on Keybase.
 - Fixed a typo in `littlelambocoin show -w` with thanks to @pyl on Keybase.
-- In Windows the start menu item is now Littlelambocoin Network and the icon in Add/Remove is updated.
+- In Windows the start menu item is now LittleLamboCoin Network and the icon in Add/Remove is updated.
 
 ## [1.0beta11] aka Beta 1.11 - 2020-08-24
 
 ### Added
 
-- The Littlelambocoin UI now has a proper About menu entry that gives the various component versions and directs people to submit issues on GitHub. Thank you to @freddiecoleman for this pull request!
+- The LittleLamboCoin UI now has a proper About menu entry that gives the various component versions and directs people to submit issues on GitHub. Thank you to @freddiecoleman for this pull request!
 - Ability to run only the farmer, wallet, or timelord services, for more advanced configurations (littlelambocoin run farmer-only, wallet-only, timelord-only)
 
 ### Changed
@@ -1320,11 +1320,11 @@ all fields that referred to sub blocks are changed to blocks.
 - We've added unhardened HD keys to bls-signatures for the smart wallets that need them. We've added significant cross project testing to our BLS implementation.
 - The python implementation of bls-signatures is now current to the new specification.
 - `littlelambocoin show -b` now returns plot public key and pool public key for each block.
-- Added cbor2 binary wheels for ARM64 to the Littlelambocoin simple site. Raspberry Pi should be just a little easier to install.
+- Added cbor2 binary wheels for ARM64 to the LittleLamboCoin simple site. Raspberry Pi should be just a little easier to install.
 
 ### Changed
 
-- Wallet addresses and other key related elements are now expressed in Chech32 which is the Littlelambocoin implementation of [Bech32](https://github.com/bitcoin/bips/blob/master/bip-0173.mediawiki). All of your old wallet addresses will be replaced with the new Chech32 addresses. The only thing you can't do is send test littlelambocoin between 1.8/1.9 and 1.10 software. Anyone who upgrades to 1.10 will keep their transactions and balances of test littlelambocoin from the earlier two releases however.
+- Wallet addresses and other key related elements are now expressed in Chech32 which is the LittleLamboCoin implementation of [Bech32](https://github.com/bitcoin/bips/blob/master/bip-0173.mediawiki). All of your old wallet addresses will be replaced with the new Chech32 addresses. The only thing you can't do is send test littlelambocoin between 1.8/1.9 and 1.10 software. Anyone who upgrades to 1.10 will keep their transactions and balances of test littlelambocoin from the earlier two releases however.
 - We added a first few enhancements to plotting speed. For a k=30 on a ramdisk with `-b 64 GiB` it results in an 11% speedup in overall plotting speed and a 23% improvement in phase 1 speed. Many more significant increases in plotting speed are in the works.
 - The proof of space document in littlelambocoinpos has been updated to the new format and edited for clarity. Additionally GitHub actions now has the on demand ability to create the PDF version.
 - Relic has upstreamed our changes required for the IETF BLS standard. We now build directly from the Relic repository for all but Windows and will be migrating Windows in the next release.
@@ -1335,7 +1335,7 @@ all fields that referred to sub blocks are changed to blocks.
 
 - Proof of space plotting now correctly calculates the total working space used in the `-t` directory.
 - `littlelambocoin show -w` now displays a message when balances cannot be displayed instead of throwing an error. Thanks to @freddiecoleman for this fix!
-- Fix issue with shutting down full node (full node processes remained open, and caused a spinner when launching Littlelambocoin)
+- Fix issue with shutting down full node (full node processes remained open, and caused a spinner when launching LittleLamboCoin)
 - Various code review alerts for comparing to a wider type in littlelambocoinpos were fixed. Additionally, unused code was removed from littlelambocoinpos
 - Benchmarking has been re-enabled in bls-signatures.
 - Various node security vulnerabilities were addressed.
@@ -1392,7 +1392,7 @@ the now deprecated AES methods. This should increase plotting speed and support
 more processors.
 - Plot refreshing happens during all new challenges and only new/modified files
 are read.
-- Updated [blspy](https://github.com/Littlelambocoin-Network/bls-signatures) to use the
+- Updated [blspy](https://github.com/LittleLamboCoin-Network/bls-signatures) to use the
 new [IETF standard for BLS signatures](https://tools.ietf.org/html/draft-irtf-cfrg-bls-signature-02).
 - Added a faster VDF process which generates n-wesolowski proofs quickly
 after the VDF result is known. This requires a high number of CPUs. To use it,
@@ -1421,9 +1421,9 @@ that ci runs successfully complete from PRs or forked repositories.
 we expect to add in future releases.
 - The littlelambocoin executable is now available if installing from the Windows or MacOS
 Graphical installer. Try `./littlelambocoin -h` from
-`~\AppData\Local\Littlelambocoin-Blockchain\app-0.1.8\resources\app.asar.unpacked\daemon\`
+`~\AppData\Local\LittleLamboCoin-Blockchain\app-0.1.8\resources\app.asar.unpacked\daemon\`
 in Windows or
-`/Applications/Littlelambocoin.app/Contents/Resources/app.asar.unpacked/daemon` on MacOS.
+`/Applications/LittleLamboCoin.app/Contents/Resources/app.asar.unpacked/daemon` on MacOS.
 
 ### Changed
 
@@ -1494,7 +1494,7 @@ relic. We will make a patch available for these systems shortly.
 - Added ability to import private keys in the UI.
 - Added ability to see private keys and mnemonic seeds in the keys menu
 - User can specify log level in the config file (defaults to info.)
-- The Windows installer is now signed by a Littlelambocoin Network certificate. It may take some time to develop enough reputation to not warn multiple times during install.
+- The Windows installer is now signed by a LittleLamboCoin Network certificate. It may take some time to develop enough reputation to not warn multiple times during install.
 
 ### Changed
 
@@ -1502,12 +1502,12 @@ relic. We will make a patch available for these systems shortly.
 - We have made performance improvements to plotting speed on all platforms.
 - The command line plotter now supports specifying it's memory buffer size.
 - Test plots for the simulation and testing harness now go into `~/.littlelambocoin/test-plots/`
-- We have completely refactored all networking code towards making each Littlelambocoin service use the same default networking infrastructure and move to websockets as the default networking wire protocol.
+- We have completely refactored all networking code towards making each LittleLamboCoin service use the same default networking infrastructure and move to websockets as the default networking wire protocol.
 - We added additional improvements and more RPCs to the start daemon and various services to continue to make littlelambocoin start/stop reliable cross platform.
 - The install.sh script now discovers if it's running on Ubuntu less than 20.04 and correctly upgrades node.js to the current stable version.
 - For GitHub ci builds of the Windows installer, editbin.exe is more reliably found.
 - All installer ci builds now obtain version information automatically from setuptools_scm and convert it to an installer version number that is appropriate for the platform and type of release (dev versus release.)
-- We now codesign the Apple .dmg installer with the Littlelambocoin Network developer ID on both GitHub Actions and Azure Pipelines. We will be notarizing and distributing the Azure Pipelines version as it's built on MacOS Mojave (10.14.6) for stronger cross version support.
+- We now codesign the Apple .dmg installer with the LittleLamboCoin Network developer ID on both GitHub Actions and Azure Pipelines. We will be notarizing and distributing the Azure Pipelines version as it's built on MacOS Mojave (10.14.6) for stronger cross version support.
 
 ### Fixed
 
@@ -1585,7 +1585,7 @@ relic. We will make a patch available for these systems shortly.
 
 ### Fixed
 
-- There was a regression in Littlelambocoin Proof of Space ([littlelambocoinpos](https://github.com/Chia-Network/chiapos)) that came from our efforts to speed up plotting on Windows native. Now k>=32 plots work correctly. We made additional bug fixes and corrected limiting small k size generation.
+- There was a regression in LittleLamboCoin Proof of Space ([littlelambocoinpos](https://github.com/Chia-Network/chiapos)) that came from our efforts to speed up plotting on Windows native. Now k>=32 plots work correctly. We made additional bug fixes and corrected limiting small k size generation.
 - There was a bug in Timelord handling that could stop all VDF progress.
 
 ### Deprecated
@@ -1601,7 +1601,7 @@ relic. We will make a patch available for these systems shortly.
 
 ### Added
 
-- This release adds Coloured coin support with offers. Yes that is the correct spelling. Coloured coins allow you to issue a coin, token, or asset with nearly unlimited issuance plans and functionality. They support inner smart transactions so they can inherit any of the other functionality you can implement in Littlelambocoinlisp. Offers are especially cool as they create a truly decentralized exchange capability. Read much more about them in Bram's [blog post on Coloured coins](https://littlelambocoin.net/2020/04/29/coloured-coins-launch.en.html).
+- This release adds Coloured coin support with offers. Yes that is the correct spelling. Coloured coins allow you to issue a coin, token, or asset with nearly unlimited issuance plans and functionality. They support inner smart transactions so they can inherit any of the other functionality you can implement in LittleLamboCoinlisp. Offers are especially cool as they create a truly decentralized exchange capability. Read much more about them in Bram's [blog post on Coloured coins](https://littlelambocoin.org/2020/04/29/coloured-coins-launch.en.html).
 - This release adds support for native Windows via a (mostly) automated installer and MacOS Mojave. Windows still requires some PowerShell command line use. You should expect ongoing improvements in ease of install and replication of the command line tools in the GUI. Again huge thanks to @dkackman for continued Windows installer development. Native Windows is currently slightly slower than the same version running in WSL 2 on the same machine for both block verification and plotting.
 - We made some speed improvements that positively affected all platforms while trying to increase plotting speed in Windows.
 - The graphical Full Node display now shows the expected finish times of each of the prospective chain tips.
@@ -1616,7 +1616,7 @@ relic. We will make a patch available for these systems shortly.
 ### Changed
 
 - Most scripts have been removed in favor of littlelambocoin action commands. You can run `littlelambocoin version` or `littlelambocoin start node` for example. Just running `littlelambocoin` will show you more options. However `littlelambocoin-create-plots` continues to use the hyphenated form. Also it's now `littlelambocoin generate keys` as another example.
-- Littlelambocoin start commands like `littlelambocoin start farmer` and `littlelambocoin stop node` now keep track of process IDs in a run/ directory in your configuration directory. `littlelambocoin stop` is unlikely to work on Windows native for now. If `littlelambocoin start -r node` doesn't work you can force the run/ directory to be reset with `littlelambocoin start -f node`.
+- LittleLamboCoin start commands like `littlelambocoin start farmer` and `littlelambocoin stop node` now keep track of process IDs in a run/ directory in your configuration directory. `littlelambocoin stop` is unlikely to work on Windows native for now. If `littlelambocoin start -r node` doesn't work you can force the run/ directory to be reset with `littlelambocoin start -f node`.
 - We suggest you take a look at our [Upgrading documentation](https://github.com/Chia-Network/chia-blockchain/wiki/Updating-beta-software) if you aren't performing a new install.
 - blspy now has libsodium included in the MacOS and Linux binary wheels.
 - miniupnpc and setprotitle were dynamically checked for an installed at runtime. Removed those checks and we rely upon the install tools installing them before first run.
@@ -1680,7 +1680,7 @@ relic. We will make a patch available for these systems shortly.
 
 ### Added
 
-- There is now full transaction support on the Littlelambocoin blockchain. In this initial Beta 1.0 release, all transaction types are supported though the wallets and UIs currently only directly support basic transactions like coinbase rewards and sending coins while paying fees. UI support for our [smart transactions](https://github.com/Littlelambocoin-Network/wallets/blob/main/README.md) will be available in the UIs shortly.
+- There is now full transaction support on the LittleLamboCoin blockchain. In this initial Beta 1.0 release, all transaction types are supported though the wallets and UIs currently only directly support basic transactions like coinbase rewards and sending coins while paying fees. UI support for our [smart transactions](https://github.com/LittleLamboCoin-Network/wallets/blob/main/README.md) will be available in the UIs shortly.
 - Wallet and Node GUI’s are available on Windows, Mac, and desktop Linux platforms. We now use an Electron UI that is a full light client wallet that can also serve as a node UI. Our Windows Electron Wallet can run standalone by connecting to other nodes on the network or another node you run. WSL 2 on Windows can run everything except the Wallet but you can run the Wallet on the native Windows side of the same machine. Also the WSL 2 install process is 3 times faster and _much_ easier. Windows native node/farmer/plotting functionality are coming soon.
 - Install is significantly easier with less dependencies on all supported platforms.
 - If you’re a farmer you can use the Wallet to keep track of your earnings. Either use the same keys.yaml on the same machine or copy the keys.yaml to another machine where you want to track of and spend your coins.
@@ -1691,7 +1691,7 @@ relic. We will make a patch available for these systems shortly.
 - We have revamped the littlelambocoin management command line. To start a farmer all you have to do is start the venv with `. ./activate` and then type `littlelambocoin-start-farmer &`. The [README.md](https://github.com/Chia-Network/chia-blockchain/blob/main/README.md) has been updated to reflect the new commands.
 - We have moved all node to node communication to TLS 1.3 by default. For now, all TLS is unauthenticated but certain types of over the wire node to node communications will have the ability to authenticate both by certificate and by inter protocol signature. Encrypting over the wire by default stops casual snooping of transaction origination, light wallet to trusted node communication, and harvester-farmer-node communication for example. This leaves only the mempool and the chain itself open to casual observation by the public and the various entities around the world.
 - Configuration directories have been moved to a default location of HomeDirectory/.littlelambocoin/release/config, plots/ db/, wallet/ etc. This can be overridden by `export LITTLELAMBOCOIN_ROOT=~/.littlelambocoin` for example which would then put the plots directory in `HomeDirectory/.littlelambocoin/plots`.
-- The libraries littlelambocoin-pos, littlelambocoin-fast-vdf, and littlelambocoin-bip-158 have been moved to their own repositories: [littlelambocoinpos](https://github.com/Chia-Network/chiapos), [littlelambocoinvdf](https://github.com/Chia-Network/chiavdf), and [chaibip158](https://github.com/Chia-Network/chiabip158). They are brought in by littlelambocoin-blockchain at install time. Our BLS signature library remains at [bls-signatures](https://github.com/Littlelambocoin-Network/bls-signatures).
+- The libraries littlelambocoin-pos, littlelambocoin-fast-vdf, and littlelambocoin-bip-158 have been moved to their own repositories: [littlelambocoinpos](https://github.com/Chia-Network/chiapos), [littlelambocoinvdf](https://github.com/Chia-Network/chiavdf), and [chaibip158](https://github.com/Chia-Network/chiabip158). They are brought in by littlelambocoin-blockchain at install time. Our BLS signature library remains at [bls-signatures](https://github.com/LittleLamboCoin-Network/bls-signatures).
 - The install process now brings in littlelambocoinpos, littlelambocoinvdf, etc from Pypi where they are auto published via GitHub Actions ci using cibuildwheel. Check out `.github/workflows/build.yml` for build methods in each of the sub repositories.
 - `littlelambocoin-regenerate-keys` has been renamed `littlelambocoin-generate-keys`.
 - setproctitle is now an optional install dependency that we will continue to install in the default install methods.
@@ -1760,7 +1760,7 @@ relic. We will make a patch available for these systems shortly.
 - Due to changes to the sqlite database that are not backwards compatible, re-synch will be required.
 - Loading the blockchain only loads headers into memory instead of header blocks (header + proofs), speeds up the startup, and reduces normal operation memory usage by 80%.
 - Memory access is now synchronous to reduce use of locks and speed up block processing.
-- Littlelambocoin fullnode, farmer and harvester now default to logging to littlelambocoin.log in the littlelambocoin-blockchain directory. This is configured in config.yaml and due to config.yaml changes it is recommended to edit the new template config instead of using older config.yaml’s from previous versions.
+- LittleLamboCoin fullnode, farmer and harvester now default to logging to littlelambocoin.log in the littlelambocoin-blockchain directory. This is configured in config.yaml and due to config.yaml changes it is recommended to edit the new template config instead of using older config.yaml’s from previous versions.
 - uvloop is now an optional add on.
 - Harvester/farmer will not try to farm plots that they don’t have the key for.
 
@@ -1774,7 +1774,7 @@ relic. We will make a patch available for these systems shortly.
 ### Added
 
 - FullNode performance improvements - Syncing up to the blockchain by importing all blocks is faster due to improvements in VDF verification speed and multithreading block verification.
-- VDF improvements - VDF verification and generation speed has increased and dependence on flint2 has been removed. We wish to thank Dr. William Hart (@wbhart) for dual licensing parts of his contributions in FLINT and Antic for inclusion in the Littlelambocoin blockchain.
+- VDF improvements - VDF verification and generation speed has increased and dependence on flint2 has been removed. We wish to thank Dr. William Hart (@wbhart) for dual licensing parts of his contributions in FLINT and Antic for inclusion in the LittleLamboCoin blockchain.
 - Implemented an RPC interface with JSON serialization for streamables - currently on port 8555.
 - Added details on how to contribute in CONTRIBUTING.md. Thanks @RichardLitt.
 - Added color logging
@@ -1855,8 +1855,8 @@ relic. We will make a patch available for these systems shortly.
 
 ### Added
 
-- This is the first release of the Littlelambocoin testnet! Blockchain consensus, proof of time, and proof of space are included.
-- More details on the release at [https://www.littlelambocoin.net/developer/](https://www.littlelambocoin.net/developer/)
+- This is the first release of the LittleLamboCoin testnet! Blockchain consensus, proof of time, and proof of space are included.
+- More details on the release at [https://www.littlelambocoin.org/developer/](https://www.littlelambocoin.org/developer/)
 
 [unreleased]: https://github.com/Chia-Network/chia-blockchain/compare/1.0beta5...dev
 [1.0beta5]: https://github.com/Chia-Network/chia-blockchain/compare/1.0beta4...1.0beta5

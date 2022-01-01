@@ -24,7 +24,7 @@ from littlelambocoin.protocols.shared_protocol import protocol_version
 from littlelambocoin.server.introducer_peers import IntroducerPeers
 from littlelambocoin.server.outbound_message import Message, NodeType
 from littlelambocoin.server.ssl_context import private_ssl_paths, public_ssl_paths
-from littlelambocoin.server.ws_connection import WSLittlelambocoinConnection
+from littlelambocoin.server.ws_connection import WSLittleLamboCoinConnection
 from littlelambocoin.types.blockchain_format.sized_bytes import bytes32
 from littlelambocoin.types.peer_info import PeerInfo
 from littlelambocoin.util.errors import Err, ProtocolError
@@ -81,7 +81,7 @@ def ssl_context_for_client(
     return ssl_context
 
 
-class LittlelambocoinServer:
+class LittleLamboCoinServer:
     def __init__(
         self,
         port: int,
@@ -101,10 +101,10 @@ class LittlelambocoinServer:
     ):
         # Keeps track of all connections to and from this node.
         logging.basicConfig(level=logging.DEBUG)
-        self.all_connections: Dict[bytes32, WSLittlelambocoinConnection] = {}
+        self.all_connections: Dict[bytes32, WSLittleLamboCoinConnection] = {}
         self.tasks: Set[asyncio.Task] = set()
 
-        self.connection_by_type: Dict[NodeType, Dict[bytes32, WSLittlelambocoinConnection]] = {
+        self.connection_by_type: Dict[NodeType, Dict[bytes32, WSLittleLamboCoinConnection]] = {
             NodeType.FULL_NODE: {},
             NodeType.WALLET: {},
             NodeType.HARVESTER: {},
@@ -190,7 +190,7 @@ class LittlelambocoinServer:
         is_crawler = getattr(self.node, "crawl", None)
         while True:
             await asyncio.sleep(600 if is_crawler is None else 2)
-            to_remove: List[WSLittlelambocoinConnection] = []
+            to_remove: List[WSLittleLamboCoinConnection] = []
             for connection in self.all_connections.values():
                 if self._local_type == NodeType.FULL_NODE and connection.connection_type == NodeType.FULL_NODE:
                     if is_crawler is not None:
@@ -267,9 +267,9 @@ class LittlelambocoinServer:
         peer_id = bytes32(der_cert.fingerprint(hashes.SHA256()))
         if peer_id == self.node_id:
             return ws
-        connection: Optional[WSLittlelambocoinConnection] = None
+        connection: Optional[WSLittleLamboCoinConnection] = None
         try:
-            connection = WSLittlelambocoinConnection(
+            connection = WSLittleLamboCoinConnection(
                 self._local_type,
                 ws,
                 self._port,
@@ -335,7 +335,7 @@ class LittlelambocoinServer:
         await close_event.wait()
         return ws
 
-    async def connection_added(self, connection: WSLittlelambocoinConnection, on_connect=None):
+    async def connection_added(self, connection: WSLittleLamboCoinConnection, on_connect=None):
         # If we already had a connection to this peer_id, close the old one. This is secure because peer_ids are based
         # on TLS public keys
         if connection.peer_node_id in self.all_connections:
@@ -387,7 +387,7 @@ class LittlelambocoinServer:
                 self.littlelambocoin_ca_crt_path, self.littlelambocoin_ca_key_path, self.p2p_crt_path, self.p2p_key_path
             )
         session = None
-        connection: Optional[WSLittlelambocoinConnection] = None
+        connection: Optional[WSLittleLamboCoinConnection] = None
         try:
             # Crawler/DNS introducer usually uses a lower timeout than the default
             timeout_value = (
@@ -425,7 +425,7 @@ class LittlelambocoinServer:
             if peer_id == self.node_id:
                 raise RuntimeError(f"Trying to connect to a peer ({target_node}) with the same peer_id: {peer_id}")
 
-            connection = WSLittlelambocoinConnection(
+            connection = WSLittleLamboCoinConnection(
                 self._local_type,
                 ws,
                 self._port,
@@ -483,7 +483,7 @@ class LittlelambocoinServer:
 
         return False
 
-    def connection_closed(self, connection: WSLittlelambocoinConnection, ban_time: int):
+    def connection_closed(self, connection: WSLittleLamboCoinConnection, ban_time: int):
         if is_localhost(connection.peer_host) and ban_time != 0:
             self.log.warning(f"Trying to ban localhost for {ban_time}, but will not ban")
             ban_time = 0
@@ -532,7 +532,7 @@ class LittlelambocoinServer:
             if payload_inc is None or connection_inc is None:
                 continue
 
-            async def api_call(full_message: Message, connection: WSLittlelambocoinConnection, task_id):
+            async def api_call(full_message: Message, connection: WSLittleLamboCoinConnection, task_id):
                 nonlocal message_types
                 start_time = time.time()
                 message_type = ""
@@ -631,7 +631,7 @@ class LittlelambocoinServer:
         self,
         messages: List[Message],
         node_type: NodeType,
-        origin_peer: WSLittlelambocoinConnection,
+        origin_peer: WSLittleLamboCoinConnection,
     ):
         for node_id, connection in self.all_connections.items():
             if node_id == origin_peer.peer_node_id:
@@ -674,7 +674,7 @@ class LittlelambocoinServer:
             for message in messages:
                 await connection.send_message(message)
 
-    def get_outgoing_connections(self) -> List[WSLittlelambocoinConnection]:
+    def get_outgoing_connections(self) -> List[WSLittleLamboCoinConnection]:
         result = []
         for _, connection in self.all_connections.items():
             if connection.is_outbound:
@@ -682,7 +682,7 @@ class LittlelambocoinServer:
 
         return result
 
-    def get_full_node_outgoing_connections(self) -> List[WSLittlelambocoinConnection]:
+    def get_full_node_outgoing_connections(self) -> List[WSLittleLamboCoinConnection]:
         result = []
         connections = self.get_full_node_connections()
         for connection in connections:
@@ -690,10 +690,10 @@ class LittlelambocoinServer:
                 result.append(connection)
         return result
 
-    def get_full_node_connections(self) -> List[WSLittlelambocoinConnection]:
+    def get_full_node_connections(self) -> List[WSLittleLamboCoinConnection]:
         return list(self.connection_by_type[NodeType.FULL_NODE].values())
 
-    def get_connections(self, node_type: Optional[NodeType] = None) -> List[WSLittlelambocoinConnection]:
+    def get_connections(self, node_type: Optional[NodeType] = None) -> List[WSLittleLamboCoinConnection]:
         result = []
         for _, connection in self.all_connections.items():
             if node_type is None or connection.connection_type == node_type:
@@ -745,7 +745,7 @@ class LittlelambocoinServer:
         try:
             timeout = ClientTimeout(total=15)
             async with ClientSession(timeout=timeout) as session:
-                async with session.get("https://ip.littlelambocoin.net/") as resp:
+                async with session.get("https://ip.littlelambocoin.org/") as resp:
                     if resp.status == 200:
                         ip = str(await resp.text())
                         ip = ip.rstrip()
@@ -784,7 +784,7 @@ class LittlelambocoinServer:
             return inbound_count < self.config["max_inbound_timelord"]
         return True
 
-    def is_trusted_peer(self, peer: WSLittlelambocoinConnection, trusted_peers: Dict) -> bool:
+    def is_trusted_peer(self, peer: WSLittleLamboCoinConnection, trusted_peers: Dict) -> bool:
         if trusted_peers is None:
             return False
         for trusted_peer in trusted_peers:

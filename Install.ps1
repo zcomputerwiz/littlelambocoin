@@ -2,7 +2,7 @@ $ErrorActionPreference = "Stop"
 
 if ([Environment]::Is64BitOperatingSystem -eq $false)
 {
-    Write-Output "Littlelambocoin requires a 64-bit Windows installation"
+    Write-Output "LittleLamboCoin requires a 64-bit Windows installation"
     Exit 1
 }
 
@@ -48,7 +48,7 @@ venv\scripts\pip install --extra-index-url https://pypi.chia.net/simple/ miniupn
 venv\scripts\pip install --editable . --extra-index-url https://pypi.chia.net/simple/
 
 Write-Output ""
-Write-Output "Littlelambocoin blockchain .\Install.ps1 complete."
+Write-Output "LittleLamboCoin blockchain .\Install.ps1 complete."
 Write-Output "For assistance join us on Keybase in the #support chat channel:"
 Write-Output "https://keybase.io/team/littlelambocoin_network.public"
 Write-Output ""

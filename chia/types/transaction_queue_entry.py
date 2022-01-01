@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Optional
 
-from littlelambocoin.server.ws_connection import WSLittlelambocoinConnection
+from littlelambocoin.server.ws_connection import WSLittleLamboCoinConnection
 from littlelambocoin.types.blockchain_format.sized_bytes import bytes32
 from littlelambocoin.types.spend_bundle import SpendBundle
 
@@ -15,7 +15,7 @@ class TransactionQueueEntry:
     transaction: SpendBundle
     transaction_bytes: Optional[bytes]
     spend_name: bytes32
-    peer: Optional[WSLittlelambocoinConnection]
+    peer: Optional[WSLittleLamboCoinConnection]
     test: bool
 
     def __lt__(self, other):

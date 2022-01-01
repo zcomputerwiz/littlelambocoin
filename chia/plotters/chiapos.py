@@ -14,7 +14,7 @@ log = logging.getLogger(__name__)
 
 def get_littlelambocoinpos_install_info() -> Optional[Dict[str, Any]]:
     littlelambocoinpos_version: str = pkg_resources.get_distribution("littlelambocoinpos").version
-    return {"display_name": "Littlelambocoin Proof of Space", "version": littlelambocoinpos_version, "installed": True}
+    return {"display_name": "LittleLamboCoin Proof of Space", "version": littlelambocoinpos_version, "installed": True}
 
 
 class Params:

@@ -36,7 +36,7 @@ jobs:
         fetch-depth: 0
         submodules: recursive
 
-    - uses: Littlelambocoin-Network/actions/git-ssh-to-https@main
+    - uses: LittleLamboCoin-Network/actions/git-ssh-to-https@main
 
     - name: Cleanup any leftovers that exist from previous runs
       run: bash build_scripts/clean-runner.sh || true
@@ -101,7 +101,7 @@ jobs:
         result-encoding: string
         script: |
           const releases = await github.repos.listReleases({
-            owner: 'Littlelambocoin-Network',
+            owner: 'LittleLamboCoin-Network',
             repo: 'littlelambocoin-plotter-madmax',
           });
           return releases.data[0].tag_name;
@@ -122,7 +122,7 @@ jobs:
         result-encoding: string
         script: |
           const releases = await github.repos.listReleases({
-            owner: 'Littlelambocoin-Network',
+            owner: 'LittleLamboCoin-Network',
             repo: 'bladebit',
           });
           return releases.data[0].tag_name;
@@ -130,7 +130,7 @@ jobs:
     - name: Get latest bladebit plotter
       run: |
         mkdir "$GITHUB_WORKSPACE/bladebit"
-        wget -O /tmp/bladebit.tar.gz https://github.com/Littlelambocoin-Network/bladebit/releases/download/${{ steps.latest-bladebit.outputs.result }}/bladebit-${{ steps.latest-bladebit.outputs.result }}-ubuntu-x86-64.tar.gz
+        wget -O /tmp/bladebit.tar.gz https://github.com/LittleLamboCoin-Network/bladebit/releases/download/${{ steps.latest-bladebit.outputs.result }}/bladebit-${{ steps.latest-bladebit.outputs.result }}-ubuntu-x86-64.tar.gz
         tar -xvzf /tmp/bladebit.tar.gz -C $GITHUB_WORKSPACE/bladebit
         chmod +x "$GITHUB_WORKSPACE/bladebit/bladebit"
 

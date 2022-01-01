@@ -21,7 +21,7 @@ if [ ! "$LITTLELAMBOCOIN_INSTALLER_VERSION" ]; then
 	echo "WARNING: No environment variable LITTLELAMBOCOIN_INSTALLER_VERSION set. Using 0.0.0."
 	LITTLELAMBOCOIN_INSTALLER_VERSION="0.0.0"
 fi
-echo "Littlelambocoin Installer Version is: $LITTLELAMBOCOIN_INSTALLER_VERSION"
+echo "LittleLamboCoin Installer Version is: $LITTLELAMBOCOIN_INSTALLER_VERSION"
 
 echo "Installing npm and electron packagers"
 npm install electron-packager -g
@@ -66,7 +66,7 @@ cp package.json package.json.orig
 jq --arg VER "$LITTLELAMBOCOIN_INSTALLER_VERSION" '.version=$VER' package.json > temp.json && mv temp.json package.json
 
 electron-packager . littlelambocoin-blockchain --asar.unpack="**/daemon/**" --platform=linux \
---icon=src/assets/img/Littlelambocoin.icns --overwrite --app-bundle-id=net.littlelambocoin.blockchain \
+--icon=src/assets/img/LittleLamboCoin.icns --overwrite --app-bundle-id=net.littlelambocoin.blockchain \
 --appVersion=$LITTLELAMBOCOIN_INSTALLER_VERSION --executable-name=littlelambocoin-blockchain
 LAST_EXIT_CODE=$?
 

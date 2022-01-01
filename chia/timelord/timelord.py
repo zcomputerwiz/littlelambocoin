@@ -15,7 +15,7 @@ from littlelambocoin.consensus.pot_iterations import calculate_sp_iters, is_over
 from littlelambocoin.protocols import timelord_protocol
 from littlelambocoin.protocols.protocol_message_types import ProtocolMessageTypes
 from littlelambocoin.server.outbound_message import NodeType, make_msg
-from littlelambocoin.server.server import LittlelambocoinServer
+from littlelambocoin.server.server import LittleLamboCoinServer
 from littlelambocoin.timelord.iters_from_block import iters_from_block
 from littlelambocoin.timelord.timelord_state import LastState
 from littlelambocoin.timelord.types import Chain, IterationType, StateType
@@ -65,7 +65,7 @@ class Timelord:
         self.free_clients: List[Tuple[str, asyncio.StreamReader, asyncio.StreamWriter]] = []
         self.potential_free_clients: List = []
         self.ip_whitelist = self.config["vdf_clients"]["ip"]
-        self.server: Optional[LittlelambocoinServer] = None
+        self.server: Optional[LittleLamboCoinServer] = None
         self.chain_type_to_stream: Dict[Chain, Tuple[str, asyncio.StreamReader, asyncio.StreamWriter]] = {}
         self.chain_start_time: Dict = {}
         # Chains that currently don't have a vdf_client.
@@ -152,7 +152,7 @@ class Timelord:
     async def _await_closed(self):
         pass
 
-    def set_server(self, server: LittlelambocoinServer):
+    def set_server(self, server: LittleLamboCoinServer):
         self.server = server
 
     async def _handle_client(self, reader: asyncio.StreamReader, writer: asyncio.StreamWriter):

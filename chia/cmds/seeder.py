@@ -18,7 +18,7 @@ CONTEXT_SETTINGS = dict(help_option_names=["-h", "--help"])
 
 
 @click.group(
-    help=f"\n  Manage the Littlelambocoin Seeder ({__version__})\n",
+    help=f"\n  Manage the LittleLamboCoin Seeder ({__version__})\n",
     epilog="Try 'littlelambocoin seeder start crawler' or 'littlelambocoin seeder start server'",
     context_settings=CONTEXT_SETTINGS,
 )
@@ -34,7 +34,7 @@ def cli(
     ctx.obj["root_path"] = Path(root_path)
 
 
-@cli.command("version", short_help="Show the Littlelambocoin Seeder version")
+@cli.command("version", short_help="Show the LittleLamboCoin Seeder version")
 def version_cmd() -> None:
     print(__version__)
 
@@ -42,12 +42,12 @@ def version_cmd() -> None:
 @click.command("init", short_help="Create or migrate the configuration")
 @click.pass_context
 def init_cmd(ctx: click.Context, **kwargs):
-    print("Calling Littlelambocoin Seeder Init...")
+    print("Calling LittleLamboCoin Seeder Init...")
     init(None, ctx.obj["root_path"], True)
     if os.environ.get("LITTLELAMBOCOIN_ROOT", None) is not None:
         print(f"warning, your LITTLELAMBOCOIN_ROOT is set to {os.environ['LITTLELAMBOCOIN_ROOT']}.")
     root_path = ctx.obj["root_path"]
-    print(f"Littlelambocoin directory {root_path}")
+    print(f"LittleLamboCoin directory {root_path}")
     if root_path.is_dir() and not Path(root_path / "config" / "config.yaml").exists():
         # This is reached if LITTLELAMBOCOIN_ROOT is set, but there is no config
         # This really shouldn't happen, but if we dont have the base littlelambocoin config, we can't continue
@@ -94,10 +94,10 @@ def configure(
     change_made = False
     if testnet is not None:
         if testnet == "true" or testnet == "t":
-            print("Updating Littlelambocoin Seeder to testnet settings")
+            print("Updating LittleLamboCoin Seeder to testnet settings")
             port = 58444
             network = "testnet7"
-            bootstrap = ["testnet-node.littlelambocoin.net"]
+            bootstrap = ["testnet-node.littlelambocoin.org"]
 
             config["seeder"]["port"] = port
             config["seeder"]["other_peers_port"] = port
@@ -107,10 +107,10 @@ def configure(
             change_made = True
 
         elif testnet == "false" or testnet == "f":
-            print("Updating Littlelambocoin Seeder to mainnet settings")
+            print("Updating LittleLamboCoin Seeder to mainnet settings")
             port = 8444
             network = "mainnet"
-            bootstrap = ["node.littlelambocoin.net"]
+            bootstrap = ["node.littlelambocoin.org"]
 
             config["seeder"]["port"] = port
             config["seeder"]["other_peers_port"] = port
@@ -138,7 +138,7 @@ def configure(
         change_made = True
 
     if change_made:
-        print("Restart any running Littlelambocoin Seeder services for changes to take effect")
+        print("Restart any running LittleLamboCoin Seeder services for changes to take effect")
         save_config(root_path, "config.yaml", config)
     return 0
 

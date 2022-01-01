@@ -9,8 +9,8 @@ from cryptography.hazmat.primitives import hashes, serialization
 
 from littlelambocoin.protocols.shared_protocol import protocol_version
 from littlelambocoin.server.outbound_message import NodeType
-from littlelambocoin.server.server import LittlelambocoinServer, ssl_context_for_client
-from littlelambocoin.server.ws_connection import WSLittlelambocoinConnection
+from littlelambocoin.server.server import LittleLamboCoinServer, ssl_context_for_client
+from littlelambocoin.server.ws_connection import WSLittleLamboCoinConnection
 from littlelambocoin.ssl.create_ssl import generate_ca_signed_cert
 from littlelambocoin.types.blockchain_format.sized_bytes import bytes32
 from littlelambocoin.types.peer_info import PeerInfo
@@ -21,7 +21,7 @@ from tests.time_out_assert import time_out_assert
 log = logging.getLogger(__name__)
 
 
-async def disconnect_all_and_reconnect(server: LittlelambocoinServer, reconnect_to: LittlelambocoinServer) -> bool:
+async def disconnect_all_and_reconnect(server: LittleLamboCoinServer, reconnect_to: LittleLamboCoinServer) -> bool:
     cons = list(server.all_connections.values())[:]
     for con in cons:
         await con.close()
@@ -29,7 +29,7 @@ async def disconnect_all_and_reconnect(server: LittlelambocoinServer, reconnect_
 
 
 async def add_dummy_connection(
-    server: LittlelambocoinServer, dummy_port: int, type: NodeType = NodeType.FULL_NODE
+    server: LittleLamboCoinServer, dummy_port: int, type: NodeType = NodeType.FULL_NODE
 ) -> Tuple[asyncio.Queue, bytes32]:
     timeout = aiohttp.ClientTimeout(total=10)
     session = aiohttp.ClientSession(timeout=timeout)
@@ -47,7 +47,7 @@ async def add_dummy_connection(
     peer_id = bytes32(der_cert.fingerprint(hashes.SHA256()))
     url = f"wss://{self_hostname}:{server._port}/ws"
     ws = await session.ws_connect(url, autoclose=True, autoping=True, ssl=ssl_context)
-    wsc = WSLittlelambocoinConnection(
+    wsc = WSLittleLamboCoinConnection(
         type,
         ws,
         server._port,
@@ -66,7 +66,7 @@ async def add_dummy_connection(
     return incoming_queue, peer_id
 
 
-async def connect_and_get_peer(server_1: LittlelambocoinServer, server_2: LittlelambocoinServer) -> WSLittlelambocoinConnection:
+async def connect_and_get_peer(server_1: LittleLamboCoinServer, server_2: LittleLamboCoinServer) -> WSLittleLamboCoinConnection:
     """
     Connect server_2 to server_1, and get return the connection in server_1.
     """

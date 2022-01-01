@@ -17,7 +17,7 @@ from littlelambocoin.wallet.littlelambocoinlisp import (
 )
 
 
-class TestLittlelambocoinlisp:
+class TestLittleLamboCoinlisp:
     def test_sexp(self):
         assert sexp() == "()"
         assert sexp(1) == "(1)"

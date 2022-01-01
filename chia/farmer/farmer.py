@@ -34,7 +34,7 @@ from littlelambocoin.protocols.pool_protocol import (
 from littlelambocoin.protocols.protocol_message_types import ProtocolMessageTypes
 from littlelambocoin.server.outbound_message import NodeType, make_msg
 from littlelambocoin.server.server import ssl_context_for_root
-from littlelambocoin.server.ws_connection import WSLittlelambocoinConnection
+from littlelambocoin.server.ws_connection import WSLittleLamboCoinConnection
 from littlelambocoin.ssl.create_ssl import get_mozilla_ca_crt
 from littlelambocoin.types.blockchain_format.proof_of_space import ProofOfSpace
 from littlelambocoin.types.blockchain_format.sized_bytes import bytes32
@@ -215,7 +215,7 @@ class Farmer:
     def _set_state_changed_callback(self, callback: Callable):
         self.state_changed_callback = callback
 
-    async def on_connect(self, peer: WSLittlelambocoinConnection):
+    async def on_connect(self, peer: WSLittleLamboCoinConnection):
         self.state_changed("add_connection", {})
 
         async def handshake_task():
@@ -259,7 +259,7 @@ class Farmer:
             ErrorResponse(uint16(PoolErrorCode.REQUEST_FAILED.value), error_message).to_json_dict()
         )
 
-    def on_disconnect(self, connection: ws.WSLittlelambocoinConnection):
+    def on_disconnect(self, connection: ws.WSLittleLamboCoinConnection):
         self.log.info(f"peer disconnected {connection.get_peer_logging()}")
         self.state_changed("close_connection", {})
 
@@ -672,7 +672,7 @@ class Farmer:
                     )
         return updated
 
-    async def get_cached_harvesters(self, connection: WSLittlelambocoinConnection) -> HarvesterCacheEntry:
+    async def get_cached_harvesters(self, connection: WSLittleLamboCoinConnection) -> HarvesterCacheEntry:
         host_cache = self.harvester_cache.get(connection.peer_host)
         if host_cache is None:
             host_cache = {}

@@ -31,7 +31,7 @@ def init_cmd(
     - Shut down all littlelambocoin daemon processes with `littlelambocoin stop all -d`
     - Run `littlelambocoin init -c [directory]` on your remote harvester,
       where [directory] is the the copy of your Farming Machine CA directory
-    - Get more details on remote harvester on Littlelambocoin wiki:
+    - Get more details on remote harvester on LittleLamboCoin wiki:
       https://github.com/Chia-Network/chia-blockchain/wiki/Farming-on-many-machines
     """
     from pathlib import Path

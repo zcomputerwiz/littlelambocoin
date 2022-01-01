@@ -42,7 +42,7 @@ fi
 if [ "$(uname -m)" = "armv7l" ]; then
   echo ""
 	echo "WARNING:"
-	echo "The Littlelambocoin Blockchain requires a 64 bit OS and this is 32 bit armv7l"
+	echo "The LittleLamboCoin Blockchain requires a 64 bit OS and this is 32 bit armv7l"
 	echo "For more information, see"
 	echo "https://github.com/Chia-Network/chia-blockchain/wiki/Raspberry-Pi"
 	echo "Exiting."
@@ -130,7 +130,7 @@ find_python() {
 				if [ "$BEST_VERSION" = "3" ]; then
 					PY3_VERSION=$(python$BEST_VERSION --version | cut -d ' ' -f2)
 					if [[ "$PY3_VERSION" =~ 3.10.* ]]; then
-						echo "Littlelambocoin requires Python version <= 3.9.9"
+						echo "LittleLamboCoin requires Python version <= 3.9.9"
 						echo "Current Python version = $PY3_VERSION"
 						exit 1
 					fi
@@ -174,7 +174,7 @@ python -m pip install --extra-index-url https://pypi.chia.net/simple/ miniupnpc=
 python -m pip install -e ."${EXTRAS}" --extra-index-url https://pypi.chia.net/simple/
 
 echo ""
-echo "Littlelambocoin blockchain install.sh complete."
+echo "LittleLamboCoin blockchain install.sh complete."
 echo "For assistance join us on Keybase in the #support chat channel:"
 echo "https://keybase.io/team/littlelambocoin_network.public"
 echo ""

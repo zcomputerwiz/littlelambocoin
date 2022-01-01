@@ -89,7 +89,7 @@ class Harvester:
         if len(update_result.loaded) > 0:
             self.event_loop.call_soon_threadsafe(self._state_changed, "plots")
 
-    def on_disconnect(self, connection: ws.WSLittlelambocoinConnection):
+    def on_disconnect(self, connection: ws.WSLittleLamboCoinConnection):
         self.log.info(f"peer disconnected {connection.get_peer_logging()}")
         self._state_changed("close_connection")
 

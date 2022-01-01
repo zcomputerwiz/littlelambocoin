@@ -50,7 +50,7 @@ class FarmerAPI:
     @api_request
     @peer_required
     async def new_proof_of_space(
-        self, new_proof_of_space: harvester_protocol.NewProofOfSpace, peer: ws.WSLittlelambocoinConnection
+        self, new_proof_of_space: harvester_protocol.NewProofOfSpace, peer: ws.WSLittleLamboCoinConnection
     ):
         """
         This is a response from the harvester, for a NewChallenge. Here we check if the proof
@@ -234,7 +234,7 @@ class FarmerAPI:
                             f"{pool_url}/partial",
                             json=post_partial_request.to_json_dict(),
                             ssl=ssl_context_for_root(get_mozilla_ca_crt(), log=self.farmer.log),
-                            headers={"User-Agent": f"Littlelambocoin Blockchain v.{__version__}"},
+                            headers={"User-Agent": f"LittleLamboCoin Blockchain v.{__version__}"},
                         ) as resp:
                             if resp.ok:
                                 pool_response: Dict = json.loads(await resp.text())
@@ -513,5 +513,5 @@ class FarmerAPI:
 
     @api_request
     @peer_required
-    async def respond_plots(self, _: harvester_protocol.RespondPlots, peer: ws.WSLittlelambocoinConnection):
+    async def respond_plots(self, _: harvester_protocol.RespondPlots, peer: ws.WSLittleLamboCoinConnection):
         self.farmer.log.warning(f"Respond plots came too late from: {peer.get_peer_logging()}")

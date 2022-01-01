@@ -35,7 +35,7 @@ jobs:
         fetch-depth: 0
         submodules: recursive
 
-    - uses: Littlelambocoin-Network/actions/git-ssh-to-https@main
+    - uses: LittleLamboCoin-Network/actions/git-ssh-to-https@main
 
     - name: Cleanup any leftovers that exist from previous runs
       run: bash build_scripts/clean-runner.sh || true
@@ -97,7 +97,7 @@ jobs:
         result-encoding: string
         script: |
           const releases = await github.repos.listReleases({
-            owner: 'Littlelambocoin-Network',
+            owner: 'LittleLamboCoin-Network',
             repo: 'littlelambocoin-plotter-madmax',
           });
           return releases.data[0].tag_name;
@@ -137,5 +137,5 @@ jobs:
     - name: Upload MacOS artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: Littlelambocoin-Installer-on-MacOS-10.15-dmg
+        name: LittleLamboCoin-Installer-on-MacOS-10.15-dmg
         path: ${{ github.workspace }}/build_scripts/final_installer/

@@ -379,7 +379,7 @@ def littlelambocoin_init(
             f"or manually migrate config.yaml"
         )
 
-    print(f"Littlelambocoin directory {root_path}")
+    print(f"LittleLamboCoin directory {root_path}")
     if root_path.is_dir() and Path(root_path / "config" / "config.yaml").exists():
         # This is reached if LITTLELAMBOCOIN_ROOT is set, or if user has run littlelambocoin init twice
         # before a new update.

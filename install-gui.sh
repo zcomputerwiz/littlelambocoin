@@ -10,7 +10,7 @@ if [ -z "$VIRTUAL_ENV" ]; then
 fi
 
 if [ "$(id -u)" = 0 ]; then
-  echo "The Littlelambocoin Blockchain GUI can not be installed or run by the root user."
+  echo "The LittleLamboCoin Blockchain GUI can not be installed or run by the root user."
 	exit 1
 fi
 
@@ -111,6 +111,6 @@ else
 fi
 
 echo ""
-echo "Littlelambocoin blockchain install-gui.sh completed."
+echo "LittleLamboCoin blockchain install-gui.sh completed."
 echo ""
 echo "Type 'cd littlelambocoin-blockchain-gui' and then 'npm run electron &' to start the GUI."

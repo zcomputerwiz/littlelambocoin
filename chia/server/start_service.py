@@ -16,7 +16,7 @@ except ImportError:
 
 from littlelambocoin.rpc.rpc_server import start_rpc_server
 from littlelambocoin.server.outbound_message import NodeType
-from littlelambocoin.server.server import LittlelambocoinServer
+from littlelambocoin.server.server import LittleLamboCoinServer
 from littlelambocoin.server.upnp import UPnP
 from littlelambocoin.types.peer_info import PeerInfo
 from littlelambocoin.util.littlelambocoin_logging import initialize_logging
@@ -80,7 +80,7 @@ class Service:
         inbound_rlp = self.config.get("inbound_rate_limit_percent")
         outbound_rlp = self.config.get("outbound_rate_limit_percent")
         assert inbound_rlp and outbound_rlp
-        self._server = LittlelambocoinServer(
+        self._server = LittleLamboCoinServer(
             advertised_port,
             node,
             peer_api,
@@ -228,7 +228,7 @@ class Service:
 
         self._log.info("Waiting for socket to be closed (if opened)")
 
-        self._log.info("Waiting for LittlelambocoinServer to be closed")
+        self._log.info("Waiting for LittleLamboCoinServer to be closed")
         await self._server.await_closed()
 
         if self._rpc_close_task:

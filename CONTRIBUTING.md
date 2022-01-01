@@ -1,13 +1,13 @@
 # Introduction
 
 Welcome to the littlelambocoin-blockchain project!
-We are happy that you are taking a look at the code for Littlelambocoin, a proof of space and time cryptocurrency.
+We are happy that you are taking a look at the code for LittleLamboCoin, a proof of space and time cryptocurrency.
 
 A lot of fascinating new cryptography and blockchain concepts are used and implemented here.
-This repo includes the code for the Littlelambocoin full node, farmer, and timelord (in littlelambocoin folder), which are all written in python.
-It also includes a verifiable delay function implementation that it imports from the [littlelambocoinvdf repo](https://github.com/Chia-Network/chiavdf) (in c/c++), and a proof of space implementation that it imports from the [littlelambocoinpos repo](https://github.com/Chia-Network/chiapos). BLS signatures are imported from the [bls-signatures repo](https://github.com/Littlelambocoin-Network/bls-signatures) as blspy. There is an additional dependency on the [littlelambocoinbip158 repo](https://github.com/Chia-Network/chiabip158). For major platforms, binary and source wheels are shipped to PyPI from each dependent repo. Then littlelambocoin-blockchain can pip install those from PyPI or they can be prepackaged as is done for the Windows installer. On unsupported platforms, pip will fall back to the source distributions, to be compiled locally.
+This repo includes the code for the LittleLamboCoin full node, farmer, and timelord (in littlelambocoin folder), which are all written in python.
+It also includes a verifiable delay function implementation that it imports from the [littlelambocoinvdf repo](https://github.com/Chia-Network/chiavdf) (in c/c++), and a proof of space implementation that it imports from the [littlelambocoinpos repo](https://github.com/Chia-Network/chiapos). BLS signatures are imported from the [bls-signatures repo](https://github.com/LittleLamboCoin-Network/bls-signatures) as blspy. There is an additional dependency on the [littlelambocoinbip158 repo](https://github.com/Chia-Network/chiabip158). For major platforms, binary and source wheels are shipped to PyPI from each dependent repo. Then littlelambocoin-blockchain can pip install those from PyPI or they can be prepackaged as is done for the Windows installer. On unsupported platforms, pip will fall back to the source distributions, to be compiled locally.
 
-If you want to learn more about this project, read the [wiki](https://github.com/Chia-Network/chia-blockchain/wiki), or check out the [green paper](https://www.littlelambocoin.net/assets/LittlelambocoinGreenPaper.pdf).
+If you want to learn more about this project, read the [wiki](https://github.com/Chia-Network/chia-blockchain/wiki), or check out the [green paper](https://www.littlelambocoin.org/assets/LittleLamboCoinGreenPaper.pdf).
 
 ## Contributions
 
@@ -23,9 +23,9 @@ Contact any of the team members on [Keybase](https://keybase.io/team/littlelambo
 
 We ask that external contributors create a fork of the `main` branch for any feature work they wish to take on.
 
-Members of the Littlelambocoin organization may create feature branches from the `main` branch.
+Members of the LittleLamboCoin organization may create feature branches from the `main` branch.
 
-In the event an emergency fix is required for the release version of Littlelambocoin, members of the Littlelambocoin organization will create a feature branch from the current release branch `1.0.0`.
+In the event an emergency fix is required for the release version of LittleLamboCoin, members of the LittleLamboCoin organization will create a feature branch from the current release branch `1.0.0`.
 
 ## Branching Strategy
 
@@ -34,7 +34,7 @@ In the event an emergency fix is required for the release version of Littlelambo
 1. All changes go into the main branch.
 2. Main is stable at all times, all tests pass.
 3. Features (with tests) are developed and fully tested on feature branches, and reviewed before landing in main.
-4. Littlelambocoin Network's nodes on the public testnet are running the latest version `x.y.z`.
+4. LittleLamboCoin Network's nodes on the public testnet are running the latest version `x.y.z`.
 5. The `main` branch will have a long running `beta testnet` to allow previewing of changes.
 6. Pull Request events may require a `beta testnet` review environment. At the moment this is at the discretion of the reviewer.
 7. Hotfixes land in the release branch they fix, and all later versions. (This will be achieved by regularly merging from `1.0.x` to main).
@@ -102,14 +102,14 @@ Following the release of `1.1.0`, the official `testnet` will include all change
 
 Prior to proposing changes to `main`, proposers should consider if running a `beta testnet` review environment will make the reviewer more effective when evaluating a change.
 Changes that impact the blockchain could require a review environment before acceptance into `main`. This is at the discretion of the reviewer.
-Littlelambocoin organization members have been granted CI access to deploy `beta testnets`.
-If you are not a Littlelambocoin organization member, you can enquire about deploying a `beta testnet` in the public dev Keybase channel.
+LittleLamboCoin organization members have been granted CI access to deploy `beta testnets`.
+If you are not a LittleLamboCoin organization member, you can enquire about deploying a `beta testnet` in the public dev Keybase channel.
 
 ## Submit changes
 
 To propose changes, please make a pull request to the `main` branch. See Branching Strategy above.
 
-To propose changes for the production releases of Littlelambocoin, please make a pull request to the latest release branch.
+To propose changes for the production releases of LittleLamboCoin, please make a pull request to the latest release branch.
 
 ## Copyright
 

@@ -13,9 +13,9 @@ from littlelambocoin.wallet.transaction_sorting import SortKey
 
 class WalletRpcClient(RpcClient):
     """
-    Client to Littlelambocoin RPC, connects to a local wallet. Uses HTTP/JSON, and converts back from
+    Client to LittleLamboCoin RPC, connects to a local wallet. Uses HTTP/JSON, and converts back from
     JSON into native python objects before returning. All api calls use POST requests.
-    Note that this is not the same as the peer protocol, or wallet protocol (which run Littlelambocoin's
+    Note that this is not the same as the peer protocol, or wallet protocol (which run LittleLamboCoin's
     protocol on top of TCP), it's a separate protocol on top of HTTP that provides easy access
     to the full node.
     """
@@ -25,7 +25,7 @@ class WalletRpcClient(RpcClient):
         try:
             return await self.fetch(
                 "log_in",
-                {"host": "https://backup.littlelambocoin.net", "fingerprint": fingerprint, "type": "start"},
+                {"host": "https://backup.littlelambocoin.org", "fingerprint": fingerprint, "type": "start"},
             )
 
         except ValueError as e:
@@ -36,7 +36,7 @@ class WalletRpcClient(RpcClient):
             return await self.fetch(
                 "log_in",
                 {
-                    "host": "https://backup.littlelambocoin.net",
+                    "host": "https://backup.littlelambocoin.org",
                     "fingerprint": fingerprint,
                     "type": "restore_backup",
                     "file_path": file_path,
@@ -49,7 +49,7 @@ class WalletRpcClient(RpcClient):
         try:
             return await self.fetch(
                 "log_in",
-                {"host": "https://backup.littlelambocoin.net", "fingerprint": fingerprint, "type": "skip"},
+                {"host": "https://backup.littlelambocoin.org", "fingerprint": fingerprint, "type": "skip"},
             )
         except ValueError as e:
             return e.args[0]

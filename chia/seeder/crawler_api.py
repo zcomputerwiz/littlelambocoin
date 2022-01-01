@@ -32,19 +32,19 @@ class CrawlerAPI:
 
     @peer_required
     @api_request
-    async def request_peers(self, _request: full_node_protocol.RequestPeers, peer: ws.WSLittlelambocoinConnection):
+    async def request_peers(self, _request: full_node_protocol.RequestPeers, peer: ws.WSLittleLamboCoinConnection):
         pass
 
     @peer_required
     @api_request
     async def respond_peers(
-        self, request: full_node_protocol.RespondPeers, peer: ws.WSLittlelambocoinConnection
+        self, request: full_node_protocol.RespondPeers, peer: ws.WSLittleLamboCoinConnection
     ) -> Optional[Message]:
         pass
 
     @peer_required
     @api_request
-    async def new_peak(self, request: full_node_protocol.NewPeak, peer: ws.WSLittlelambocoinConnection) -> Optional[Message]:
+    async def new_peak(self, request: full_node_protocol.NewPeak, peer: ws.WSLittleLamboCoinConnection) -> Optional[Message]:
         await self.crawler.new_peak(request, peer)
         return None
 
@@ -55,7 +55,7 @@ class CrawlerAPI:
     @api_request
     @peer_required
     async def new_signage_point_or_end_of_sub_slot(
-        self, new_sp: full_node_protocol.NewSignagePointOrEndOfSubSlot, peer: ws.WSLittlelambocoinConnection
+        self, new_sp: full_node_protocol.NewSignagePointOrEndOfSubSlot, peer: ws.WSLittleLamboCoinConnection
     ) -> Optional[Message]:
         pass
 
@@ -67,7 +67,7 @@ class CrawlerAPI:
 
     @peer_required
     @api_request
-    async def new_compact_vdf(self, request: full_node_protocol.NewCompactVDF, peer: ws.WSLittlelambocoinConnection):
+    async def new_compact_vdf(self, request: full_node_protocol.NewCompactVDF, peer: ws.WSLittleLamboCoinConnection):
         pass
 
     @api_request
@@ -103,7 +103,7 @@ class CrawlerAPI:
     async def request_mempool_transactions(
         self,
         request: full_node_protocol.RequestMempoolTransactions,
-        peer: ws.WSLittlelambocoinConnection,
+        peer: ws.WSLittleLamboCoinConnection,
     ) -> Optional[Message]:
         pass
 

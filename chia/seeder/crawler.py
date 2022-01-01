@@ -14,7 +14,7 @@ from littlelambocoin.full_node.coin_store import CoinStore
 from littlelambocoin.protocols import full_node_protocol
 from littlelambocoin.seeder.crawl_store import CrawlStore
 from littlelambocoin.seeder.peer_record import PeerRecord, PeerReliability
-from littlelambocoin.server.server import LittlelambocoinServer
+from littlelambocoin.server.server import LittleLamboCoinServer
 from littlelambocoin.types.peer_info import PeerInfo
 from littlelambocoin.util.path import mkdir, path_from_root
 from littlelambocoin.util.ints import uint32, uint64
@@ -76,7 +76,7 @@ class Crawler:
         return await self.server.start_client(peer_info, on_connect)
 
     async def connect_task(self, peer):
-        async def peer_action(peer: ws.WSLittlelambocoinConnection):
+        async def peer_action(peer: ws.WSLittleLamboCoinConnection):
 
             peer_info = peer.get_peer_info()
             version = peer.get_version()
@@ -304,14 +304,14 @@ class Crawler:
         except Exception as e:
             self.log.error(f"Exception: {e}. Traceback: {traceback.format_exc()}.")
 
-    def set_server(self, server: LittlelambocoinServer):
+    def set_server(self, server: LittleLamboCoinServer):
         self.server = server
 
     def _state_changed(self, change: str):
         if self.state_changed_callback is not None:
             self.state_changed_callback(change)
 
-    async def new_peak(self, request: full_node_protocol.NewPeak, peer: ws.WSLittlelambocoinConnection):
+    async def new_peak(self, request: full_node_protocol.NewPeak, peer: ws.WSLittleLamboCoinConnection):
         try:
             peer_info = peer.get_peer_info()
             tls_version = peer.get_tls_version()
@@ -326,7 +326,7 @@ class Crawler:
         except Exception as e:
             self.log.error(f"Exception: {e}. Traceback: {traceback.format_exc()}.")
 
-    async def on_connect(self, connection: ws.WSLittlelambocoinConnection):
+    async def on_connect(self, connection: ws.WSLittleLamboCoinConnection):
         pass
 
     def _close(self):

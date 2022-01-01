@@ -21,8 +21,8 @@ from typing import Any, List, Optional, Tuple, Type, Union
 # the new passphrase.
 DEFAULT_PASSPHRASE_IF_NO_MASTER_PASSPHRASE = "$ littlelambocoin passphrase set # all the cool kids are doing it!"
 
-MASTER_PASSPHRASE_SERVICE_NAME = "Littlelambocoin Passphrase"
-MASTER_PASSPHRASE_USER_NAME = "Littlelambocoin Passphrase"
+MASTER_PASSPHRASE_SERVICE_NAME = "LittleLamboCoin Passphrase"
+MASTER_PASSPHRASE_USER_NAME = "LittleLamboCoin Passphrase"
 
 
 LegacyKeyring = Union[MacKeyring, WinKeyring, CryptFileKeyring]

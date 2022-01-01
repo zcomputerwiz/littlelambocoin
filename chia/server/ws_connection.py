@@ -25,7 +25,7 @@ from littlelambocoin.util.network import class_for_type, is_localhost
 LENGTH_BYTES: int = 4
 
 
-class WSLittlelambocoinConnection:
+class WSLittleLamboCoinConnection:
     """
     Represents a connection to another node. Local host and port are ours, while peer host and
     port are the host and port of the peer that we are connected to. Node_id and connection_type are
@@ -72,7 +72,7 @@ class WSLittlelambocoinConnection:
         self.is_outbound = is_outbound
         self.is_feeler = is_feeler
 
-        # LittlelambocoinConnection metrics
+        # LittleLamboCoinConnection metrics
         self.creation_time = time.time()
         self.bytes_read = 0
         self.bytes_written = 0
@@ -106,7 +106,7 @@ class WSLittlelambocoinConnection:
         self.outbound_rate_limiter = RateLimiter(incoming=False, percentage_of_limit=outbound_rate_limit_percent)
         self.inbound_rate_limiter = RateLimiter(incoming=True, percentage_of_limit=inbound_rate_limit_percent)
 
-        # Used by the Littlelambocoin Seeder.
+        # Used by the LittleLamboCoin Seeder.
         self.version = None
 
     async def perform_handshake(self, network_id: str, protocol_version: str, server_port: int, local_type: NodeType):
@@ -508,7 +508,7 @@ class WSLittlelambocoinConnection:
             await asyncio.sleep(3)
         return None
 
-    # Used by the Littlelambocoin Seeder.
+    # Used by the LittleLamboCoin Seeder.
     def get_version(self):
         return self.version
 

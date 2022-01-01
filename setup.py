@@ -60,9 +60,9 @@ dev_dependencies = [
 kwargs = dict(
     name="littlelambocoin-blockchain",
     author="Mariano Sorgente",
-    author_email="mariano@littlelambocoin.net",
-    description="Littlelambocoin blockchain full node, farmer, timelord, and wallet.",
-    url="https://littlelambocoin.net/",
+    author_email="mariano@littlelambocoin.org",
+    description="LittleLamboCoin blockchain full node, farmer, timelord, and wallet.",
+    url="https://littlelambocoin.org/",
     license="Apache License",
     python_requires=">=3.7, <4",
     keywords="littlelambocoin blockchain node",

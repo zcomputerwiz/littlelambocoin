@@ -42,7 +42,7 @@ if (-not (Test-Path env:LITTLELAMBOCOIN_INSTALLER_VERSION)) {
   $env:LITTLELAMBOCOIN_INSTALLER_VERSION = '0.0.0'
   Write-Output "WARNING: No environment variable LITTLELAMBOCOIN_INSTALLER_VERSION set. Using 0.0.0"
   }
-Write-Output "Littlelambocoin Version is: $env:LITTLELAMBOCOIN_INSTALLER_VERSION"
+Write-Output "LittleLamboCoin Version is: $env:LITTLELAMBOCOIN_INSTALLER_VERSION"
 Write-Output "   ---"
 
 Write-Output "Checking if madmax exists"
@@ -127,7 +127,7 @@ editbin.exe /STACK:8000000 daemon\littlelambocoin.exe
 Write-Output "   ---"
 
 $packageVersion = "$env:LITTLELAMBOCOIN_INSTALLER_VERSION"
-$packageName = "Littlelambocoin-$packageVersion"
+$packageName = "LittleLamboCoin-$packageVersion"
 
 Write-Output "packageName is $packageName"
 
@@ -142,7 +142,7 @@ Write-Output "   ---"
 
 Write-Output "   ---"
 Write-Output "electron-packager"
-electron-packager . Littlelambocoin --asar.unpack="**\daemon\**" --overwrite --icon=.\src\assets\img\littlelambocoin.ico --app-version=$packageVersion
+electron-packager . LittleLamboCoin --asar.unpack="**\daemon\**" --overwrite --icon=.\src\assets\img\littlelambocoin.ico --app-version=$packageVersion
 Write-Output "   ---"
 
 Write-Output "   ---"
@@ -156,8 +156,8 @@ If ($env:HAS_SECRET) {
    Write-Output "   ---"
    Write-Output "Add timestamp and verify signature"
    Write-Output "   ---"
-   signtool.exe timestamp /v /t http://timestamp.comodoca.com/ .\release-builds\windows-installer\LittlelambocoinSetup-$packageVersion.exe
-   signtool.exe verify /v /pa .\release-builds\windows-installer\LittlelambocoinSetup-$packageVersion.exe
+   signtool.exe timestamp /v /t http://timestamp.comodoca.com/ .\release-builds\windows-installer\LittleLamboCoinSetup-$packageVersion.exe
+   signtool.exe verify /v /pa .\release-builds\windows-installer\LittleLamboCoinSetup-$packageVersion.exe
    }   Else    {
    Write-Output "Skipping timestamp and verify signatures - no authorization to install certificates"
 }
@@ -167,7 +167,7 @@ git status
 Write-Output "   ---"
 Write-Output "Moving final installers to expected location"
 Write-Output "   ---"
-Copy-Item ".\Littlelambocoin-win32-x64" -Destination "$env:GITHUB_WORKSPACE\littlelambocoin-blockchain-gui\" -Recurse
+Copy-Item ".\LittleLamboCoin-win32-x64" -Destination "$env:GITHUB_WORKSPACE\littlelambocoin-blockchain-gui\" -Recurse
 Copy-Item ".\release-builds" -Destination "$env:GITHUB_WORKSPACE\littlelambocoin-blockchain-gui\" -Recurse
 
 Write-Output "   ---"

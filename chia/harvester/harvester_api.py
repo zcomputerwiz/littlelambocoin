@@ -13,7 +13,7 @@ from littlelambocoin.protocols.farmer_protocol import FarmingInfo
 from littlelambocoin.protocols.harvester_protocol import Plot
 from littlelambocoin.protocols.protocol_message_types import ProtocolMessageTypes
 from littlelambocoin.server.outbound_message import make_msg
-from littlelambocoin.server.ws_connection import WSLittlelambocoinConnection
+from littlelambocoin.server.ws_connection import WSLittleLamboCoinConnection
 from littlelambocoin.types.blockchain_format.proof_of_space import ProofOfSpace
 from littlelambocoin.types.blockchain_format.sized_bytes import bytes32
 from littlelambocoin.util.api_decorators import api_request, peer_required
@@ -46,7 +46,7 @@ class HarvesterAPI:
     @peer_required
     @api_request
     async def new_signage_point_harvester(
-        self, new_challenge: harvester_protocol.NewSignagePointHarvester, peer: WSLittlelambocoinConnection
+        self, new_challenge: harvester_protocol.NewSignagePointHarvester, peer: WSLittleLamboCoinConnection
     ):
         """
         The harvester receives a new signage point from the farmer, this happens at the start of each slot.
