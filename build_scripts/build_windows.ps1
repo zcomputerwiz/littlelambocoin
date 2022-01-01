@@ -102,7 +102,7 @@ $Env:NODE_OPTIONS = "--max-old-space-size=3000"
 npm install -g electron-packager
 npm install -g lerna
 
-lerna clean -y
+# lerna clean -y
 npm install
 # Audit fix does not currently work with Lerna. See https://github.com/lerna/lerna/issues/1663
 # npm audit fix

@@ -22,7 +22,7 @@ npm install electron-installer-dmg -g
 npm install electron-packager@15.4.0 -g
 npm install electron-osx-sign@v0.5.0 -g
 npm install notarize-cli -g
-npm install lerna -g
+# npm install lerna -g
 
 echo "Create dist/"
 sudo rm -rf dist
@@ -42,7 +42,7 @@ cd .. || exit
 cd littlelambocoin-blockchain-gui || exit
 
 echo "npm build"
-lerna clean -y
+# lerna clean -y
 npm install
 # Audit fix does not currently work with Lerna. See https://github.com/lerna/lerna/issues/1663
 # npm audit fix

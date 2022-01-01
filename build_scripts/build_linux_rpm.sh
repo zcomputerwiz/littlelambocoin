@@ -27,7 +27,7 @@ echo "LittleLamboCoin Installer Version is: $LITTLELAMBOCOIN_INSTALLER_VERSION"
 echo "Installing npm and electron packagers"
 npm install electron-packager -g
 npm install electron-installer-redhat -g
-npm install lerna -g
+# npm install lerna -g
 
 echo "Create dist/"
 rm -rf dist
@@ -48,7 +48,7 @@ cd .. || exit
 cd littlelambocoin-blockchain-gui || exit
 
 echo "npm build"
-lerna clean -y
+# lerna clean -y
 npm install
 # Audit fix does not currently work with Lerna. See https://github.com/lerna/lerna/issues/1663
 # npm audit fix
