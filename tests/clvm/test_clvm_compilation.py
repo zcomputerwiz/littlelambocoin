@@ -9,7 +9,7 @@ wallet_program_files = set(
     [
         "littlelambocoin/wallet/puzzles/calculate_synthetic_public_key.clvm",
         "littlelambocoin/wallet/puzzles/cc.clvm",
-        "littlelambocoin/wallet/puzzles/littlelambocoinlisp_deserialisation.clvm",
+        "littlelambocoin/wallet/puzzles/chialisp_deserialisation.clvm",
         "littlelambocoin/wallet/puzzles/rom_bootstrap_generator.clvm",
         "littlelambocoin/wallet/puzzles/generator_for_single_coin.clvm",
         "littlelambocoin/wallet/puzzles/genesis-by-coin-id-with-0.clvm",

@@ -7,7 +7,7 @@ from littlelambocoin.types.blockchain_format.program import Program
 from littlelambocoin.types.blockchain_format.sized_bytes import bytes32
 from littlelambocoin.types.condition_opcodes import ConditionOpcode
 from littlelambocoin.util.ints import uint64
-from littlelambocoin.wallet.littlelambocoinlisp import sexp
+from littlelambocoin.wallet.chialisp import sexp
 from littlelambocoin.wallet.puzzles.load_clvm import load_clvm
 
 RATE_LIMITED_MODE = 1

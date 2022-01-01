@@ -13,7 +13,7 @@ LittleLamboCoin is a modern cryptocurrency built from scratch, designed to be ef
 * Very easy to use full node and farmer GUI and cli (thousands of nodes active on mainnet)
 * [LittleLamboCoin seeder](https://github.com/Chia-Network/chia-blockchain/wiki/LittleLamboCoin-Seeder-User-Guide), which maintains a list of reliable nodes within the LittleLamboCoin network via a built-in DNS server.
 * Simplified UTXO based transaction model, with small on-chain state
-* Lisp-style Turing-complete functional [programming language](https://littlelambocoinlisp.com/) for money related use cases
+* Lisp-style Turing-complete functional [programming language](https://chialisp.com/) for money related use cases
 * BLS keys and aggregate signatures (only one signature per block)
 * [Pooling protocol](https://github.com/Chia-Network/chia-blockchain/wiki/Pooling-User-Guide) that allows farmers to have control of making blocks
 * Support for light clients with fast, objective syncing
