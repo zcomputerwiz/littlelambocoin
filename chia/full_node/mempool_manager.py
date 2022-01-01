@@ -6,34 +6,34 @@ import time
 from concurrent.futures.process import ProcessPoolExecutor
 from typing import Dict, List, Optional, Set, Tuple
 from blspy import G1Element, GTElement
-from chiabip158 import PyBIP158
+from littlelambocoinbip158 import PyBIP158
 
-from chia.util import cached_bls
-from chia.consensus.block_record import BlockRecord
-from chia.consensus.constants import ConsensusConstants
-from chia.consensus.cost_calculator import NPCResult, calculate_cost_of_program
-from chia.full_node.bundle_tools import simple_solution_generator
-from chia.full_node.coin_store import CoinStore
-from chia.full_node.mempool import Mempool
-from chia.full_node.mempool_check_conditions import mempool_check_conditions_dict, get_name_puzzle_conditions
-from chia.full_node.pending_tx_cache import PendingTxCache
-from chia.types.blockchain_format.coin import Coin
-from chia.types.blockchain_format.program import SerializedProgram
-from chia.types.blockchain_format.sized_bytes import bytes32
-from chia.types.coin_record import CoinRecord
-from chia.types.condition_opcodes import ConditionOpcode
-from chia.types.condition_with_args import ConditionWithArgs
-from chia.types.mempool_inclusion_status import MempoolInclusionStatus
-from chia.types.mempool_item import MempoolItem
-from chia.types.spend_bundle import SpendBundle
-from chia.util.cached_bls import LOCAL_CACHE
-from chia.util.clvm import int_from_bytes
-from chia.util.condition_tools import pkm_pairs
-from chia.util.errors import Err, ValidationError
-from chia.util.generator_tools import additions_for_npc
-from chia.util.ints import uint32, uint64
-from chia.util.lru_cache import LRUCache
-from chia.util.streamable import recurse_jsonify
+from littlelambocoin.util import cached_bls
+from littlelambocoin.consensus.block_record import BlockRecord
+from littlelambocoin.consensus.constants import ConsensusConstants
+from littlelambocoin.consensus.cost_calculator import NPCResult, calculate_cost_of_program
+from littlelambocoin.full_node.bundle_tools import simple_solution_generator
+from littlelambocoin.full_node.coin_store import CoinStore
+from littlelambocoin.full_node.mempool import Mempool
+from littlelambocoin.full_node.mempool_check_conditions import mempool_check_conditions_dict, get_name_puzzle_conditions
+from littlelambocoin.full_node.pending_tx_cache import PendingTxCache
+from littlelambocoin.types.blockchain_format.coin import Coin
+from littlelambocoin.types.blockchain_format.program import SerializedProgram
+from littlelambocoin.types.blockchain_format.sized_bytes import bytes32
+from littlelambocoin.types.coin_record import CoinRecord
+from littlelambocoin.types.condition_opcodes import ConditionOpcode
+from littlelambocoin.types.condition_with_args import ConditionWithArgs
+from littlelambocoin.types.mempool_inclusion_status import MempoolInclusionStatus
+from littlelambocoin.types.mempool_item import MempoolItem
+from littlelambocoin.types.spend_bundle import SpendBundle
+from littlelambocoin.util.cached_bls import LOCAL_CACHE
+from littlelambocoin.util.clvm import int_from_bytes
+from littlelambocoin.util.condition_tools import pkm_pairs
+from littlelambocoin.util.errors import Err, ValidationError
+from littlelambocoin.util.generator_tools import additions_for_npc
+from littlelambocoin.util.ints import uint32, uint64
+from littlelambocoin.util.lru_cache import LRUCache
+from littlelambocoin.util.streamable import recurse_jsonify
 
 log = logging.getLogger(__name__)
 
@@ -430,14 +430,14 @@ class MempoolManager:
                 log.warning(f"{npc.puzzle_hash} != {coin_record.coin.puzzle_hash}")
                 return None, MempoolInclusionStatus.FAILED, Err.WRONG_PUZZLE_HASH
 
-            chialisp_height = (
+            littlelambocoinlisp_height = (
                 self.peak.prev_transaction_block_height if not self.peak.is_transaction_block else self.peak.height
             )
             assert self.peak.timestamp is not None
             error = mempool_check_conditions_dict(
                 coin_record,
                 npc.condition_dict,
-                uint32(chialisp_height),
+                uint32(littlelambocoinlisp_height),
                 self.peak.timestamp,
             )
 

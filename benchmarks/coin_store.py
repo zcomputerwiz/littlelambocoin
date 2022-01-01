@@ -2,15 +2,15 @@ import asyncio
 import random
 from time import time
 from pathlib import Path
-from chia.full_node.coin_store import CoinStore
+from littlelambocoin.full_node.coin_store import CoinStore
 from typing import List, Tuple
 import os
 import sys
 
-from chia.util.db_wrapper import DBWrapper
-from chia.types.blockchain_format.sized_bytes import bytes32
-from chia.types.blockchain_format.coin import Coin
-from chia.util.ints import uint64, uint32
+from littlelambocoin.util.db_wrapper import DBWrapper
+from littlelambocoin.types.blockchain_format.sized_bytes import bytes32
+from littlelambocoin.types.blockchain_format.coin import Coin
+from littlelambocoin.util.ints import uint64, uint32
 from utils import rewards, rand_hash, setup_db
 
 NUM_ITERS = 200

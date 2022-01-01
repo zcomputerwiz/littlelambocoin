@@ -6,22 +6,22 @@ import sys
 from pathlib import Path
 from typing import Tuple
 
-from chia.daemon.server import pid_path_for_service
-from chia.util.path import mkdir
+from littlelambocoin.daemon.server import pid_path_for_service
+from littlelambocoin.util.path import mkdir
 
 
 def launch_service(root_path: Path, service_command) -> Tuple[subprocess.Popen, Path]:
     """
     Launch a child process.
     """
-    # set up CHIA_ROOT
+    # set up LITTLELAMBOCOIN_ROOT
     # invoke correct script
     # save away PID
 
-    # we need to pass on the possibly altered CHIA_ROOT
-    os.environ["CHIA_ROOT"] = str(root_path)
+    # we need to pass on the possibly altered LITTLELAMBOCOIN_ROOT
+    os.environ["LITTLELAMBOCOIN_ROOT"] = str(root_path)
 
-    print(f"Launching service with CHIA_ROOT: {os.environ['CHIA_ROOT']}")
+    print(f"Launching service with LITTLELAMBOCOIN_ROOT: {os.environ['LITTLELAMBOCOIN_ROOT']}")
 
     # Insert proper e
     service_array = service_command.split()
@@ -80,9 +80,9 @@ def kill_service(root_path: Path, service_name: str) -> bool:
 # determine if application is a script file or frozen exe
 if getattr(sys, "frozen", False):
     name_map = {
-        "chia_seeder": "chia_seeder",
-        "chia_seeder_crawler": "chia_seeder_crawler",
-        "chia_seeder_server": "chia_seeder_server",
+        "littlelambocoin_seeder": "littlelambocoin_seeder",
+        "littlelambocoin_seeder_crawler": "littlelambocoin_seeder_crawler",
+        "littlelambocoin_seeder_server": "littlelambocoin_seeder_server",
     }
 
     def executable_for_service(service_name: str) -> str:

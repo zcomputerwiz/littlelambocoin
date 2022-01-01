@@ -4,18 +4,18 @@ from typing import Dict, List, Optional, Any
 
 import aiohttp
 
-from chia.server.server import NodeType, ssl_context_for_client
-from chia.server.ssl_context import private_ssl_ca_paths
-from chia.types.blockchain_format.sized_bytes import bytes32
-from chia.util.byte_types import hexstr_to_bytes
-from chia.util.ints import uint16
+from littlelambocoin.server.server import NodeType, ssl_context_for_client
+from littlelambocoin.server.ssl_context import private_ssl_ca_paths
+from littlelambocoin.types.blockchain_format.sized_bytes import bytes32
+from littlelambocoin.util.byte_types import hexstr_to_bytes
+from littlelambocoin.util.ints import uint16
 
 
 class RpcClient:
     """
-    Client to Chia RPC, connects to a local service. Uses HTTP/JSON, and converts back from
+    Client to Littlelambocoin RPC, connects to a local service. Uses HTTP/JSON, and converts back from
     JSON into native python objects before returning. All api calls use POST requests.
-    Note that this is not the same as the peer protocol, or wallet protocol (which run Chia's
+    Note that this is not the same as the peer protocol, or wallet protocol (which run Littlelambocoin's
     protocol on top of TCP), it's a separate protocol on top of HTTP that provides easy access
     to the full node.
     """

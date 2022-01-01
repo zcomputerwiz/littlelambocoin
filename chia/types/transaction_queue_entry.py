@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 from typing import Optional
 
-from chia.server.ws_connection import WSChiaConnection
-from chia.types.blockchain_format.sized_bytes import bytes32
-from chia.types.spend_bundle import SpendBundle
+from littlelambocoin.server.ws_connection import WSLittlelambocoinConnection
+from littlelambocoin.types.blockchain_format.sized_bytes import bytes32
+from littlelambocoin.types.spend_bundle import SpendBundle
 
 
 @dataclass(frozen=True)
@@ -15,7 +15,7 @@ class TransactionQueueEntry:
     transaction: SpendBundle
     transaction_bytes: Optional[bytes]
     spend_name: bytes32
-    peer: Optional[WSChiaConnection]
+    peer: Optional[WSLittlelambocoinConnection]
     test: bool
 
     def __lt__(self, other):

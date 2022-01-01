@@ -9,59 +9,59 @@ from typing import Any, Callable, Dict, List, Optional, Set, Tuple
 
 import aiosqlite
 from blspy import AugSchemeMPL, G1Element, PrivateKey
-from chiabip158 import PyBIP158
+from littlelambocoinbip158 import PyBIP158
 from cryptography.fernet import Fernet
 
-from chia import __version__
-from chia.consensus.block_record import BlockRecord
-from chia.consensus.coinbase import pool_parent_id, farmer_parent_id
-from chia.consensus.constants import ConsensusConstants
-from chia.consensus.find_fork_point import find_fork_point_in_chain
-from chia.full_node.weight_proof import WeightProofHandler
-from chia.pools.pool_puzzles import SINGLETON_LAUNCHER_HASH, solution_to_pool_state
-from chia.pools.pool_wallet import PoolWallet
-from chia.protocols.wallet_protocol import PuzzleSolutionResponse, RespondPuzzleSolution
-from chia.types.blockchain_format.coin import Coin
-from chia.types.blockchain_format.program import Program
-from chia.types.blockchain_format.sized_bytes import bytes32
-from chia.types.coin_spend import CoinSpend
-from chia.types.full_block import FullBlock
-from chia.types.header_block import HeaderBlock
-from chia.types.mempool_inclusion_status import MempoolInclusionStatus
-from chia.util.byte_types import hexstr_to_bytes
-from chia.util.db_wrapper import DBWrapper
-from chia.util.errors import Err
-from chia.util.hash import std_hash
-from chia.util.ints import uint32, uint64, uint128
-from chia.util.db_synchronous import db_synchronous_on
-from chia.wallet.block_record import HeaderBlockRecord
-from chia.wallet.cc_wallet.cc_wallet import CCWallet
-from chia.wallet.derivation_record import DerivationRecord
-from chia.wallet.derive_keys import master_sk_to_backup_sk, master_sk_to_wallet_sk
-from chia.wallet.key_val_store import KeyValStore
-from chia.wallet.rl_wallet.rl_wallet import RLWallet
-from chia.wallet.settings.user_settings import UserSettings
-from chia.wallet.trade_manager import TradeManager
-from chia.wallet.transaction_record import TransactionRecord
-from chia.wallet.util.backup_utils import open_backup_file
-from chia.wallet.util.transaction_type import TransactionType
-from chia.wallet.util.wallet_types import WalletType
-from chia.wallet.wallet import Wallet
-from chia.wallet.wallet_action import WalletAction
-from chia.wallet.wallet_action_store import WalletActionStore
-from chia.wallet.wallet_block_store import WalletBlockStore
-from chia.wallet.wallet_blockchain import WalletBlockchain
-from chia.wallet.wallet_coin_record import WalletCoinRecord
-from chia.wallet.wallet_coin_store import WalletCoinStore
-from chia.wallet.wallet_info import WalletInfo, WalletInfoBackup
-from chia.wallet.wallet_interested_store import WalletInterestedStore
-from chia.wallet.wallet_pool_store import WalletPoolStore
-from chia.wallet.wallet_puzzle_store import WalletPuzzleStore
-from chia.wallet.wallet_sync_store import WalletSyncStore
-from chia.wallet.wallet_transaction_store import WalletTransactionStore
-from chia.wallet.wallet_user_store import WalletUserStore
-from chia.server.server import ChiaServer
-from chia.wallet.did_wallet.did_wallet import DIDWallet
+from littlelambocoin import __version__
+from littlelambocoin.consensus.block_record import BlockRecord
+from littlelambocoin.consensus.coinbase import pool_parent_id, farmer_parent_id
+from littlelambocoin.consensus.constants import ConsensusConstants
+from littlelambocoin.consensus.find_fork_point import find_fork_point_in_chain
+from littlelambocoin.full_node.weight_proof import WeightProofHandler
+from littlelambocoin.pools.pool_puzzles import SINGLETON_LAUNCHER_HASH, solution_to_pool_state
+from littlelambocoin.pools.pool_wallet import PoolWallet
+from littlelambocoin.protocols.wallet_protocol import PuzzleSolutionResponse, RespondPuzzleSolution
+from littlelambocoin.types.blockchain_format.coin import Coin
+from littlelambocoin.types.blockchain_format.program import Program
+from littlelambocoin.types.blockchain_format.sized_bytes import bytes32
+from littlelambocoin.types.coin_spend import CoinSpend
+from littlelambocoin.types.full_block import FullBlock
+from littlelambocoin.types.header_block import HeaderBlock
+from littlelambocoin.types.mempool_inclusion_status import MempoolInclusionStatus
+from littlelambocoin.util.byte_types import hexstr_to_bytes
+from littlelambocoin.util.db_wrapper import DBWrapper
+from littlelambocoin.util.errors import Err
+from littlelambocoin.util.hash import std_hash
+from littlelambocoin.util.ints import uint32, uint64, uint128
+from littlelambocoin.util.db_synchronous import db_synchronous_on
+from littlelambocoin.wallet.block_record import HeaderBlockRecord
+from littlelambocoin.wallet.cc_wallet.cc_wallet import CCWallet
+from littlelambocoin.wallet.derivation_record import DerivationRecord
+from littlelambocoin.wallet.derive_keys import master_sk_to_backup_sk, master_sk_to_wallet_sk
+from littlelambocoin.wallet.key_val_store import KeyValStore
+from littlelambocoin.wallet.rl_wallet.rl_wallet import RLWallet
+from littlelambocoin.wallet.settings.user_settings import UserSettings
+from littlelambocoin.wallet.trade_manager import TradeManager
+from littlelambocoin.wallet.transaction_record import TransactionRecord
+from littlelambocoin.wallet.util.backup_utils import open_backup_file
+from littlelambocoin.wallet.util.transaction_type import TransactionType
+from littlelambocoin.wallet.util.wallet_types import WalletType
+from littlelambocoin.wallet.wallet import Wallet
+from littlelambocoin.wallet.wallet_action import WalletAction
+from littlelambocoin.wallet.wallet_action_store import WalletActionStore
+from littlelambocoin.wallet.wallet_block_store import WalletBlockStore
+from littlelambocoin.wallet.wallet_blockchain import WalletBlockchain
+from littlelambocoin.wallet.wallet_coin_record import WalletCoinRecord
+from littlelambocoin.wallet.wallet_coin_store import WalletCoinStore
+from littlelambocoin.wallet.wallet_info import WalletInfo, WalletInfoBackup
+from littlelambocoin.wallet.wallet_interested_store import WalletInterestedStore
+from littlelambocoin.wallet.wallet_pool_store import WalletPoolStore
+from littlelambocoin.wallet.wallet_puzzle_store import WalletPuzzleStore
+from littlelambocoin.wallet.wallet_sync_store import WalletSyncStore
+from littlelambocoin.wallet.wallet_transaction_store import WalletTransactionStore
+from littlelambocoin.wallet.wallet_user_store import WalletUserStore
+from littlelambocoin.server.server import LittlelambocoinServer
+from littlelambocoin.wallet.did_wallet.did_wallet import DIDWallet
 
 
 def get_balance_from_coin_records(coin_records: Set[WalletCoinRecord]) -> uint128:
@@ -115,7 +115,7 @@ class WalletStateManager:
     interested_store: WalletInterestedStore
     pool_store: WalletPoolStore
     weight_proof_handler: Any
-    server: ChiaServer
+    server: LittlelambocoinServer
     root_path: Path
 
     @staticmethod
@@ -124,7 +124,7 @@ class WalletStateManager:
         config: Dict,
         db_path: Path,
         constants: ConsensusConstants,
-        server: ChiaServer,
+        server: LittlelambocoinServer,
         root_path: Path,
         name: str = None,
     ):

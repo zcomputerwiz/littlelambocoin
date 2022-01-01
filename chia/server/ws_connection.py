@@ -6,26 +6,26 @@ from typing import Any, Callable, Dict, List, Optional
 
 from aiohttp import WSCloseCode, WSMessage, WSMsgType
 
-from chia.cmds.init_funcs import chia_full_version_str
-from chia.protocols.protocol_message_types import ProtocolMessageTypes
-from chia.protocols.protocol_state_machine import message_response_ok
-from chia.protocols.protocol_timing import INTERNAL_PROTOCOL_ERROR_BAN_SECONDS
-from chia.protocols.shared_protocol import Capability, Handshake
-from chia.server.outbound_message import Message, NodeType, make_msg
-from chia.server.rate_limits import RateLimiter
-from chia.types.blockchain_format.sized_bytes import bytes32
-from chia.types.peer_info import PeerInfo
-from chia.util.errors import Err, ProtocolError
-from chia.util.ints import uint8, uint16
+from littlelambocoin.cmds.init_funcs import littlelambocoin_full_version_str
+from littlelambocoin.protocols.protocol_message_types import ProtocolMessageTypes
+from littlelambocoin.protocols.protocol_state_machine import message_response_ok
+from littlelambocoin.protocols.protocol_timing import INTERNAL_PROTOCOL_ERROR_BAN_SECONDS
+from littlelambocoin.protocols.shared_protocol import Capability, Handshake
+from littlelambocoin.server.outbound_message import Message, NodeType, make_msg
+from littlelambocoin.server.rate_limits import RateLimiter
+from littlelambocoin.types.blockchain_format.sized_bytes import bytes32
+from littlelambocoin.types.peer_info import PeerInfo
+from littlelambocoin.util.errors import Err, ProtocolError
+from littlelambocoin.util.ints import uint8, uint16
 
 # Each message is prepended with LENGTH_BYTES bytes specifying the length
-from chia.util.network import class_for_type, is_localhost
+from littlelambocoin.util.network import class_for_type, is_localhost
 
 # Max size 2^(8*4) which is around 4GiB
 LENGTH_BYTES: int = 4
 
 
-class WSChiaConnection:
+class WSLittlelambocoinConnection:
     """
     Represents a connection to another node. Local host and port are ours, while peer host and
     port are the host and port of the peer that we are connected to. Node_id and connection_type are
@@ -72,7 +72,7 @@ class WSChiaConnection:
         self.is_outbound = is_outbound
         self.is_feeler = is_feeler
 
-        # ChiaConnection metrics
+        # LittlelambocoinConnection metrics
         self.creation_time = time.time()
         self.bytes_read = 0
         self.bytes_written = 0
@@ -106,7 +106,7 @@ class WSChiaConnection:
         self.outbound_rate_limiter = RateLimiter(incoming=False, percentage_of_limit=outbound_rate_limit_percent)
         self.inbound_rate_limiter = RateLimiter(incoming=True, percentage_of_limit=inbound_rate_limit_percent)
 
-        # Used by the Chia Seeder.
+        # Used by the Littlelambocoin Seeder.
         self.version = None
 
     async def perform_handshake(self, network_id: str, protocol_version: str, server_port: int, local_type: NodeType):
@@ -116,7 +116,7 @@ class WSChiaConnection:
                 Handshake(
                     network_id,
                     protocol_version,
-                    chia_full_version_str(),
+                    littlelambocoin_full_version_str(),
                     uint16(server_port),
                     uint8(local_type.value),
                     [(uint16(Capability.BASE.value), "1")],
@@ -172,7 +172,7 @@ class WSChiaConnection:
                 Handshake(
                     network_id,
                     protocol_version,
-                    chia_full_version_str(),
+                    littlelambocoin_full_version_str(),
                     uint16(server_port),
                     uint8(local_type.value),
                     [(uint16(Capability.BASE.value), "1")],
@@ -508,7 +508,7 @@ class WSChiaConnection:
             await asyncio.sleep(3)
         return None
 
-    # Used by the Chia Seeder.
+    # Used by the Littlelambocoin Seeder.
     def get_version(self):
         return self.version
 

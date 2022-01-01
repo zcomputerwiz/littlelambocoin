@@ -6,11 +6,11 @@ from typing import List
 
 from blspy import AugSchemeMPL, G2Element
 
-from chia.consensus.default_constants import DEFAULT_CONSTANTS
-from chia.types.blockchain_format.coin import Coin
-from chia.types.blockchain_format.sized_bytes import bytes32
-from chia.util.streamable import Streamable, dataclass_from_dict, recurse_jsonify, streamable
-from chia.wallet.util.debug_spend_bundle import debug_spend_bundle
+from littlelambocoin.consensus.default_constants import DEFAULT_CONSTANTS
+from littlelambocoin.types.blockchain_format.coin import Coin
+from littlelambocoin.types.blockchain_format.sized_bytes import bytes32
+from littlelambocoin.util.streamable import Streamable, dataclass_from_dict, recurse_jsonify, streamable
+from littlelambocoin.wallet.util.debug_spend_bundle import debug_spend_bundle
 
 from .coin_spend import CoinSpend
 

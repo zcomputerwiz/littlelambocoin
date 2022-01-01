@@ -7,11 +7,11 @@ from pathlib import Path
 from typing import Callable, Dict, List, Optional, Set, Tuple, Union
 
 from blspy import PrivateKey
-from chia.consensus.block_record import BlockRecord
-from chia.consensus.blockchain_interface import BlockchainInterface
-from chia.consensus.constants import ConsensusConstants
-from chia.consensus.multiprocess_validation import PreValidationResult
-from chia.daemon.keychain_proxy import (
+from littlelambocoin.consensus.block_record import BlockRecord
+from littlelambocoin.consensus.blockchain_interface import BlockchainInterface
+from littlelambocoin.consensus.constants import ConsensusConstants
+from littlelambocoin.consensus.multiprocess_validation import PreValidationResult
+from littlelambocoin.daemon.keychain_proxy import (
     KeychainProxy,
     KeychainProxyConnectionFailure,
     KeyringIsEmpty,
@@ -19,11 +19,11 @@ from chia.daemon.keychain_proxy import (
     connect_to_keychain_and_validate,
     wrap_local_keychain,
 )
-from chia.pools.pool_puzzles import SINGLETON_LAUNCHER_HASH
-from chia.protocols import wallet_protocol
-from chia.protocols.full_node_protocol import RequestProofOfWeight, RespondProofOfWeight
-from chia.protocols.protocol_message_types import ProtocolMessageTypes
-from chia.protocols.wallet_protocol import (
+from littlelambocoin.pools.pool_puzzles import SINGLETON_LAUNCHER_HASH
+from littlelambocoin.protocols import wallet_protocol
+from littlelambocoin.protocols.full_node_protocol import RequestProofOfWeight, RespondProofOfWeight
+from littlelambocoin.protocols.protocol_message_types import ProtocolMessageTypes
+from littlelambocoin.protocols.wallet_protocol import (
     RejectAdditionsRequest,
     RejectRemovalsRequest,
     RequestAdditions,
@@ -33,37 +33,37 @@ from chia.protocols.wallet_protocol import (
     RespondHeaderBlocks,
     RespondRemovals,
 )
-from chia.server.node_discovery import WalletPeers
-from chia.server.outbound_message import Message, NodeType, make_msg
-from chia.server.peer_store_resolver import PeerStoreResolver
-from chia.server.server import ChiaServer
-from chia.server.ws_connection import WSChiaConnection
-from chia.types.blockchain_format.coin import Coin, hash_coin_list
-from chia.types.blockchain_format.sized_bytes import bytes32
-from chia.types.coin_spend import CoinSpend
-from chia.types.header_block import HeaderBlock
-from chia.types.mempool_inclusion_status import MempoolInclusionStatus
-from chia.types.peer_info import PeerInfo
-from chia.util.byte_types import hexstr_to_bytes
-from chia.util.check_fork_next_block import check_fork_next_block
-from chia.util.config import WALLET_PEERS_PATH_KEY_DEPRECATED, load_config
-from chia.util.errors import Err, ValidationError
-from chia.util.ints import uint32, uint128
-from chia.util.keychain import Keychain
-from chia.util.lru_cache import LRUCache
-from chia.util.merkle_set import MerkleSet, confirm_included_already_hashed, confirm_not_included_already_hashed
-from chia.util.network import get_host_addr
-from chia.util.path import mkdir, path_from_root
-from chia.wallet.block_record import HeaderBlockRecord
-from chia.wallet.derivation_record import DerivationRecord
-from chia.wallet.settings.settings_objects import BackupInitialized
-from chia.wallet.transaction_record import TransactionRecord
-from chia.wallet.util.backup_utils import open_backup_file
-from chia.wallet.util.wallet_types import WalletType
-from chia.wallet.wallet_action import WalletAction
-from chia.wallet.wallet_blockchain import ReceiveBlockResult
-from chia.wallet.wallet_state_manager import WalletStateManager
-from chia.util.profiler import profile_task
+from littlelambocoin.server.node_discovery import WalletPeers
+from littlelambocoin.server.outbound_message import Message, NodeType, make_msg
+from littlelambocoin.server.peer_store_resolver import PeerStoreResolver
+from littlelambocoin.server.server import LittlelambocoinServer
+from littlelambocoin.server.ws_connection import WSLittlelambocoinConnection
+from littlelambocoin.types.blockchain_format.coin import Coin, hash_coin_list
+from littlelambocoin.types.blockchain_format.sized_bytes import bytes32
+from littlelambocoin.types.coin_spend import CoinSpend
+from littlelambocoin.types.header_block import HeaderBlock
+from littlelambocoin.types.mempool_inclusion_status import MempoolInclusionStatus
+from littlelambocoin.types.peer_info import PeerInfo
+from littlelambocoin.util.byte_types import hexstr_to_bytes
+from littlelambocoin.util.check_fork_next_block import check_fork_next_block
+from littlelambocoin.util.config import WALLET_PEERS_PATH_KEY_DEPRECATED, load_config
+from littlelambocoin.util.errors import Err, ValidationError
+from littlelambocoin.util.ints import uint32, uint128
+from littlelambocoin.util.keychain import Keychain
+from littlelambocoin.util.lru_cache import LRUCache
+from littlelambocoin.util.merkle_set import MerkleSet, confirm_included_already_hashed, confirm_not_included_already_hashed
+from littlelambocoin.util.network import get_host_addr
+from littlelambocoin.util.path import mkdir, path_from_root
+from littlelambocoin.wallet.block_record import HeaderBlockRecord
+from littlelambocoin.wallet.derivation_record import DerivationRecord
+from littlelambocoin.wallet.settings.settings_objects import BackupInitialized
+from littlelambocoin.wallet.transaction_record import TransactionRecord
+from littlelambocoin.wallet.util.backup_utils import open_backup_file
+from littlelambocoin.wallet.util.wallet_types import WalletType
+from littlelambocoin.wallet.wallet_action import WalletAction
+from littlelambocoin.wallet.wallet_blockchain import ReceiveBlockResult
+from littlelambocoin.wallet.wallet_state_manager import WalletStateManager
+from littlelambocoin.util.profiler import profile_task
 
 
 class WalletNode:
@@ -72,7 +72,7 @@ class WalletNode:
     constants: ConsensusConstants
     keychain_proxy: Optional[KeychainProxy]
     local_keychain: Optional[Keychain]  # For testing only. KeychainProxy is used in normal cases
-    server: Optional[ChiaServer]
+    server: Optional[LittlelambocoinServer]
     log: logging.Logger
     wallet_peers: WalletPeers
     # Maintains the state of the wallet (blockchain and transactions), handles DB connections
@@ -145,7 +145,7 @@ class WalletNode:
             keychain_proxy = await self.ensure_keychain_proxy()
             key = await keychain_proxy.get_key_for_fingerprint(fingerprint)
         except KeyringIsEmpty:
-            self.log.warning("No keys present. Create keys with the UI, or with the 'chia keys' program.")
+            self.log.warning("No keys present. Create keys with the UI, or with the 'littlelambocoin keys' program.")
             return None
         except KeyringIsLocked:
             self.log.warning("Keyring is locked")
@@ -351,7 +351,7 @@ class WalletNode:
 
         return messages
 
-    def set_server(self, server: ChiaServer):
+    def set_server(self, server: LittlelambocoinServer):
         self.server = server
         DNS_SERVERS_EMPTY: list = []
         network_name: str = self.config["selected_network"]
@@ -375,7 +375,7 @@ class WalletNode:
             self.log,
         )
 
-    async def on_connect(self, peer: WSChiaConnection):
+    async def on_connect(self, peer: WSLittlelambocoinConnection):
         if self.wallet_state_manager is None or self.backup_initialized is False:
             return None
         messages_peer_ids = await self._messages_to_resend()
@@ -427,7 +427,7 @@ class WalletNode:
                 return True
         return False
 
-    async def complete_blocks(self, header_blocks: List[HeaderBlock], peer: WSChiaConnection):
+    async def complete_blocks(self, header_blocks: List[HeaderBlock], peer: WSLittlelambocoinConnection):
         if self.wallet_state_manager is None:
             return None
         header_block_records: List[HeaderBlockRecord] = []
@@ -477,7 +477,7 @@ class WalletNode:
                 else:
                     self.log.debug(f"Result: {result}")
 
-    async def new_peak_wallet(self, peak: wallet_protocol.NewPeakWallet, peer: WSChiaConnection):
+    async def new_peak_wallet(self, peak: wallet_protocol.NewPeakWallet, peer: WSLittlelambocoinConnection):
         if self.wallet_state_manager is None:
             return
 
@@ -665,7 +665,7 @@ class WalletNode:
             self.log.info("Not performing sync, already caught up.")
             return None
 
-        peers: List[WSChiaConnection] = self.server.get_full_node_connections()
+        peers: List[WSLittlelambocoinConnection] = self.server.get_full_node_connections()
         if len(peers) == 0:
             self.log.info("No peers to sync to")
             return None
@@ -688,7 +688,7 @@ class WalletNode:
 
     async def fetch_blocks_and_validate(
         self,
-        peer: WSChiaConnection,
+        peer: WSLittlelambocoinConnection,
         height_start: uint32,
         height_end: uint32,
         fork_point_with_peak: Optional[uint32],
@@ -954,7 +954,7 @@ class WalletNode:
         return additional_coin_spends
 
     async def get_additions(
-        self, peer: WSChiaConnection, block_i, additions: Optional[List[bytes32]], get_all_additions: bool = False
+        self, peer: WSLittlelambocoinConnection, block_i, additions: Optional[List[bytes32]], get_all_additions: bool = False
     ) -> Optional[List[Coin]]:
         if (additions is not None and len(additions) > 0) or get_all_additions:
             if get_all_additions:
@@ -988,7 +988,7 @@ class WalletNode:
             return []  # No added coins
 
     async def get_removals(
-        self, peer: WSChiaConnection, block_i, additions, removals, request_all_removals=False
+        self, peer: WSLittlelambocoinConnection, block_i, additions, removals, request_all_removals=False
     ) -> Optional[List[Coin]]:
         assert self.wallet_state_manager is not None
         # Check if we need all removals
@@ -1039,7 +1039,7 @@ class WalletNode:
 
 
 async def wallet_next_block_check(
-    peer: WSChiaConnection, potential_peek: uint32, blockchain: BlockchainInterface
+    peer: WSLittlelambocoinConnection, potential_peek: uint32, blockchain: BlockchainInterface
 ) -> bool:
     block_response = await peer.request_header_blocks(
         wallet_protocol.RequestHeaderBlocks(potential_peek, potential_peek)

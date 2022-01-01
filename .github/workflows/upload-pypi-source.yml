@@ -51,7 +51,7 @@ jobs:
 
     - name: Lint source with flake8
       run: |
-        flake8 chia tests
+        flake8 littlelambocoin tests
 
     - name: Lint source with mypy
       run: |

@@ -7,32 +7,32 @@ from typing import Any, Dict, List, Optional, Tuple
 
 from blspy import AugSchemeMPL
 
-from chia.types.blockchain_format.coin import Coin
-from chia.types.blockchain_format.program import Program
-from chia.types.blockchain_format.sized_bytes import bytes32
-from chia.types.spend_bundle import SpendBundle
-from chia.types.coin_spend import CoinSpend
-from chia.util.byte_types import hexstr_to_bytes
-from chia.util.db_wrapper import DBWrapper
-from chia.util.hash import std_hash
-from chia.util.ints import uint32, uint64
-from chia.wallet.cc_wallet import cc_utils
-from chia.wallet.cc_wallet.cc_utils import CC_MOD, SpendableCC, spend_bundle_for_spendable_ccs, uncurry_cc
-from chia.wallet.cc_wallet.cc_wallet import CCWallet
-from chia.wallet.puzzles.genesis_by_coin_id_with_0 import genesis_coin_id_for_genesis_coin_checker
-from chia.wallet.trade_record import TradeRecord
-from chia.wallet.trading.trade_status import TradeStatus
-from chia.wallet.trading.trade_store import TradeStore
-from chia.wallet.transaction_record import TransactionRecord
-from chia.wallet.util.trade_utils import (
+from littlelambocoin.types.blockchain_format.coin import Coin
+from littlelambocoin.types.blockchain_format.program import Program
+from littlelambocoin.types.blockchain_format.sized_bytes import bytes32
+from littlelambocoin.types.spend_bundle import SpendBundle
+from littlelambocoin.types.coin_spend import CoinSpend
+from littlelambocoin.util.byte_types import hexstr_to_bytes
+from littlelambocoin.util.db_wrapper import DBWrapper
+from littlelambocoin.util.hash import std_hash
+from littlelambocoin.util.ints import uint32, uint64
+from littlelambocoin.wallet.cc_wallet import cc_utils
+from littlelambocoin.wallet.cc_wallet.cc_utils import CC_MOD, SpendableCC, spend_bundle_for_spendable_ccs, uncurry_cc
+from littlelambocoin.wallet.cc_wallet.cc_wallet import CCWallet
+from littlelambocoin.wallet.puzzles.genesis_by_coin_id_with_0 import genesis_coin_id_for_genesis_coin_checker
+from littlelambocoin.wallet.trade_record import TradeRecord
+from littlelambocoin.wallet.trading.trade_status import TradeStatus
+from littlelambocoin.wallet.trading.trade_store import TradeStore
+from littlelambocoin.wallet.transaction_record import TransactionRecord
+from littlelambocoin.wallet.util.trade_utils import (
     get_discrepancies_for_spend_bundle,
     get_output_amount_for_puzzle_and_solution,
     get_output_discrepancy_for_puzzle_and_solution,
 )
-from chia.wallet.util.transaction_type import TransactionType
-from chia.wallet.util.wallet_types import WalletType
-from chia.wallet.wallet import Wallet
-from chia.wallet.wallet_coin_record import WalletCoinRecord
+from littlelambocoin.wallet.util.transaction_type import TransactionType
+from littlelambocoin.wallet.util.wallet_types import WalletType
+from littlelambocoin.wallet.wallet import Wallet
+from littlelambocoin.wallet.wallet_coin_record import WalletCoinRecord
 
 
 class TradeManager:
@@ -278,7 +278,7 @@ class TradeManager:
                         to_exclude = []
                     else:
                         to_exclude = spend_bundle.removals()
-                    new_spend_bundle = await wallet.create_spend_bundle_relative_chia(amount, to_exclude)
+                    new_spend_bundle = await wallet.create_spend_bundle_relative_littlelambocoin(amount, to_exclude)
                 else:
                     return False, None, "unsupported wallet type"
                 if new_spend_bundle is None or new_spend_bundle.removals() == []:
@@ -336,7 +336,7 @@ class TradeManager:
         for key, value in result.items():
             wsm = self.wallet_state_manager
             wallet: Wallet = wsm.main_wallet
-            if key == "chia":
+            if key == "littlelambocoin":
                 continue
             self.log.info(f"value is {key}")
             exists = await wsm.get_wallet_for_colour(key)
@@ -364,7 +364,7 @@ class TradeManager:
         cc_coinsol_outamounts: Dict[str, List[Tuple[CoinSpend, int]]] = dict()
         aggsig = offer_spend_bundle.aggregated_signature
         cc_discrepancies: Dict[str, int] = dict()
-        chia_discrepancy = None
+        littlelambocoin_discrepancy = None
         wallets: Dict[str, Any] = dict()  # colour to wallet dict
 
         for coinsol in offer_spend_bundle.coin_spends:
@@ -397,24 +397,24 @@ class TradeManager:
                     cc_coinsol_outamounts[colour] = [(coinsol, total)]
 
             else:
-                # standard chia coin
+                # standard littlelambocoin coin
                 unspent = await self.wallet_state_manager.get_spendable_coins_for_wallet(1)
                 if coinsol.coin in [record.coin for record in unspent]:
                     return False, None, "can't respond to own offer"
-                if chia_discrepancy is None:
-                    chia_discrepancy = get_output_discrepancy_for_puzzle_and_solution(coinsol.coin, puzzle, solution)
+                if littlelambocoin_discrepancy is None:
+                    littlelambocoin_discrepancy = get_output_discrepancy_for_puzzle_and_solution(coinsol.coin, puzzle, solution)
                 else:
-                    chia_discrepancy += get_output_discrepancy_for_puzzle_and_solution(coinsol.coin, puzzle, solution)
+                    littlelambocoin_discrepancy += get_output_discrepancy_for_puzzle_and_solution(coinsol.coin, puzzle, solution)
                 coinsols.append(coinsol)
 
-        chia_spend_bundle: Optional[SpendBundle] = None
-        if chia_discrepancy is not None:
-            chia_spend_bundle = await self.wallet_state_manager.main_wallet.create_spend_bundle_relative_chia(
-                chia_discrepancy, []
+        littlelambocoin_spend_bundle: Optional[SpendBundle] = None
+        if littlelambocoin_discrepancy is not None:
+            littlelambocoin_spend_bundle = await self.wallet_state_manager.main_wallet.create_spend_bundle_relative_littlelambocoin(
+                littlelambocoin_discrepancy, []
             )
-            if chia_spend_bundle is not None:
+            if littlelambocoin_spend_bundle is not None:
                 for coinsol in coinsols:
-                    chia_spend_bundle.coin_spends.append(coinsol)
+                    littlelambocoin_spend_bundle.coin_spends.append(coinsol)
 
         zero_spend_list: List[SpendBundle] = []
         spend_bundle = None
@@ -424,10 +424,10 @@ class TradeManager:
             if cc_discrepancies[colour] < 0:
                 my_cc_spends = await wallets[colour].select_coins(abs(cc_discrepancies[colour]))
             else:
-                if chia_spend_bundle is None:
+                if littlelambocoin_spend_bundle is None:
                     to_exclude: List = []
                 else:
-                    to_exclude = chia_spend_bundle.removals()
+                    to_exclude = littlelambocoin_spend_bundle.removals()
                 my_cc_spends = await wallets[colour].select_coins(0)
                 if my_cc_spends is None or my_cc_spends == set():
                     zero_spend_bundle: SpendBundle = await wallets[colour].generate_zero_val_coin(False, to_exclude)
@@ -435,7 +435,7 @@ class TradeManager:
                         return (
                             False,
                             None,
-                            "Unable to generate zero value coin. Confirm that you have chia available",
+                            "Unable to generate zero value coin. Confirm that you have littlelambocoin available",
                         )
                     zero_spend_list.append(zero_spend_bundle)
 
@@ -538,9 +538,9 @@ class TradeManager:
 
         # Add transaction history for this trade
         now = uint64(int(time.time()))
-        if chia_spend_bundle is not None:
-            spend_bundle = SpendBundle.aggregate([spend_bundle, chia_spend_bundle])
-            if chia_discrepancy < 0:
+        if littlelambocoin_spend_bundle is not None:
+            spend_bundle = SpendBundle.aggregate([spend_bundle, littlelambocoin_spend_bundle])
+            if littlelambocoin_discrepancy < 0:
                 # TODO: address hint error and remove ignore
                 #       error: Argument "to_puzzle_hash" to "TransactionRecord" has incompatible type "bytes"; expected
                 #       "bytes32"  [arg-type]
@@ -548,18 +548,18 @@ class TradeManager:
                     confirmed_at_height=uint32(0),
                     created_at_time=now,
                     to_puzzle_hash=token_bytes(),  # type: ignore[arg-type]
-                    amount=uint64(abs(chia_discrepancy)),
+                    amount=uint64(abs(littlelambocoin_discrepancy)),
                     fee_amount=uint64(0),
                     confirmed=False,
                     sent=uint32(10),
-                    spend_bundle=chia_spend_bundle,
-                    additions=chia_spend_bundle.additions(),
-                    removals=chia_spend_bundle.removals(),
+                    spend_bundle=littlelambocoin_spend_bundle,
+                    additions=littlelambocoin_spend_bundle.additions(),
+                    removals=littlelambocoin_spend_bundle.removals(),
                     wallet_id=uint32(1),
                     sent_to=[],
                     trade_id=std_hash(spend_bundle.name() + bytes(now)),
                     type=uint32(TransactionType.OUTGOING_TRADE.value),
-                    name=chia_spend_bundle.name(),
+                    name=littlelambocoin_spend_bundle.name(),
                 )
             else:
                 # TODO: address hint error and remove ignore
@@ -569,24 +569,24 @@ class TradeManager:
                     confirmed_at_height=uint32(0),
                     created_at_time=uint64(int(time.time())),
                     to_puzzle_hash=token_bytes(),  # type: ignore[arg-type]
-                    amount=uint64(abs(chia_discrepancy)),
+                    amount=uint64(abs(littlelambocoin_discrepancy)),
                     fee_amount=uint64(0),
                     confirmed=False,
                     sent=uint32(10),
-                    spend_bundle=chia_spend_bundle,
-                    additions=chia_spend_bundle.additions(),
-                    removals=chia_spend_bundle.removals(),
+                    spend_bundle=littlelambocoin_spend_bundle,
+                    additions=littlelambocoin_spend_bundle.additions(),
+                    removals=littlelambocoin_spend_bundle.removals(),
                     wallet_id=uint32(1),
                     sent_to=[],
                     trade_id=std_hash(spend_bundle.name() + bytes(now)),
                     type=uint32(TransactionType.INCOMING_TRADE.value),
-                    name=chia_spend_bundle.name(),
+                    name=littlelambocoin_spend_bundle.name(),
                 )
             my_tx_records.append(tx_record)
 
         for colour, amount in cc_discrepancies.items():
             wallet = wallets[colour]
-            if chia_discrepancy > 0:
+            if littlelambocoin_discrepancy > 0:
                 # TODO: address hint error and remove ignore
                 #       error: Argument "to_puzzle_hash" to "TransactionRecord" has incompatible type "bytes"; expected
                 #       "bytes32"  [arg-type]

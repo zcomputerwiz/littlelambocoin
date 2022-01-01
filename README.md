@@ -1,6 +1,6 @@
-# chia-blockchain
+# littlelambocoin-blockchain
 
-![Alt text](https://www.chia.net/img/chia_logo.svg)
+![Alt text](https://www.littlelambocoin.net/img/littlelambocoin_logo.svg)
 
 | Current Release/main | Development Branch/dev |
 |         :---:          |          :---:         |
@@ -8,12 +8,12 @@
 
 ![GitHub contributors](https://img.shields.io/github/contributors/Chia-Network/chia-blockchain?logo=GitHub)
 
-Chia is a modern cryptocurrency built from scratch, designed to be efficient, decentralized, and secure. Here are some of the features and benefits:
+Littlelambocoin is a modern cryptocurrency built from scratch, designed to be efficient, decentralized, and secure. Here are some of the features and benefits:
 * [Proof of space and time](https://docs.google.com/document/d/1tmRIb7lgi4QfKkNaxuKOBHRmwbVlGL4f7EsBDr_5xZE/edit) based consensus which allows anyone to farm with commodity hardware
 * Very easy to use full node and farmer GUI and cli (thousands of nodes active on mainnet)
-* [Chia seeder](https://github.com/Chia-Network/chia-blockchain/wiki/Chia-Seeder-User-Guide), which maintains a list of reliable nodes within the Chia network via a built-in DNS server.
+* [Littlelambocoin seeder](https://github.com/Chia-Network/chia-blockchain/wiki/Littlelambocoin-Seeder-User-Guide), which maintains a list of reliable nodes within the Littlelambocoin network via a built-in DNS server.
 * Simplified UTXO based transaction model, with small on-chain state
-* Lisp-style Turing-complete functional [programming language](https://chialisp.com/) for money related use cases
+* Lisp-style Turing-complete functional [programming language](https://littlelambocoinlisp.com/) for money related use cases
 * BLS keys and aggregate signatures (only one signature per block)
 * [Pooling protocol](https://github.com/Chia-Network/chia-blockchain/wiki/Pooling-User-Guide) that allows farmers to have control of making blocks
 * Support for light clients with fast, objective syncing
@@ -36,7 +36,7 @@ These methods tend to be router make/model specific.
 Most users should only install harvesters, farmers, plotter, full nodes, and wallets.
 Setting up a seeder is best left to more advanced users.
 Building Timelords and VDFs is for sophisticated users, in most environments.
-Chia Network and additional volunteers are running sufficient Timelords
+Littlelambocoin Network and additional volunteers are running sufficient Timelords
 for consensus.
 
 ## Installing
@@ -44,7 +44,7 @@ for consensus.
 Install instructions are available in the
 [INSTALL](https://github.com/Chia-Network/chia-blockchain/wiki/INSTALL)
 section of the
-[chia-blockchain repository wiki](https://github.com/Chia-Network/chia-blockchain/wiki).
+[littlelambocoin-blockchain repository wiki](https://github.com/Chia-Network/chia-blockchain/wiki).
 
 ## Running
 

@@ -7,31 +7,31 @@ import time
 import traceback
 import os
 from typing import Callable, Dict, List, Optional, Tuple, Set
-from chia.util.streamable import Streamable, streamable
-from chiavdf import create_discriminant, prove
+from littlelambocoin.util.streamable import Streamable, streamable
+from littlelambocoinvdf import create_discriminant, prove
 
-from chia.consensus.constants import ConsensusConstants
-from chia.consensus.pot_iterations import calculate_sp_iters, is_overflow_block
-from chia.protocols import timelord_protocol
-from chia.protocols.protocol_message_types import ProtocolMessageTypes
-from chia.server.outbound_message import NodeType, make_msg
-from chia.server.server import ChiaServer
-from chia.timelord.iters_from_block import iters_from_block
-from chia.timelord.timelord_state import LastState
-from chia.timelord.types import Chain, IterationType, StateType
-from chia.types.blockchain_format.classgroup import ClassgroupElement
-from chia.types.blockchain_format.reward_chain_block import RewardChainBlock
-from chia.types.blockchain_format.sized_bytes import bytes32
-from chia.types.blockchain_format.slots import (
+from littlelambocoin.consensus.constants import ConsensusConstants
+from littlelambocoin.consensus.pot_iterations import calculate_sp_iters, is_overflow_block
+from littlelambocoin.protocols import timelord_protocol
+from littlelambocoin.protocols.protocol_message_types import ProtocolMessageTypes
+from littlelambocoin.server.outbound_message import NodeType, make_msg
+from littlelambocoin.server.server import LittlelambocoinServer
+from littlelambocoin.timelord.iters_from_block import iters_from_block
+from littlelambocoin.timelord.timelord_state import LastState
+from littlelambocoin.timelord.types import Chain, IterationType, StateType
+from littlelambocoin.types.blockchain_format.classgroup import ClassgroupElement
+from littlelambocoin.types.blockchain_format.reward_chain_block import RewardChainBlock
+from littlelambocoin.types.blockchain_format.sized_bytes import bytes32
+from littlelambocoin.types.blockchain_format.slots import (
     ChallengeChainSubSlot,
     InfusedChallengeChainSubSlot,
     RewardChainSubSlot,
     SubSlotProofs,
 )
-from chia.types.blockchain_format.sub_epoch_summary import SubEpochSummary
-from chia.types.blockchain_format.vdf import VDFInfo, VDFProof
-from chia.types.end_of_slot_bundle import EndOfSubSlotBundle
-from chia.util.ints import uint8, uint16, uint32, uint64, uint128
+from littlelambocoin.types.blockchain_format.sub_epoch_summary import SubEpochSummary
+from littlelambocoin.types.blockchain_format.vdf import VDFInfo, VDFProof
+from littlelambocoin.types.end_of_slot_bundle import EndOfSubSlotBundle
+from littlelambocoin.util.ints import uint8, uint16, uint32, uint64, uint128
 from concurrent.futures import ProcessPoolExecutor
 
 log = logging.getLogger(__name__)
@@ -65,7 +65,7 @@ class Timelord:
         self.free_clients: List[Tuple[str, asyncio.StreamReader, asyncio.StreamWriter]] = []
         self.potential_free_clients: List = []
         self.ip_whitelist = self.config["vdf_clients"]["ip"]
-        self.server: Optional[ChiaServer] = None
+        self.server: Optional[LittlelambocoinServer] = None
         self.chain_type_to_stream: Dict[Chain, Tuple[str, asyncio.StreamReader, asyncio.StreamWriter]] = {}
         self.chain_start_time: Dict = {}
         # Chains that currently don't have a vdf_client.
@@ -130,7 +130,7 @@ class Timelord:
             self.main_loop = asyncio.create_task(self._manage_chains())
         else:
             if os.name == "nt" or slow_bluebox:
-                # `vdf_client` doesn't build on windows, use `prove()` from chiavdf.
+                # `vdf_client` doesn't build on windows, use `prove()` from littlelambocoinvdf.
                 workers = self.config.get("slow_bluebox_process_count", 1)
                 self.bluebox_pool = ProcessPoolExecutor(max_workers=workers)
                 self.main_loop = asyncio.create_task(
@@ -152,7 +152,7 @@ class Timelord:
     async def _await_closed(self):
         pass
 
-    def set_server(self, server: ChiaServer):
+    def set_server(self, server: LittlelambocoinServer):
         self.server = server
 
     async def _handle_client(self, reader: asyncio.StreamReader, writer: asyncio.StreamWriter):

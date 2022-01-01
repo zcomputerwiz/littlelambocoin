@@ -1,13 +1,13 @@
 from dataclasses import dataclass
 from typing import List, Optional, Set
-from chia.types.blockchain_format.coin import Coin
-from chia.types.blockchain_format.foliage import Foliage, FoliageTransactionBlock, TransactionsInfo
-from chia.types.blockchain_format.program import SerializedProgram
-from chia.types.blockchain_format.reward_chain_block import RewardChainBlock
-from chia.types.blockchain_format.vdf import VDFProof
-from chia.types.end_of_slot_bundle import EndOfSubSlotBundle
-from chia.util.ints import uint32
-from chia.util.streamable import Streamable, streamable
+from littlelambocoin.types.blockchain_format.coin import Coin
+from littlelambocoin.types.blockchain_format.foliage import Foliage, FoliageTransactionBlock, TransactionsInfo
+from littlelambocoin.types.blockchain_format.program import SerializedProgram
+from littlelambocoin.types.blockchain_format.reward_chain_block import RewardChainBlock
+from littlelambocoin.types.blockchain_format.vdf import VDFProof
+from littlelambocoin.types.end_of_slot_bundle import EndOfSubSlotBundle
+from littlelambocoin.util.ints import uint32
+from littlelambocoin.util.streamable import Streamable, streamable
 
 
 @dataclass(frozen=True)

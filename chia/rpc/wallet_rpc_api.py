@@ -6,35 +6,35 @@ from typing import Callable, Dict, List, Optional, Tuple
 
 from blspy import PrivateKey, G1Element
 
-from chia.consensus.block_rewards import calculate_base_farmer_reward
-from chia.pools.pool_wallet import PoolWallet
-from chia.pools.pool_wallet_info import create_pool_state, FARMING_TO_POOL, PoolWalletInfo, PoolState
-from chia.protocols.protocol_message_types import ProtocolMessageTypes
-from chia.server.outbound_message import NodeType, make_msg
-from chia.simulator.simulator_protocol import FarmNewBlockProtocol
-from chia.types.blockchain_format.coin import Coin
-from chia.types.blockchain_format.sized_bytes import bytes32
-from chia.util.bech32m import decode_puzzle_hash, encode_puzzle_hash
-from chia.util.byte_types import hexstr_to_bytes
-from chia.util.ints import uint32, uint64
-from chia.util.keychain import KeyringIsLocked, bytes_to_mnemonic, generate_mnemonic
-from chia.util.path import path_from_root
-from chia.util.ws_message import WsRpcMessage, create_payload_dict
-from chia.wallet.cc_wallet.cc_wallet import CCWallet
-from chia.wallet.derive_keys import master_sk_to_singleton_owner_sk
-from chia.wallet.rl_wallet.rl_wallet import RLWallet
-from chia.wallet.derive_keys import master_sk_to_farmer_sk, master_sk_to_pool_sk, master_sk_to_wallet_sk
-from chia.wallet.did_wallet.did_wallet import DIDWallet
-from chia.wallet.trade_record import TradeRecord
-from chia.wallet.transaction_record import TransactionRecord
-from chia.wallet.util.backup_utils import download_backup, get_backup_info, upload_backup
-from chia.wallet.util.trade_utils import trade_record_to_dict
-from chia.wallet.util.transaction_type import TransactionType
-from chia.wallet.util.wallet_types import AmountWithPuzzlehash, WalletType
-from chia.wallet.wallet_info import WalletInfo
-from chia.wallet.wallet_node import WalletNode
-from chia.util.config import load_config
-from chia.consensus.coinbase import create_puzzlehash_for_pk
+from littlelambocoin.consensus.block_rewards import calculate_base_farmer_reward
+from littlelambocoin.pools.pool_wallet import PoolWallet
+from littlelambocoin.pools.pool_wallet_info import create_pool_state, FARMING_TO_POOL, PoolWalletInfo, PoolState
+from littlelambocoin.protocols.protocol_message_types import ProtocolMessageTypes
+from littlelambocoin.server.outbound_message import NodeType, make_msg
+from littlelambocoin.simulator.simulator_protocol import FarmNewBlockProtocol
+from littlelambocoin.types.blockchain_format.coin import Coin
+from littlelambocoin.types.blockchain_format.sized_bytes import bytes32
+from littlelambocoin.util.bech32m import decode_puzzle_hash, encode_puzzle_hash
+from littlelambocoin.util.byte_types import hexstr_to_bytes
+from littlelambocoin.util.ints import uint32, uint64
+from littlelambocoin.util.keychain import KeyringIsLocked, bytes_to_mnemonic, generate_mnemonic
+from littlelambocoin.util.path import path_from_root
+from littlelambocoin.util.ws_message import WsRpcMessage, create_payload_dict
+from littlelambocoin.wallet.cc_wallet.cc_wallet import CCWallet
+from littlelambocoin.wallet.derive_keys import master_sk_to_singleton_owner_sk
+from littlelambocoin.wallet.rl_wallet.rl_wallet import RLWallet
+from littlelambocoin.wallet.derive_keys import master_sk_to_farmer_sk, master_sk_to_pool_sk, master_sk_to_wallet_sk
+from littlelambocoin.wallet.did_wallet.did_wallet import DIDWallet
+from littlelambocoin.wallet.trade_record import TradeRecord
+from littlelambocoin.wallet.transaction_record import TransactionRecord
+from littlelambocoin.wallet.util.backup_utils import download_backup, get_backup_info, upload_backup
+from littlelambocoin.wallet.util.trade_utils import trade_record_to_dict
+from littlelambocoin.wallet.util.transaction_type import TransactionType
+from littlelambocoin.wallet.util.wallet_types import AmountWithPuzzlehash, WalletType
+from littlelambocoin.wallet.wallet_info import WalletInfo
+from littlelambocoin.wallet.wallet_node import WalletNode
+from littlelambocoin.util.config import load_config
+from littlelambocoin.consensus.coinbase import create_puzzlehash_for_pk
 
 # Timeout for response from wallet/full node for sending a transaction
 TIMEOUT = 30
@@ -46,7 +46,7 @@ class WalletRpcApi:
     def __init__(self, wallet_node: WalletNode):
         assert wallet_node is not None
         self.service = wallet_node
-        self.service_name = "chia_wallet"
+        self.service_name = "littlelambocoin_wallet"
 
     def get_routes(self) -> Dict[str, Callable]:
         return {
@@ -129,7 +129,7 @@ class WalletRpcApi:
             data["wallet_id"] = args[1]
         if args[2] is not None:
             data["additional_data"] = args[2]
-        return [create_payload_dict("state_changed", data, "chia_wallet", "wallet_ui")]
+        return [create_payload_dict("state_changed", data, "littlelambocoin_wallet", "wallet_ui")]
 
     async def _stop_wallet(self):
         """
@@ -568,7 +568,7 @@ class WalletRpcApi:
             if request["mode"] == "new":
                 owner_puzzle_hash: bytes32 = await self.service.wallet_state_manager.main_wallet.get_puzzle_hash(True)
 
-                from chia.pools.pool_wallet_info import initial_pool_state_from_dict
+                from littlelambocoin.pools.pool_wallet_info import initial_pool_state_from_dict
 
                 async with self.service.wallet_state_manager.lock:
                     last_wallet: Optional[

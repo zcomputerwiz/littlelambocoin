@@ -4,13 +4,13 @@ from typing import Dict, List, Optional, Tuple, Any
 import aiosqlite
 import zstd
 
-from chia.consensus.block_record import BlockRecord
-from chia.types.blockchain_format.sized_bytes import bytes32
-from chia.types.full_block import FullBlock
-from chia.types.weight_proof import SubEpochChallengeSegment, SubEpochSegments
-from chia.util.db_wrapper import DBWrapper
-from chia.util.ints import uint32
-from chia.util.lru_cache import LRUCache
+from littlelambocoin.consensus.block_record import BlockRecord
+from littlelambocoin.types.blockchain_format.sized_bytes import bytes32
+from littlelambocoin.types.full_block import FullBlock
+from littlelambocoin.types.weight_proof import SubEpochChallengeSegment, SubEpochSegments
+from littlelambocoin.util.db_wrapper import DBWrapper
+from littlelambocoin.util.ints import uint32
+from littlelambocoin.util.lru_cache import LRUCache
 
 log = logging.getLogger(__name__)
 

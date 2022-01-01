@@ -4,9 +4,9 @@ dependencies = [
     "multidict==5.1.0",  # Avoid 5.2.0 due to Avast
     "aiofiles==0.7.0",  # Async IO for files
     "blspy==1.0.8",  # Signature library
-    "chiavdf==1.0.3",  # timelord and vdf verification
-    "chiabip158==1.0",  # bip158-style wallet filters
-    "chiapos==1.0.7",  # proof of space
+    "littlelambocoinvdf==1.0.3",  # timelord and vdf verification
+    "littlelambocoinbip158==1.0",  # bip158-style wallet filters
+    "littlelambocoinpos==1.0.7",  # proof of space
     "clvm==0.9.7",
     "clvm_rs==0.1.16",
     "clvm_tools==0.4.3",
@@ -23,11 +23,11 @@ dependencies = [
     #  "keyrings.cryptfile==1.3.8",  # Secure storage for keys on Linux (Will be replaced)
     #  See https://github.com/frispete/keyrings.cryptfile/issues/15
     "PyYAML==5.4.1",  # Used for config file format
-    "setproctitle==1.2.2",  # Gives the chia processes readable names
+    "setproctitle==1.2.2",  # Gives the littlelambocoin processes readable names
     "sortedcontainers==2.4.0",  # For maintaining sorted mempools
     "websockets==8.1.0",  # For use in wallet RPC and electron UI
     "click==7.1.2",  # For the CLI
-    "dnspythonchia==2.2.0",  # Query DNS seeds
+    "dnspythonlittlelambocoin==2.2.0",  # Query DNS seeds
     "watchdog==2.1.6",  # Filesystem event watching - watches keyring.yaml
     "dnslib==0.9.14",  # dns lib
     "typing-extensions==4.0.1",  # typing backports like Protocol and TypedDict
@@ -58,14 +58,14 @@ dev_dependencies = [
 ]
 
 kwargs = dict(
-    name="chia-blockchain",
+    name="littlelambocoin-blockchain",
     author="Mariano Sorgente",
-    author_email="mariano@chia.net",
-    description="Chia blockchain full node, farmer, timelord, and wallet.",
-    url="https://chia.net/",
+    author_email="mariano@littlelambocoin.net",
+    description="Littlelambocoin blockchain full node, farmer, timelord, and wallet.",
+    url="https://littlelambocoin.net/",
     license="Apache License",
     python_requires=">=3.7, <4",
-    keywords="chia blockchain node",
+    keywords="littlelambocoin blockchain node",
     install_requires=dependencies,
     setup_requires=["setuptools_scm"],
     extras_require=dict(
@@ -75,60 +75,60 @@ kwargs = dict(
     ),
     packages=[
         "build_scripts",
-        "chia",
-        "chia.cmds",
-        "chia.clvm",
-        "chia.consensus",
-        "chia.daemon",
-        "chia.full_node",
-        "chia.timelord",
-        "chia.farmer",
-        "chia.harvester",
-        "chia.introducer",
-        "chia.plotters",
-        "chia.plotting",
-        "chia.pools",
-        "chia.protocols",
-        "chia.rpc",
-        "chia.seeder",
-        "chia.seeder.util",
-        "chia.server",
-        "chia.simulator",
-        "chia.types.blockchain_format",
-        "chia.types",
-        "chia.util",
-        "chia.wallet",
-        "chia.wallet.puzzles",
-        "chia.wallet.rl_wallet",
-        "chia.wallet.cc_wallet",
-        "chia.wallet.did_wallet",
-        "chia.wallet.settings",
-        "chia.wallet.trading",
-        "chia.wallet.util",
-        "chia.ssl",
+        "littlelambocoin",
+        "littlelambocoin.cmds",
+        "littlelambocoin.clvm",
+        "littlelambocoin.consensus",
+        "littlelambocoin.daemon",
+        "littlelambocoin.full_node",
+        "littlelambocoin.timelord",
+        "littlelambocoin.farmer",
+        "littlelambocoin.harvester",
+        "littlelambocoin.introducer",
+        "littlelambocoin.plotters",
+        "littlelambocoin.plotting",
+        "littlelambocoin.pools",
+        "littlelambocoin.protocols",
+        "littlelambocoin.rpc",
+        "littlelambocoin.seeder",
+        "littlelambocoin.seeder.util",
+        "littlelambocoin.server",
+        "littlelambocoin.simulator",
+        "littlelambocoin.types.blockchain_format",
+        "littlelambocoin.types",
+        "littlelambocoin.util",
+        "littlelambocoin.wallet",
+        "littlelambocoin.wallet.puzzles",
+        "littlelambocoin.wallet.rl_wallet",
+        "littlelambocoin.wallet.cc_wallet",
+        "littlelambocoin.wallet.did_wallet",
+        "littlelambocoin.wallet.settings",
+        "littlelambocoin.wallet.trading",
+        "littlelambocoin.wallet.util",
+        "littlelambocoin.ssl",
         "mozilla-ca",
     ],
     entry_points={
         "console_scripts": [
-            "chia = chia.cmds.chia:main",
-            "chia_wallet = chia.server.start_wallet:main",
-            "chia_full_node = chia.server.start_full_node:main",
-            "chia_harvester = chia.server.start_harvester:main",
-            "chia_farmer = chia.server.start_farmer:main",
-            "chia_introducer = chia.server.start_introducer:main",
-            "chia_seeder = chia.cmds.seeder:main",
-            "chia_seeder_crawler = chia.seeder.start_crawler:main",
-            "chia_seeder_server = chia.seeder.dns_server:main",
-            "chia_timelord = chia.server.start_timelord:main",
-            "chia_timelord_launcher = chia.timelord.timelord_launcher:main",
-            "chia_full_node_simulator = chia.simulator.start_simulator:main",
+            "littlelambocoin = littlelambocoin.cmds.littlelambocoin:main",
+            "littlelambocoin_wallet = littlelambocoin.server.start_wallet:main",
+            "littlelambocoin_full_node = littlelambocoin.server.start_full_node:main",
+            "littlelambocoin_harvester = littlelambocoin.server.start_harvester:main",
+            "littlelambocoin_farmer = littlelambocoin.server.start_farmer:main",
+            "littlelambocoin_introducer = littlelambocoin.server.start_introducer:main",
+            "littlelambocoin_seeder = littlelambocoin.cmds.seeder:main",
+            "littlelambocoin_seeder_crawler = littlelambocoin.seeder.start_crawler:main",
+            "littlelambocoin_seeder_server = littlelambocoin.seeder.dns_server:main",
+            "littlelambocoin_timelord = littlelambocoin.server.start_timelord:main",
+            "littlelambocoin_timelord_launcher = littlelambocoin.timelord.timelord_launcher:main",
+            "littlelambocoin_full_node_simulator = littlelambocoin.simulator.start_simulator:main",
         ]
     },
     package_data={
-        "chia": ["pyinstaller.spec"],
+        "littlelambocoin": ["pyinstaller.spec"],
         "": ["*.clvm", "*.clvm.hex", "*.clib", "*.clinc", "*.clsp", "py.typed"],
-        "chia.util": ["initial-*.yaml", "english.txt"],
-        "chia.ssl": ["chia_ca.crt", "chia_ca.key", "dst_root_ca.pem"],
+        "littlelambocoin.util": ["initial-*.yaml", "english.txt"],
+        "littlelambocoin.ssl": ["littlelambocoin_ca.crt", "littlelambocoin_ca.key", "dst_root_ca.pem"],
         "mozilla-ca": ["cacert.pem"],
     },
     use_scm_version={"fallback_version": "unknown-no-.git-directory"},

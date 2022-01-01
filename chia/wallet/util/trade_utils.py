@@ -1,12 +1,12 @@
 from typing import Any, Dict, Optional, Tuple
 
-from chia.types.blockchain_format.program import Program, INFINITE_COST
-from chia.types.condition_opcodes import ConditionOpcode
-from chia.types.spend_bundle import SpendBundle
-from chia.util.condition_tools import conditions_dict_for_solution
-from chia.wallet.cc_wallet import cc_utils
-from chia.wallet.trade_record import TradeRecord
-from chia.wallet.trading.trade_status import TradeStatus
+from littlelambocoin.types.blockchain_format.program import Program, INFINITE_COST
+from littlelambocoin.types.condition_opcodes import ConditionOpcode
+from littlelambocoin.types.spend_bundle import SpendBundle
+from littlelambocoin.util.condition_tools import conditions_dict_for_solution
+from littlelambocoin.wallet.cc_wallet import cc_utils
+from littlelambocoin.wallet.trade_record import TradeRecord
+from littlelambocoin.wallet.trading.trade_status import TradeStatus
 
 
 def trade_status_ui_string(status: TradeStatus):
@@ -83,10 +83,10 @@ def get_discrepancies_for_spend_bundle(
                 coin_amount = coinsol.coin.amount
                 out_amount = get_output_amount_for_puzzle_and_solution(puzzle, solution)
                 diff = coin_amount - out_amount
-                if "chia" in cc_discrepancies:
-                    cc_discrepancies["chia"] = cc_discrepancies["chia"] + diff
+                if "littlelambocoin" in cc_discrepancies:
+                    cc_discrepancies["littlelambocoin"] = cc_discrepancies["littlelambocoin"] + diff
                 else:
-                    cc_discrepancies["chia"] = diff
+                    cc_discrepancies["littlelambocoin"] = diff
 
         return True, cc_discrepancies, None
     except Exception as e:

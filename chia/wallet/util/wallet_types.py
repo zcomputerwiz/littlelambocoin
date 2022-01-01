@@ -2,8 +2,8 @@ from enum import IntEnum
 
 from typing_extensions import TypedDict
 
-from chia.types.blockchain_format.sized_bytes import bytes32
-from chia.util.ints import uint64
+from littlelambocoin.types.blockchain_format.sized_bytes import bytes32
+from littlelambocoin.util.ints import uint64
 
 
 class WalletType(IntEnum):

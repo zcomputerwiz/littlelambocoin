@@ -4,27 +4,27 @@ import logging
 import time
 from typing import Dict, List, Optional, Set, Tuple
 
-from chia.consensus.block_record import BlockRecord
-from chia.consensus.blockchain_interface import BlockchainInterface
-from chia.consensus.constants import ConsensusConstants
-from chia.consensus.difficulty_adjustment import can_finish_sub_and_full_epoch
-from chia.consensus.make_sub_epoch_summary import next_sub_epoch_summary
-from chia.consensus.multiprocess_validation import PreValidationResult
-from chia.consensus.pot_iterations import calculate_sp_interval_iters
-from chia.full_node.signage_point import SignagePoint
-from chia.protocols import timelord_protocol
-from chia.server.outbound_message import Message
-from chia.types.blockchain_format.classgroup import ClassgroupElement
-from chia.types.blockchain_format.sized_bytes import bytes32
-from chia.types.blockchain_format.sub_epoch_summary import SubEpochSummary
-from chia.types.blockchain_format.vdf import VDFInfo
-from chia.types.end_of_slot_bundle import EndOfSubSlotBundle
-from chia.types.full_block import FullBlock
-from chia.types.generator_types import CompressorArg
-from chia.types.unfinished_block import UnfinishedBlock
-from chia.util.ints import uint8, uint32, uint64, uint128
-from chia.util.lru_cache import LRUCache
-from chia.util.streamable import Streamable, streamable
+from littlelambocoin.consensus.block_record import BlockRecord
+from littlelambocoin.consensus.blockchain_interface import BlockchainInterface
+from littlelambocoin.consensus.constants import ConsensusConstants
+from littlelambocoin.consensus.difficulty_adjustment import can_finish_sub_and_full_epoch
+from littlelambocoin.consensus.make_sub_epoch_summary import next_sub_epoch_summary
+from littlelambocoin.consensus.multiprocess_validation import PreValidationResult
+from littlelambocoin.consensus.pot_iterations import calculate_sp_interval_iters
+from littlelambocoin.full_node.signage_point import SignagePoint
+from littlelambocoin.protocols import timelord_protocol
+from littlelambocoin.server.outbound_message import Message
+from littlelambocoin.types.blockchain_format.classgroup import ClassgroupElement
+from littlelambocoin.types.blockchain_format.sized_bytes import bytes32
+from littlelambocoin.types.blockchain_format.sub_epoch_summary import SubEpochSummary
+from littlelambocoin.types.blockchain_format.vdf import VDFInfo
+from littlelambocoin.types.end_of_slot_bundle import EndOfSubSlotBundle
+from littlelambocoin.types.full_block import FullBlock
+from littlelambocoin.types.generator_types import CompressorArg
+from littlelambocoin.types.unfinished_block import UnfinishedBlock
+from littlelambocoin.util.ints import uint8, uint32, uint64, uint128
+from littlelambocoin.util.lru_cache import LRUCache
+from littlelambocoin.util.streamable import Streamable, streamable
 
 log = logging.getLogger(__name__)
 

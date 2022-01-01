@@ -63,7 +63,7 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-pip-
 
-# Omitted checking out blocks and plots repo Chia-Network/test-cache
+# Omitted checking out blocks and plots repo Littlelambocoin-Network/test-cache
 
     - name: Install ubuntu dependencies
       run: |

@@ -2,9 +2,9 @@
 
 import os
 from pathlib import Path
-from chia.util.streamable import Streamable, streamable
+from littlelambocoin.util.streamable import Streamable, streamable
 from tests.util.network_protocol_data import *
-from chia.util.ints import uint32
+from littlelambocoin.util.ints import uint32
 
 version = "1.0"
 

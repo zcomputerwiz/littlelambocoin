@@ -2,10 +2,10 @@ import logging
 import time
 from typing import Callable, Optional
 
-from chia.protocols import timelord_protocol
-from chia.timelord.timelord import Chain, IterationType, Timelord, iters_from_block
-from chia.util.api_decorators import api_request
-from chia.util.ints import uint64
+from littlelambocoin.protocols import timelord_protocol
+from littlelambocoin.timelord.timelord import Chain, IterationType, Timelord, iters_from_block
+from littlelambocoin.util.api_decorators import api_request
+from littlelambocoin.util.ints import uint64
 
 log = logging.getLogger(__name__)
 

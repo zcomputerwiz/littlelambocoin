@@ -6,28 +6,28 @@ from typing import Dict, Optional, List, Any, Set, Tuple, Union
 
 from blspy import AugSchemeMPL, G1Element
 from secrets import token_bytes
-from chia.protocols import wallet_protocol
-from chia.protocols.wallet_protocol import RespondAdditions, RejectAdditionsRequest
-from chia.server.outbound_message import NodeType
-from chia.types.announcement import Announcement
-from chia.types.blockchain_format.coin import Coin
-from chia.types.blockchain_format.program import Program
-from chia.types.blockchain_format.sized_bytes import bytes32
-from chia.types.coin_spend import CoinSpend
-from chia.types.spend_bundle import SpendBundle
-from chia.util.ints import uint64, uint32, uint8
-from chia.wallet.util.transaction_type import TransactionType
+from littlelambocoin.protocols import wallet_protocol
+from littlelambocoin.protocols.wallet_protocol import RespondAdditions, RejectAdditionsRequest
+from littlelambocoin.server.outbound_message import NodeType
+from littlelambocoin.types.announcement import Announcement
+from littlelambocoin.types.blockchain_format.coin import Coin
+from littlelambocoin.types.blockchain_format.program import Program
+from littlelambocoin.types.blockchain_format.sized_bytes import bytes32
+from littlelambocoin.types.coin_spend import CoinSpend
+from littlelambocoin.types.spend_bundle import SpendBundle
+from littlelambocoin.util.ints import uint64, uint32, uint8
+from littlelambocoin.wallet.util.transaction_type import TransactionType
 
-from chia.wallet.did_wallet.did_info import DIDInfo
-from chia.wallet.lineage_proof import LineageProof
-from chia.wallet.transaction_record import TransactionRecord
-from chia.wallet.util.wallet_types import WalletType
-from chia.wallet.wallet import Wallet
-from chia.wallet.wallet_coin_record import WalletCoinRecord
-from chia.wallet.wallet_info import WalletInfo
-from chia.wallet.derivation_record import DerivationRecord
-from chia.wallet.did_wallet import did_wallet_puzzles
-from chia.wallet.derive_keys import master_sk_to_wallet_sk
+from littlelambocoin.wallet.did_wallet.did_info import DIDInfo
+from littlelambocoin.wallet.lineage_proof import LineageProof
+from littlelambocoin.wallet.transaction_record import TransactionRecord
+from littlelambocoin.wallet.util.wallet_types import WalletType
+from littlelambocoin.wallet.wallet import Wallet
+from littlelambocoin.wallet.wallet_coin_record import WalletCoinRecord
+from littlelambocoin.wallet.wallet_info import WalletInfo
+from littlelambocoin.wallet.derivation_record import DerivationRecord
+from littlelambocoin.wallet.did_wallet import did_wallet_puzzles
+from littlelambocoin.wallet.derive_keys import master_sk_to_wallet_sk
 
 
 class DIDWallet:

@@ -1,12 +1,12 @@
 from typing import List, Optional, Set, Dict, Any, Tuple
 import aiosqlite
-from chia.protocols.wallet_protocol import CoinState
-from chia.types.blockchain_format.coin import Coin
-from chia.types.blockchain_format.sized_bytes import bytes32
-from chia.types.coin_record import CoinRecord
-from chia.util.db_wrapper import DBWrapper
-from chia.util.ints import uint32, uint64
-from chia.util.lru_cache import LRUCache
+from littlelambocoin.protocols.wallet_protocol import CoinState
+from littlelambocoin.types.blockchain_format.coin import Coin
+from littlelambocoin.types.blockchain_format.sized_bytes import bytes32
+from littlelambocoin.types.coin_record import CoinRecord
+from littlelambocoin.util.db_wrapper import DBWrapper
+from littlelambocoin.util.ints import uint32, uint64
+from littlelambocoin.util.lru_cache import LRUCache
 from time import time
 import logging
 

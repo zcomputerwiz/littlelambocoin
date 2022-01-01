@@ -8,11 +8,11 @@ from typing import Dict, List, Optional
 
 import pkg_resources
 
-from chia.util.chia_logging import initialize_logging
-from chia.util.config import load_config
-from chia.util.default_root import DEFAULT_ROOT_PATH
-from chia.util.network import get_host_addr
-from chia.util.setproctitle import setproctitle
+from littlelambocoin.util.littlelambocoin_logging import initialize_logging
+from littlelambocoin.util.config import load_config
+from littlelambocoin.util.default_root import DEFAULT_ROOT_PATH
+from littlelambocoin.util.network import get_host_addr
+from littlelambocoin.util.setproctitle import setproctitle
 
 active_processes: List = []
 stopped = False
@@ -34,7 +34,7 @@ async def kill_processes():
 
 
 def find_vdf_client() -> pathlib.Path:
-    p = pathlib.Path(pkg_resources.get_distribution("chiavdf").location) / "vdf_client"
+    p = pathlib.Path(pkg_resources.get_distribution("littlelambocoinvdf").location) / "vdf_client"
     if p.is_file():
         return p
     raise FileNotFoundError("can't find vdf_client binary")
@@ -95,7 +95,7 @@ def main():
         log.info("Timelord launcher not supported on Windows.")
         return
     root_path = DEFAULT_ROOT_PATH
-    setproctitle("chia_timelord_launcher")
+    setproctitle("littlelambocoin_timelord_launcher")
     net_config = load_config(root_path, "config.yaml")
     config = net_config["timelord_launcher"]
     initialize_logging("TLauncher", config["logging"], root_path)
