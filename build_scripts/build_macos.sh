@@ -54,7 +54,7 @@ if [ "$LAST_EXIT_CODE" -ne 0 ]; then
 fi
 
 # Change to the gui package
-cd packages/gui || exit
+# cd packages/gui || exit
 
 # sets the version for littlelambocoin-blockchain in package.json
 brew install jq

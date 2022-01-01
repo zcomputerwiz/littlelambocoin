@@ -86,11 +86,11 @@ pyinstaller --log-level INFO $SPEC_FILE
 Write-Output "   ---"
 Write-Output "Copy littlelambocoin executables to littlelambocoin-blockchain-gui\"
 Write-Output "   ---"
-Copy-Item "dist\daemon" -Destination "..\littlelambocoin-blockchain-gui\packages\gui\" -Recurse
+Copy-Item "dist\daemon" -Destination "..\littlelambocoin-blockchain-gui\" -Recurse
 Set-Location -Path "..\littlelambocoin-blockchain-gui" -PassThru
 # We need the code sign cert in the gui subdirectory so we can actually sign the UI package
 If ($env:HAS_SECRET) {
-    Copy-Item "win_code_sign_cert.p12" -Destination "packages\gui\"
+    Copy-Item "win_code_sign_cert.p12" -Destination "\"
 }
 
 git status
@@ -118,7 +118,7 @@ If ($LastExitCode -gt 0){
 }
 
 # Change to the GUI directory
-Set-Location -Path "packages\gui" -PassThru
+# Set-Location -Path "packages\gui" -PassThru
 
 Write-Output "   ---"
 Write-Output "Increase the stack for littlelambocoin command for (littlelambocoin plots create) chiapos limitations"
