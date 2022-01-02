@@ -88,8 +88,8 @@ if [ "$LAST_EXIT_CODE" -ne 0 ]; then
 	exit $LAST_EXIT_CODE
 fi
 
-mv LittleLamboCoin-darwin-arm64 ../../../build_scripts/dist/
-cd ../../../build_scripts || exit
+mv LittleLamboCoin-darwin-arm64 ../build_scripts/dist/
+cd ../build_scripts || exit
 
 DMG_NAME="LittleLamboCoin-$LITTLELAMBOCOIN_INSTALLER_VERSION-arm64.dmg"
 echo "Create $DMG_NAME"
