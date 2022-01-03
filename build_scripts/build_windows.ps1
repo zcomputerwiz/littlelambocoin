@@ -100,7 +100,7 @@ Write-Output "Prepare Electron packager"
 Write-Output "   ---"
 $Env:NODE_OPTIONS = "--max-old-space-size=3000"
 npm install -g electron-packager
-npm install -g lerna
+# npm install -g lerna
 
 # lerna clean -y
 npm install
