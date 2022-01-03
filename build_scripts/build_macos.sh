@@ -92,7 +92,7 @@ cd ../build_scripts || exit
 DMG_NAME="LittleLamboCoin-$LITTLELAMBOCOIN_INSTALLER_VERSION.dmg"
 echo "Create $DMG_NAME"
 mkdir final_installer
-electron-installer-dmg dist/LittleLamboCoin-darwin-x64/LittleLamboCoin.app LittleLamboCoin-$LITTLELAMBOCOIN_INSTALLER_VERSION \
+electron-installer-dmg dist/LittleLamboCoin-darwin-x64/LittleLamboCoin.app LittleLamboCoin \
 --overwrite --out final_installer
 LAST_EXIT_CODE=$?
 if [ "$LAST_EXIT_CODE" -ne 0 ]; then

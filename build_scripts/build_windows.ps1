@@ -167,8 +167,8 @@ git status
 Write-Output "   ---"
 Write-Output "Moving final installers to expected location"
 Write-Output "   ---"
-Copy-Item ".\LittleLamboCoin-win32-x64" -Destination "$env:GITHUB_WORKSPACE\littlelambocoin-blockchain-gui\" -Recurse
-Copy-Item ".\release-builds" -Destination "$env:GITHUB_WORKSPACE\littlelambocoin-blockchain-gui\" -Recurse
+# Copy-Item ".\LittleLamboCoin-win32-x64" -Destination "$env:GITHUB_WORKSPACE\littlelambocoin-blockchain-gui\" -Recurse
+# Copy-Item ".\release-builds" -Destination "$env:GITHUB_WORKSPACE\littlelambocoin-blockchain-gui\" -Recurse
 
 Write-Output "   ---"
 Write-Output "Windows Installer complete"
