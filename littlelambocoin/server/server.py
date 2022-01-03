@@ -291,6 +291,13 @@ class LittleLamboCoinServer:
                 self._local_type,
             )
 
+            # Chives Network Code 
+            # To Ban Chia and other forks
+            if connection.peer_port == 9444 or connection.peer_server_port == 9444 or connection.peer_port == 8444 or connection.peer_server_port == 8444 or connection.peer_port == 6888 or connection.peer_server_port == 6888 or connection.peer_port == 8744 or connection.peer_server_port == 8744:                
+                self.log.info(f"Stop communicating with other fork: {connection.get_peer_info()} Connection Type: {connection.connection_type}. ")
+                await connection.close()
+                close_event.set()
+
             assert handshake is True
             # Limit inbound connections to config's specifications.
             if not self.accept_inbound_connections(connection.connection_type) and not is_in_network(
@@ -371,6 +378,11 @@ class LittleLamboCoinServer:
         Tries to connect to the target node, adding one connection into the pipeline, if successful.
         An on connect method can also be specified, and this will be saved into the instance variables.
         """
+        # Chives Network Code 
+        # To Ban Chia and other forks nodes
+        if(int(target_node.port)==9444 or int(target_node.port)==8444 or int(target_node.port)==6888 or int(target_node.port)==8744 or int(target_node.port)==80):
+            self.log.warning(f"Disconnected other fork in server.py {target_node.host}:{target_node.port}. Disconnected.")
+            return False
         if self.is_duplicate_or_self_connection(target_node):
             return False
 

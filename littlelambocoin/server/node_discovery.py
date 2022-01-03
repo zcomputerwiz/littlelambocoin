@@ -243,6 +243,11 @@ class FullNodeDiscovery:
 
     async def start_client_async(self, addr: PeerInfo, is_feeler: bool) -> None:
         try:
+            # Chives Network Code 
+            # To Ban Chia and other fork nodes
+            if(int(addr.port)==9444 or int(addr.port)==8444 or int(addr.port)==6888 or int(addr.port)==8744 or int(addr.port)==80):
+                self.log.warning(f"Disconnected other fork in Node Discovery {addr.host}:{addr.port}.")
+                return False
             if self.address_manager is None:
                 return
             self.pending_outbound_connections.add(addr.host)
@@ -325,6 +330,10 @@ class FullNodeDiscovery:
                 for conn in full_node_connected:
                     peer = conn.get_peer_info()
                     if peer is None:
+                        continue
+                    # Chives Network Code 
+                    # To Ban Chia and other forks nodes
+                    if peer.port == 9444 or conn.server_port == 9444 or peer.port == 8444 or conn.server_port == 8444 or peer.port == 6888 or conn.server_port == 6888 or peer.port == 8744 or conn.server_port == 8744: 
                         continue
                     group = peer.get_group()
                     groups.add(group)

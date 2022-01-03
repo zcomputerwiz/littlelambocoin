@@ -629,6 +629,12 @@ class FullNode:
         if self.full_node_peers is not None:
             asyncio.create_task(self.full_node_peers.on_connect(connection))
 
+        # Chives Network Code 
+        # To Ban Chia and other forks nodes
+        if connection.peer_port == 9444 or connection.peer_server_port == 9444 or connection.peer_port == 8444 or connection.peer_server_port == 8444 or connection.peer_port == 6888 or connection.peer_server_port == 6888 or connection.peer_port == 8744 or connection.peer_server_port == 8744:  
+            self.log.warning(f"Removing other fork node {connection.peer_host} {connection.peer_port} Connection Type: {connection.connection_type}. ")
+            return None
+
         if self.initialized is False:
             return None
 
